@@ -21,7 +21,7 @@ public class Person
     @Override
     public String toString ()
     {
-        return "Person " + data.toString().substring(5);
+        return String.format("Person %s", data.toString().substring(5));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package PopulationSimulator.entities;
+package PopulationSimulator.entities.enums;
 
 public enum SexualOrientation
 {

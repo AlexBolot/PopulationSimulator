@@ -1,8 +1,10 @@
 package PopulationSimulator.entities;
 
 import PopulationSimulator.controllers.Controller;
+import PopulationSimulator.entities.enums.Gender;
+import PopulationSimulator.entities.enums.SexualOrientation;
 
-import static PopulationSimulator.entities.SexualOrientation.Hetero;
+import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
 
 public class PersonalData
 {
@@ -64,7 +66,7 @@ public class PersonalData
     @Override
     public String toString ()
     {
-        return "Data {name:" + name + "}{age:" + getAge() + "}{gender:" + gender + "}{orientation:" + orientation + "}";
+        return String.format("Data {name:%s}{age:%d}{gender:%s}{orientation:%s}", name, getAge(), gender, orientation);
     }
 
     @Override
