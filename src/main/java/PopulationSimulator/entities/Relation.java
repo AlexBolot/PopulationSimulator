@@ -1,15 +1,17 @@
 package PopulationSimulator.entities;
 
-import PopulationSimulator.controllers.Controller;
+import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.enums.RelationType;
+
+import java.util.Objects;
 
 public class Relation
 {
     //region --------------- Attributes ----------------------
+    private int          beginnig;
     private Person       person1;
     private Person       person2;
     private RelationType type;
-    private int          beginnig;
     //endregion
 
     //region --------------- Constructors --------------------
@@ -18,7 +20,7 @@ public class Relation
         this.person1 = person1;
         this.person2 = person2;
         this.type = type;
-        this.beginnig = Controller.currentTime;
+        this.beginnig = SimulationController.currentTime;
     }
 
     public Relation (Person person1, Person person2, RelationType type, int beginnig)
@@ -31,32 +33,24 @@ public class Relation
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public Person getPerson1 () { return person1; }
+    public Person person1 () { return person1; }
 
-    public void setPerson1 (Person person1) { this.person1 = person1; }
-
-    public Person getPerson2 () { return person2; }
-
-    public void setPerson2 (Person person2) { this.person2 = person2; }
+    public Person person2 () { return person2; }
 
     public boolean involves (Person person) { return person1.equals(person) || person2.equals(person); }
 
     public RelationType getType () { return type; }
 
-    public void setType (RelationType type) { this.type = type; }
-
     public int getBeginnig () { return beginnig; }
 
-    public void setBeginnig (int beginnig) { this.beginnig = beginnig; }
-
-    public int getDuration () { return Controller.currentTime - beginnig; }
+    public int getDuration () { return SimulationController.currentTime - beginnig; }
     //endregion
 
     //region --------------- Override ------------------------
     @Override
     public String toString ()
     {
-        return String.format("Relation {%s-%s}{type:%s}}{duration:%d",
+        return String.format("Relation {%s-%s}{type:%s}{duration:%d}",
                              person1.data().getName(),
                              person2.data().getName(),
                              getType(),
@@ -77,6 +71,12 @@ public class Relation
         boolean crossedCompare = person1.equals(relCmp.person2) && person2.equals(relCmp.person1);
 
         return straightCompare || crossedCompare;
+    }
+
+    @Override
+    public int hashCode ()
+    {
+        return Objects.hashCode(person1) + Objects.hashCode(person2) + Objects.hashCode(type) + Objects.hashCode(beginnig);
     }
 
     //endregion

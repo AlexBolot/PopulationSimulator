@@ -1,6 +1,6 @@
 package PopulationSimulator.entities;
 
-import PopulationSimulator.controllers.Controller;
+import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 
@@ -21,7 +21,7 @@ public class PersonalData
         this.name = name;
         this.gender = gender;
         this.orientation = Hetero;
-        this.birthday = Controller.currentTime;
+        this.birthday = SimulationController.currentTime;
     }
 
     public PersonalData (String name, Gender gender, SexualOrientation orientation)
@@ -29,7 +29,7 @@ public class PersonalData
         this.name = name;
         this.gender = gender;
         this.orientation = orientation;
-        this.birthday = Controller.currentTime;
+        this.birthday = SimulationController.currentTime;
     }
 
     public PersonalData (String name, int birthday, Gender gender, SexualOrientation orientation)
@@ -45,28 +45,21 @@ public class PersonalData
 
     public String getName () { return name; }
 
-    public void setName (String name) { this.name = name; }
-
     public Gender getGender () { return gender; }
 
-    public void setGender (Gender gender) { this.gender = gender; }
-
-    public int getAge () { return Controller.currentTime - birthday; }
+    public int getAge () { return SimulationController.currentTime - birthday; }
 
     public int getBirthday () { return birthday; }
 
-    public void setBirthday (int birthday) { this.birthday = birthday; }
-
     public SexualOrientation getOrientation () { return orientation; }
-
-    public void setOrientation (SexualOrientation orientation) { this.orientation = orientation; }
     //endregion
 
     //region --------------- Override ------------------------
     @Override
     public String toString ()
     {
-        return String.format("Data {name:%s}{age:%d}{gender:%s}{orientation:%s}", name, getAge(), gender, orientation);
+        return String.format("Data {%s}{%d}{%s}{%s}", name, getAge(), gender, orientation);
+        //return String.format("Data {name:%s}{age:%d}{gender:%s}{orientation:%s}", name, getAge(), gender, orientation);
     }
 
     @Override
@@ -83,6 +76,5 @@ public class PersonalData
 
         return true;
     }
-
     //endregion
 }
