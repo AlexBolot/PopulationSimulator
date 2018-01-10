@@ -1,5 +1,7 @@
 package PopulationSimulator.entities;
 
+import java.util.Objects;
+
 public class Person
 {
     //region --------------- Attributes ----------------------
@@ -33,5 +35,19 @@ public class Person
 
         return data.equals(personCompare.data);
     }
+
+    @Override
+    public int hashCode ()
+    {
+        int hash = 0;
+
+        hash += Objects.hashCode(data.getName());
+        hash += Objects.hashCode(data.getBirthday());
+        hash += Objects.hashCode(data.getGender());
+        hash += Objects.hashCode(data.getOrientation());
+
+        return hash;
+    }
+
     //endregion
 }
