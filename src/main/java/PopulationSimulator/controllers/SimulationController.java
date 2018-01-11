@@ -1,7 +1,6 @@
 package PopulationSimulator.controllers;
 
 import PopulationSimulator.entities.Population;
-import PopulationSimulator.entities.Relation;
 import PopulationSimulator.rules.Applyable;
 
 import java.util.HashSet;
@@ -11,7 +10,7 @@ import java.util.HashSet;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 11/01/18 23:34
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -22,7 +21,6 @@ public class SimulationController
     public static int currentTime = 0;
 
     private Population         population;
-    private HashSet<Relation>  relations;
     private HashSet<Applyable> rules;
     //endregion
 
@@ -30,7 +28,6 @@ public class SimulationController
     public SimulationController (Population population, HashSet<Applyable> rules)
     {
         this.population = population;
-        this.relations = new HashSet<>();
         this.rules = rules;
     }
     //endregion
@@ -39,11 +36,6 @@ public class SimulationController
     public Population getPopulation ()
     {
         return population;
-    }
-
-    public HashSet<Relation> getRelations ()
-    {
-        return relations;
     }
 
     public HashSet<Applyable> getRules ()
