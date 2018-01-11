@@ -23,7 +23,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 23:25
+ . Last modified : 11/01/18 23:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
