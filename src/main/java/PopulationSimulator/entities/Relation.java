@@ -5,6 +5,16 @@ import PopulationSimulator.entities.enums.RelationType;
 
 import java.util.Objects;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The Relation class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class Relation
 {
     //region --------------- Attributes ----------------------

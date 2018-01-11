@@ -14,6 +14,16 @@ import static PopulationSimulator.entities.enums.Gender.Male;
 import static PopulationSimulator.entities.enums.RelationType.Couple;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The CoupleRule class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class CoupleRule extends SimpleRule
 {
     private static final int anyAge = -1;

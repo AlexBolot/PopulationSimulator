@@ -4,6 +4,16 @@ import PopulationSimulator.entities.Population;
 
 import java.util.Objects;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The LifespanRule class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class LifespanRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------

@@ -15,6 +15,16 @@ import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The App class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class App
 {
     public static void main (String[] args)

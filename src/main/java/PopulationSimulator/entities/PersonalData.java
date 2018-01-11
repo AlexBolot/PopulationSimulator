@@ -6,6 +6,16 @@ import PopulationSimulator.entities.enums.SexualOrientation;
 
 import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The PersonalData class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class PersonalData
 {
     //region --------------- Attributes ----------------------

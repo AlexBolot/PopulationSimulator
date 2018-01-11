@@ -2,6 +2,16 @@ package PopulationSimulator.utils;
 
 import java.util.Random;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The Const class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:21
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class Const
 {
     private static final Random random = new Random();

@@ -6,6 +6,16 @@ import PopulationSimulator.rules.Applyable;
 
 import java.util.HashSet;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The SimulationController class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:19
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class SimulationController
 {
     //region --------------- Attributes ----------------------

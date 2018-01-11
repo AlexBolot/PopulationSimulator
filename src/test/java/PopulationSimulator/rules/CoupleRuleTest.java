@@ -6,6 +6,16 @@ import org.junit.Test;
 
 import java.util.Random;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The CoupleRuleTest class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:22
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class CoupleRuleTest
 {
     private Random random = new Random();

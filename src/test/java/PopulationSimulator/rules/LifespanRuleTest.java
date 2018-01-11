@@ -15,6 +15,16 @@ import static PopulationSimulator.utils.Const.randBetween;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/*................................................................................................................................
+ . Copyright (c)
+ .
+ . The LifespanRuleTest class was coded by : Alexandre BOLOT
+ .
+ . Last modified : 11/01/18 22:22
+ .
+ . Contact : bolotalex06@gmail.com
+ ...............................................................................................................................*/
+
 public class LifespanRuleTest
 {
     private int                   lifespan;
