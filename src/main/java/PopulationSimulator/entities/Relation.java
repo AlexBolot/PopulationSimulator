@@ -10,7 +10,7 @@ import java.util.Objects;
  .
  . The Relation class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 14/01/18 00:41
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -60,9 +60,7 @@ public class Relation
     @Override
     public String toString ()
     {
-        return String.format("Relation {%s-%s}{type:%s}{duration:%d}",
-                             person1.data().getName(),
-                             person2.data().getName(),
+        return String.format("Relation {%s-%s}{type:%s}{duration:%d}", person1.ID(), person2.ID(),
                              getType(),
                              getDuration());
     }

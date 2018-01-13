@@ -19,7 +19,7 @@ import static PopulationSimulator.entities.enums.Gender.Male;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 14/01/18 00:39
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -51,20 +51,11 @@ public class ReproductionRule extends SimpleRule
             {
                 Random random = new Random();
 
-                int length1 = relation.person1().data().getName().length();
-                int length2 = relation.person2().data().getName().length();
-
-                int length = Math.max(length1, length2);
-
-                int pow2 = (int) Math.pow(10, length + 1);
-                int pow1 = (int) Math.pow(10, length);
-
-                int ID = (random.nextInt(pow2) + (pow1));
                 int age = SimulationController.currentTime;
                 Gender gender = Gender.values()[random.nextInt(Gender.values().length)];
                 SexualOrientation orientation = SexualOrientation.values()[random.nextInt(SexualOrientation.values().length)];
 
-                Person newPerson = new Person(new PersonalData(String.valueOf(ID), age, gender, orientation));
+                Person newPerson = new Person(new PersonalData(age, gender, orientation));
 
                 population.people().add(newPerson);
             }

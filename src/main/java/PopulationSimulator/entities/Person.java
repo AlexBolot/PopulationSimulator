@@ -1,13 +1,11 @@
 package PopulationSimulator.entities;
 
-import java.util.Objects;
-
 /*................................................................................................................................
  . Copyright (c)
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 14/01/18 00:34
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -15,6 +13,10 @@ import java.util.Objects;
 public class Person
 {
     //region --------------- Attributes ----------------------
+    private static int IDCounter = 0;
+
+    private final int ID;
+
     private final PersonalData data;
     //endregion
 
@@ -22,11 +24,14 @@ public class Person
     public Person (PersonalData data)
     {
         this.data = data;
+        ID = IDCounter++;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
     public PersonalData data () { return data; }
+
+    public int ID () { return ID; }
     //endregion
 
     //region --------------- Override ------------------------
@@ -43,21 +48,10 @@ public class Person
 
         Person personCompare = (Person) obj;
 
-        return data.equals(personCompare.data);
+        return ID == personCompare.ID();
     }
 
     @Override
-    public int hashCode ()
-    {
-        int hash = 0;
-
-        hash += Objects.hashCode(data.getName());
-        hash += Objects.hashCode(data.getBirthday());
-        hash += Objects.hashCode(data.getGender());
-        hash += Objects.hashCode(data.getOrientation());
-
-        return hash;
-    }
-
+    public int hashCode () { return ID; }
     //endregion
 }
