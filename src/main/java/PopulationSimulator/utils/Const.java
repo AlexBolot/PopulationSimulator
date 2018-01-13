@@ -7,7 +7,7 @@ import java.util.Random;
  .
  . The Const class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 23:28
+ . Last modified : 13/01/18 22:57
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -37,5 +37,24 @@ public class Const
     public static int randBetween (int lowBound, int highBound)
     {
         return random.nextInt(highBound - lowBound) + lowBound;
+    }
+
+    /**
+     <hr>
+     <h2>Generates a random int between center +/- delta  </h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 13/01 <br>
+     Modified : Alexandre Bolot 13/01
+     </h3>
+     <hr>
+
+     @param center Central value, middle of the rand numbers generated
+     @param delta  Min and max bounds around the center value
+     @return A random int between center +/- delta
+     */
+    public static int randDelta (int center, int delta)
+    {
+        return randBetween(center - delta, center + delta);
     }
 }

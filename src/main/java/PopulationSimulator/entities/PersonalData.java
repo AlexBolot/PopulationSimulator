@@ -11,7 +11,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 14/01/18 00:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -19,32 +19,28 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
 public class PersonalData
 {
     //region --------------- Attributes ----------------------
-    private String            name;
     private Gender            gender;
     private int               birthday;
     private SexualOrientation orientation;
     //endregion
 
     //region --------------- Constructors --------------------
-    public PersonalData (String name, Gender gender)
+    public PersonalData (Gender gender)
     {
-        this.name = name;
         this.gender = gender;
         this.orientation = Hetero;
         this.birthday = SimulationController.currentTime;
     }
 
-    public PersonalData (String name, Gender gender, SexualOrientation orientation)
+    public PersonalData (Gender gender, SexualOrientation orientation)
     {
-        this.name = name;
         this.gender = gender;
         this.orientation = orientation;
         this.birthday = SimulationController.currentTime;
     }
 
-    public PersonalData (String name, int birthday, Gender gender, SexualOrientation orientation)
+    public PersonalData (int birthday, Gender gender, SexualOrientation orientation)
     {
-        this.name = name;
         this.gender = gender;
         this.orientation = orientation;
         this.birthday = birthday;
@@ -52,9 +48,6 @@ public class PersonalData
     //endregion
 
     //region --------------- Getters - Setters ---------------
-
-    public String getName () { return name; }
-
     public Gender getGender () { return gender; }
 
     public int getAge () { return SimulationController.currentTime - birthday; }
@@ -68,8 +61,7 @@ public class PersonalData
     @Override
     public String toString ()
     {
-        return String.format("Data {%s}{%d}{%s}{%s}", name, getAge(), gender, orientation);
-        //return String.format("Data {name:%s}{age:%d}{gender:%s}{orientation:%s}", name, getAge(), gender, orientation);
+        return String.format("Data {%d}{%s}{%s}", getAge(), gender, orientation);
     }
 
     @Override
@@ -79,7 +71,6 @@ public class PersonalData
 
         PersonalData dataCompare = (PersonalData) obj;
 
-        if (!name.equals(dataCompare.name)) return false;
         if (birthday != dataCompare.birthday) return false;
         if (!gender.equals(dataCompare.gender)) return false;
         if (!orientation.equals(dataCompare.orientation)) return false;

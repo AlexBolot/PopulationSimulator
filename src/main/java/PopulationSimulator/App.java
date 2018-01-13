@@ -16,14 +16,12 @@ import java.util.LinkedHashSet;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import static PopulationSimulator.utils.Const.randBetween;
-
 /*................................................................................................................................
  . Copyright (c)
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 23:51
+ . Last modified : 14/01/18 00:40
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -73,11 +71,10 @@ public class App
     {
         Random random = new Random();
 
-        int ID = randBetween(10, 100);
         int age = 0;
         Gender gender = Gender.values()[random.nextInt(Gender.values().length)];
         SexualOrientation orientation = SexualOrientation.values()[random.nextInt(SexualOrientation.values().length)];
 
-        return new Person(new PersonalData(String.valueOf(ID), age, gender, orientation));
+        return new Person(new PersonalData(age, gender, orientation));
     }
 }
