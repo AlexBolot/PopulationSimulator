@@ -10,7 +10,7 @@ import java.util.HashSet;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 23:34
+ . Last modified : 14/01/18 03:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -18,13 +18,27 @@ import java.util.HashSet;
 public class SimulationController
 {
     //region --------------- Attributes ----------------------
-    public static int currentTime = 0;
+    private static int currentTime = 0;
 
     private Population         population;
     private HashSet<Applyable> rules;
     //endregion
 
     //region --------------- Constructors --------------------
+
+    /**
+     <hr>
+     <h2>Simple constructor of SimulationController</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 11/01
+     </h3>
+     <hr>
+
+     @param population Population (people + relations) to work on for the simulation
+     @param rules      Rules to apply on the population when to simulation starts
+     */
     public SimulationController (Population population, HashSet<Applyable> rules)
     {
         this.population = population;
@@ -33,18 +47,35 @@ public class SimulationController
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public Population getPopulation ()
+    public static int currentTime ()
+    {
+        return currentTime;
+    }
+
+    public Population population ()
     {
         return population;
     }
 
-    public HashSet<Applyable> getRules ()
+    public HashSet<Applyable> rules ()
     {
         return rules;
     }
     //endregion
 
     //region --------------- Methods -------------------------
+
+    /**
+     <hr>
+     <h2>Will apply every Rule on the Population as many times as they are ticks</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     </h3>
+
+     @param ticks Numbers of "turns" to do before stopping the simulation
+     */
     public void simulate (int ticks)
     {
         System.out.println("---------- year " + currentTime + " ----------\n");

@@ -5,6 +5,7 @@ import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:22
+ . Last modified : 14/01/18 02:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -31,6 +32,14 @@ public class LifespanRuleTest
     private LifespanRule          lifespanRule;
     private LinkedHashSet<Person> people;
 
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     </h3>
+     <hr>
+     */
     @Before
     public void before ()
     {
@@ -39,6 +48,14 @@ public class LifespanRuleTest
         lifespanRule = new LifespanRule(lifespan);
     }
 
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     </h3>
+     <hr>
+     */
     @Test
     public void apply_Right ()
     {
@@ -53,8 +70,8 @@ public class LifespanRuleTest
                 IntStream.range(0, randBetween(5, 20)).forEach(k -> add(randPerson(lifespan, false)));
             }};
 
-            youngAmount = people.stream().filter(person1 -> person1.data().getAge() < lifespan).count();
-            oldAmount = people.stream().filter(person -> person.data().getAge() >= lifespan).count();
+            youngAmount = people.stream().filter(person1 -> person1.data().age() < lifespan).count();
+            oldAmount = people.stream().filter(person -> person.data().age() >= lifespan).count();
 
             assertEquals(youngAmount + oldAmount, people.size());
 
@@ -64,6 +81,14 @@ public class LifespanRuleTest
         }
     }
 
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     </h3>
+     <hr>
+     */
     @Test
     public void apply_Empty ()
     {
@@ -74,20 +99,41 @@ public class LifespanRuleTest
         assertTrue(people.isEmpty());
     }
 
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     <hr>
+     */
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
         lifespanRule.apply(null);
     }
 
+    /**
+     <hr>
+     <h2>Generates a random Person with age under/over the limit, depending on the young param</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 10/01
+     </h3>
+     <hr>
+
+     @param limit Age limit of a Person's lifespan
+     @param young True if the generated age has to be under the limit
+     @return A random Person with age under/over the limit, depending on the young param
+     */
+    @NotNull
     private Person randPerson (int limit, boolean young)
     {
-        int ID = randBetween(0, 2000);
         int age = young ? -randBetween(0, limit) : -randBetween(limit, limit + 10);
 
         Gender gender = Gender.values()[Gender.values().length - 1];
         SexualOrientation orientation = SexualOrientation.values()[SexualOrientation.values().length - 1];
 
-        return new Person(new PersonalData(String.valueOf(ID), age, gender, orientation));
+        return new Person(new PersonalData(age, gender, orientation));
     }
 }

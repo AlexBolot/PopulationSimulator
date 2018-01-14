@@ -1,9 +1,11 @@
 package PopulationSimulator.entities;
 
-import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 
+import java.util.Objects;
+
+import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
 
 /*................................................................................................................................
@@ -11,7 +13,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 00:36
+ . Last modified : 14/01/18 02:58
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -25,20 +27,69 @@ public class PersonalData
     //endregion
 
     //region --------------- Constructors --------------------
+
+    /**
+     <hr>
+     <h2>Constructor of PersonalData using : <br>
+     - Gender : gender param <br>
+     - Orientation : Hetero (as default) <br>
+     - Birthday : Now (SimulationController.currentTime())</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param gender Gender of the Person
+     */
     public PersonalData (Gender gender)
     {
         this.gender = gender;
         this.orientation = Hetero;
-        this.birthday = SimulationController.currentTime;
+        this.birthday = currentTime();
     }
 
+    /**
+     <hr>
+     <h2>Constructor of PersonalData using : <br>
+     - Gender : gender param <br>
+     - Orientation : orientation param <br>
+     - Birthday : Now (SimulationController.currentTime())</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param gender      Gender of the Person
+     @param orientation Sexual Orientation of the Person
+     */
     public PersonalData (Gender gender, SexualOrientation orientation)
     {
         this.gender = gender;
         this.orientation = orientation;
-        this.birthday = SimulationController.currentTime;
+        this.birthday = currentTime();
     }
 
+    /**
+     <hr>
+     <h2>Constructor of PersonalData using : <br>
+     - Gender : gender param <br>
+     - Orientation : orientation param <br>
+     - Birthday : birthday param</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param gender      Gender of the Person
+     @param orientation Sexual Orientation of the Person
+     @param birthday    Birthday of the Person
+     */
     public PersonalData (int birthday, Gender gender, SexualOrientation orientation)
     {
         this.gender = gender;
@@ -48,22 +99,48 @@ public class PersonalData
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public Gender getGender () { return gender; }
+    public Gender gender () { return gender; }
 
-    public int getAge () { return SimulationController.currentTime - birthday; }
+    public int age () { return currentTime() - birthday; }
 
-    public int getBirthday () { return birthday; }
+    public int birthday () { return birthday; }
 
-    public SexualOrientation getOrientation () { return orientation; }
+    public SexualOrientation orientation () { return orientation; }
     //endregion
 
     //region --------------- Override ------------------------
+
+    /**
+     <hr>
+     <h2>Format : Data + age + gender + orientation</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @return Data + age + gender + orientation
+     */
     @Override
     public String toString ()
     {
-        return String.format("Data {%d}{%s}{%s}", getAge(), gender, orientation);
+        return String.format("Data {%d}{%s}{%s}", age(), gender, orientation);
     }
 
+    /**
+     <hr>
+     <h2>Compares : birthday, gender and orientation</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param obj The Object to compare with this
+     @return True if obj is equal to this, False otherwise
+     */
     @Override
     public boolean equals (Object obj)
     {
@@ -77,5 +154,24 @@ public class PersonalData
 
         return true;
     }
+
+
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 16/01
+     </h3>
+     <hr>
+
+     @return Unique HashCode of this PersonalData instance <br>
+     Based on : birthday, gender and orientation
+     */
+    @Override
+    public int hashCode ()
+    {
+        return Objects.hash(birthday, gender, orientation);
+    }
+
     //endregion
 }

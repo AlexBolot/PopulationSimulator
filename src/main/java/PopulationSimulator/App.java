@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 00:44
+ . Last modified : 14/01/18 02:24
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -53,7 +53,6 @@ public class App
     /**
      <hr>
      <h2>Generates a random Person with :<br>
-     - ID between 10 and 100 <br>
      - Age = 0 <br>
      - Gender = random from the Enum <br>
      - Sexual Ori. = random from the Enum</h2>

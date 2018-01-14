@@ -5,7 +5,7 @@ package PopulationSimulator.entities;
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 00:34
+ . Last modified : 14/01/18 02:58
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -21,6 +21,20 @@ public class Person
     //endregion
 
     //region --------------- Constructors --------------------
+
+    /**
+     <hr>
+     <h2>Simple constructor of Person <br>
+     Fetches ID, attributes it, then increments it.</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param data Personal data of the Person
+     */
     public Person (PersonalData data)
     {
         this.data = data;
@@ -35,12 +49,38 @@ public class Person
     //endregion
 
     //region --------------- Override ------------------------
+
+    /**
+     <hr>
+     <h2>Format : Person + ID + data.toString()</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @return Person + ID + data.toString()
+     */
     @Override
     public String toString ()
     {
-        return String.format("Person %s", data.toString().substring(5));
+        return String.format("%s : %d - %s", getClass().getSimpleName(), ID, data.toString().substring(5));
     }
 
+    /**
+     <hr>
+     <h2>Compares : ID</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 16/12 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @param obj The Object to compare with this
+     @return True if obj is equal to this, False otherwise
+     */
     @Override
     public boolean equals (Object obj)
     {
@@ -51,6 +91,17 @@ public class Person
         return ID == personCompare.ID();
     }
 
+    /**
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 10/01 <br>
+     Modified : Alexandre Bolot 14/01
+     </h3>
+     <hr>
+
+     @return Unique HashCode of this Person instance <br>
+     Based on : ID
+     */
     @Override
     public int hashCode () { return ID; }
     //endregion
