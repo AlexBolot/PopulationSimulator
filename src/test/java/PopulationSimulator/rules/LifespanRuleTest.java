@@ -1,17 +1,14 @@
 package PopulationSimulator.rules;
 
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Population;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
+import static PopulationSimulator.rules.RulesTestingUtils.randPerson;
 import static PopulationSimulator.utils.Const.randBetween;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -21,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 02:49
+ . Last modified : 14/01/18 14:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -110,30 +107,5 @@ public class LifespanRuleTest
     public void apply_Null ()
     {
         lifespanRule.apply(null);
-    }
-
-    /**
-     <hr>
-     <h2>Generates a random Person with age under/over the limit, depending on the young param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
-
-     @param limit Age limit of a Person's lifespan
-     @param young True if the generated age has to be under the limit
-     @return A random Person with age under/over the limit, depending on the young param
-     */
-    @NotNull
-    private Person randPerson (int limit, boolean young)
-    {
-        int age = young ? -randBetween(0, limit) : -randBetween(limit, limit + 10);
-
-        Gender gender = Gender.values()[Gender.values().length - 1];
-        SexualOrientation orientation = SexualOrientation.values()[SexualOrientation.values().length - 1];
-
-        return new Person(new PersonalData(age, gender, orientation));
     }
 }

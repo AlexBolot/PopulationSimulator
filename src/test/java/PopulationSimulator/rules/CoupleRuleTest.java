@@ -1,12 +1,8 @@
 package PopulationSimulator.rules;
 
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Population;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
 import PopulationSimulator.utils.Const;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,6 +12,7 @@ import java.util.stream.IntStream;
 import static PopulationSimulator.entities.enums.Gender.Female;
 import static PopulationSimulator.entities.enums.Gender.Male;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
+import static PopulationSimulator.rules.RulesTestingUtils.createPerson;
 import static PopulationSimulator.utils.Const.randBetween;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -25,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 02:49
+ . Last modified : 14/01/18 14:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -126,26 +123,5 @@ public class CoupleRuleTest
     public void apply_Null ()
     {
         coupleRule.apply(null);
-    }
-
-    /**
-     <hr>
-     <h2>Generates a Person created from given params : age, gender and orientation</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-
-     @param age         Age of the Person
-     @param gender      Gender of the Person
-     @param orientation SexualOrientation of the Perso
-     @return A Person created from given params : age, gender and orientation
-     */
-    @NotNull
-    private Person createPerson (int age, Gender gender, SexualOrientation orientation)
-    {
-        return new Person(new PersonalData(-age, gender, orientation));
     }
 }
