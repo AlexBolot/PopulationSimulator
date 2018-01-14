@@ -4,13 +4,14 @@ import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.enums.RelationType;
 
 import java.util.Objects;
+import java.util.Optional;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The Relation class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 03:00
+ . Last modified : 15/01/18 00:18
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -54,6 +55,14 @@ public class Relation
     public int beginning () { return beginning; }
 
     public int getDuration () { return SimulationController.currentTime() - beginning; }
+
+    public Optional<Person> getOther (Person person)
+    {
+        if (person.equals(person1)) return Optional.of(person2);
+        if (person.equals(person2)) return Optional.of(person1);
+        return Optional.empty();
+    }
+
     //endregion
 
     //region --------------- Override ------------------------
