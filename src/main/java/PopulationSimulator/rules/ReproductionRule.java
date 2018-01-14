@@ -9,17 +9,15 @@ import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 
 import java.util.Objects;
-import java.util.Random;
 
-import static PopulationSimulator.entities.enums.Gender.Female;
-import static PopulationSimulator.entities.enums.Gender.Male;
+import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 03:29
+ . Last modified : 14/01/18 03:38
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -92,21 +90,26 @@ public class ReproductionRule extends SimpleRule
 
         for (Relation relation : population.relations())
         {
-            Gender gender1 = relation.person1().data().gender();
-            Gender gender2 = relation.person2().data().gender();
+            PersonalData dataP1 = relation.person1().data();
+            PersonalData dataP2 = relation.person2().data();
 
-            if (gender1.equals(Male) && gender2.equals(Female))
-            {
-                Random random = new Random();
+            Gender gender1 = dataP1.gender();
+            Gender gender2 = dataP2.gender();
 
-                int age = SimulationController.currentTime();
-                Gender gender = Gender.values()[random.nextInt(Gender.values().length)];
-                SexualOrientation orientation = SexualOrientation.values()[random.nextInt(SexualOrientation.values().length)];
+            int age1 = dataP1.age();
+            int age2 = dataP2.age();
 
-                Person newPerson = new Person(new PersonalData(age, gender, orientation));
+            if (gender1.equals(gender2)) continue;
+            if (minimumAge != anyAge && age1 < minimumAge) continue;
+            if (minimumAge != anyAge && age2 < minimumAge) continue;
 
-                population.people().add(newPerson);
-            }
+            int age = SimulationController.currentTime();
+            Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
+            SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
+
+            Person newPerson = new Person(new PersonalData(age, gender, orientation));
+
+            population.people().add(newPerson);
         }
     }
     //endregion
