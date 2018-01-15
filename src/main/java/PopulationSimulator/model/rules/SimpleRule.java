@@ -1,11 +1,11 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimpleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

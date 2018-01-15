@@ -1,4 +1,4 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Population;
@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
-import static PopulationSimulator.rules.RulesTestingUtils.randPerson;
+import static PopulationSimulator.model.rules.RulesTestingUtils.randPerson;
 import static PopulationSimulator.utils.Const.randBetween;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 14:53
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

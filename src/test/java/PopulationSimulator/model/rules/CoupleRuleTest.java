@@ -1,4 +1,4 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Population;
@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 import static PopulationSimulator.entities.enums.Gender.Female;
 import static PopulationSimulator.entities.enums.Gender.Male;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
-import static PopulationSimulator.rules.RulesTestingUtils.createPerson;
+import static PopulationSimulator.model.rules.RulesTestingUtils.createPerson;
 import static PopulationSimulator.utils.Const.randBetween;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 14:53
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

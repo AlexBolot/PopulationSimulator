@@ -6,10 +6,10 @@ import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
-import PopulationSimulator.rules.Applyable;
-import PopulationSimulator.rules.CoupleRule;
-import PopulationSimulator.rules.LifespanRule;
-import PopulationSimulator.rules.ReproductionRule;
+import PopulationSimulator.model.rules.Applyable;
+import PopulationSimulator.model.rules.CoupleRule;
+import PopulationSimulator.model.rules.LifespanRule;
+import PopulationSimulator.model.rules.ReproductionRule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;
@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 02:24
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

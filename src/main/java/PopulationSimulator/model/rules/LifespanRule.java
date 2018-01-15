@@ -1,4 +1,4 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Population;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 03:23
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

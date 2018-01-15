@@ -1,4 +1,4 @@
-package PopulationSimulator.finders;
+package PopulationSimulator.model.finders;
 
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Population;
@@ -14,7 +14,7 @@ import static PopulationSimulator.entities.enums.RelationType.Couple;
  .
  . The PartenerFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 23:30
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

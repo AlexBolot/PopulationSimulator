@@ -1,18 +1,23 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.finders;
 
+import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Population;
+
+import java.util.LinkedHashSet;
 
 /*................................................................................................................................
  . Copyright (c)
  .
- . The Applyable class was coded by : Alexandre BOLOT
+ . The PersonFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 11/01/18 22:19
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public interface Applyable
+public interface PersonFinder
 {
-    void apply (Population population);
+    LinkedHashSet<Person> find (Person person, Population population);
+
+    LinkedHashSet<Person> merge (LinkedHashSet<Person> people);
 }

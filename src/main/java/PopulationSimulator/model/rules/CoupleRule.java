@@ -1,4 +1,4 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.Person;
@@ -19,7 +19,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 03:28
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

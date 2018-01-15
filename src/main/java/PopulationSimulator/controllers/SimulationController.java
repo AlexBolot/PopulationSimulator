@@ -1,7 +1,7 @@
 package PopulationSimulator.controllers;
 
 import PopulationSimulator.entities.Population;
-import PopulationSimulator.rules.Applyable;
+import PopulationSimulator.model.rules.Applyable;
 
 import java.util.HashSet;
 
@@ -10,7 +10,7 @@ import java.util.HashSet;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 03:32
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

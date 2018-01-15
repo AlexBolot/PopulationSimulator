@@ -1,4 +1,4 @@
-package PopulationSimulator.rules;
+package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
@@ -18,7 +18,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RulesTestingUtils class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 15:06
+ . Last modified : 15/01/18 13:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
