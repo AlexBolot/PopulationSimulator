@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import java.util.LinkedHashSet;
 
-import static PopulationSimulator.model.rules.RulesTestingUtils.createAllCombinations;
+import static PopulationSimulator.model.factories.PersonFactory.createAllCombinations;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 16/01/18 00:23
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

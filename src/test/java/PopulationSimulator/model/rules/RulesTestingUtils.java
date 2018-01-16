@@ -6,11 +6,6 @@ import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedHashSet;
-
-import static PopulationSimulator.entities.enums.Gender.Female;
-import static PopulationSimulator.entities.enums.Gender.Male;
-import static PopulationSimulator.entities.enums.SexualOrientation.*;
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -18,74 +13,14 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RulesTestingUtils class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 15/01/18 23:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class RulesTestingUtils
 {
-    /**
-     <hr>
-     <h2>Creates all possible combinations of couples</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
 
-     @return A LinkedHashSet of Person, containing all possible combinations of couples
-     */
-    @NotNull
-    static LinkedHashSet<Person> createAllCombinations (int minimumAge)
-    {
-        int oldEnough = minimumAge + randBetween(1, 5);
-
-        LinkedHashSet<Person> people = new LinkedHashSet<>();
-
-        //region --> Hetero Couples (x3 Couples - x3 Repro)
-        people.add(createPerson(oldEnough, Male, Hetero));
-        people.add(createPerson(oldEnough, Female, Hetero));
-
-        people.add(createPerson(oldEnough, Male, Hetero));
-        people.add(createPerson(oldEnough, Female, Hetero));
-
-        people.add(createPerson(oldEnough, Male, Hetero));
-        people.add(createPerson(oldEnough, Female, Hetero));
-        //endregion
-        //region --> Homo Couples   (x2 Couples - x0 Repro)
-        people.add(createPerson(oldEnough, Male, Homo));
-        people.add(createPerson(oldEnough, Male, Homo));
-
-        people.add(createPerson(oldEnough, Female, Homo));
-        people.add(createPerson(oldEnough, Female, Homo));
-        //endregion
-        //region --> Bi Couples     (x7 Couples - x3 Repro)
-        people.add(createPerson(oldEnough, Male, Bi));
-        people.add(createPerson(oldEnough, Female, Bi));
-
-        people.add(createPerson(oldEnough, Male, Bi));
-        people.add(createPerson(oldEnough, Male, Bi));
-
-        people.add(createPerson(oldEnough, Female, Bi));
-        people.add(createPerson(oldEnough, Female, Bi));
-
-        people.add(createPerson(oldEnough, Male, Bi));
-        people.add(createPerson(oldEnough, Male, Homo));
-
-        people.add(createPerson(oldEnough, Female, Bi));
-        people.add(createPerson(oldEnough, Female, Homo));
-
-        people.add(createPerson(oldEnough, Male, Bi));
-        people.add(createPerson(oldEnough, Female, Hetero));
-
-        people.add(createPerson(oldEnough, Female, Bi));
-        people.add(createPerson(oldEnough, Male, Hetero));
-        //endregion
-
-        return people;
-    }
 
     /**
      <hr>
