@@ -1,25 +1,25 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
-import static PopulationSimulator.entities.enums.Gender.Female;
-import static PopulationSimulator.entities.enums.Gender.Male;
+import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.entities.enums.RelationType.Couple;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
+import static PopulationSimulator.model.factories.PersonFactory.getOppositeGender;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 17/01/18 00:38
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -89,21 +89,19 @@ public class CoupleRule extends SimpleRule
     {
         Objects.requireNonNull(population, "population param is null");
 
-        for (Person person1 : population.people())
-        {
-            if (minimumAge != anyAge && person1.data().age() < minimumAge) continue;
-            if (population.relations().stream().anyMatch(relation -> relation.involves(person1))) continue;
+        ArrayList<Person> tmpPeople = new ArrayList<>(population.people());
+        if (minimumAge != anyAge) tmpPeople.removeIf(person -> person.data().age() < minimumAge);
+        tmpPeople.removeIf(person -> population.relations().stream().anyMatch(relation -> relation.involves(person)));
 
-            for (Person person2 : population.people())
+        for (Person person1 : tmpPeople)
+        {
+            for (Person person2 : tmpPeople)
             {
                 if (person2.equals(person1)) continue;
-                if (minimumAge != anyAge && person2.data().age() < minimumAge) continue;
-                if (population.relations().stream().anyMatch(relation -> relation.involves(person2))) continue;
 
                 if (isMatch(person1, person2))
                 {
-                    Relation relation = new Relation(person1, person2, Couple, SimulationController.currentTime());
-                    population.relations().add(relation);
+                    population.relations().add(new Relation(person1, person2, Couple, currentTime()));
                     break;
                 }
             }
@@ -138,19 +136,15 @@ public class CoupleRule extends SimpleRule
         Gender gen1 = p1.data().gender();
         Gender gen2 = p2.data().gender();
 
-        if (ori1.equals(Bi))
+        if (ori1 == Bi)
         {
-            if (ori2.equals(Bi)) return true;
-
-            if (ori2.equals(Hetero)) return gen1.equals(Male) && gen2.equals(Female) || gen1.equals(Female) && gen2.equals(Male);
-            if (ori2.equals(Homo)) return gen1.equals(Male) && gen2.equals(Male) || gen1.equals(Female) && gen2.equals(Female);
+            if (ori2 == Bi) return true;
+            if (ori2 == Hetero) return gen1 == getOppositeGender(gen2);
+            if (ori2 == Homo) return gen1 == gen2;
         }
 
-        if (ori1.equals(Hetero) && gen1.equals(Male)) return gen2.equals(Female) && (ori2.equals(Hetero) || ori2.equals(Bi));
-        if (ori1.equals(Hetero) && gen1.equals(Female)) return gen2.equals(Male) && (ori2.equals(Hetero) || ori2.equals(Bi));
-
-        if (ori1.equals(Homo) && gen1.equals(Male)) return gen2.equals(Male) && (ori2.equals(Homo) || ori2.equals(Bi));
-        if (ori1.equals(Homo) && gen1.equals(Female)) return gen2.equals(Female) && (ori2.equals(Homo) || ori2.equals(Bi));
+        if (ori1 == Hetero) return gen1 == getOppositeGender(gen2) && (ori2 == Hetero || ori2 == Bi);
+        if (ori1 == Homo) return gen1 == gen2 && (ori2 == Homo || ori2 == Bi);
 
         return false;
     }
