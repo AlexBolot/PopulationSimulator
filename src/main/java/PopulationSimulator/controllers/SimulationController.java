@@ -2,6 +2,7 @@ package PopulationSimulator.controllers;
 
 import PopulationSimulator.entities.Population;
 import PopulationSimulator.model.rules.Applyable;
+import org.jetbrains.annotations.Contract;
 
 import java.util.HashSet;
 
@@ -10,7 +11,7 @@ import java.util.HashSet;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 17/01/18 21:33
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -47,20 +48,12 @@ public class SimulationController
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public static int currentTime ()
-    {
-        return currentTime;
-    }
+    @Contract (pure = true)
+    public static int currentTime () { return currentTime; }
 
-    public Population population ()
-    {
-        return population;
-    }
+    public Population population () { return population; }
 
-    public HashSet<Applyable> rules ()
-    {
-        return rules;
-    }
+    public HashSet<Applyable> rules () { return rules; }
     //endregion
 
     //region --------------- Methods -------------------------

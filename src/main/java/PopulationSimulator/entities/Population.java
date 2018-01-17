@@ -8,7 +8,7 @@ import java.util.Objects;
  .
  . The Population class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 15:05
+ . Last modified : 17/01/18 21:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -16,8 +16,8 @@ import java.util.Objects;
 public class Population
 {
     //region --------------- Attributes ----------------------
-    private LinkedHashSet<Person>   people;
-    private LinkedHashSet<Relation> relations;
+    private final LinkedHashSet<Person>   people;
+    private final LinkedHashSet<Relation> relations;
     //endregion
 
     //region --------------- Constructors --------------------
@@ -40,19 +40,9 @@ public class Population
         return people;
     }
 
-    public void setPeople (LinkedHashSet<Person> people)
-    {
-        this.people = people;
-    }
-
     public LinkedHashSet<Relation> relations ()
     {
         return relations;
-    }
-
-    public void setRelations (LinkedHashSet<Relation> relations)
-    {
-        this.relations = relations;
     }
     //endregion
 

@@ -13,15 +13,16 @@ import PopulationSimulator.model.rules.ReproductionRule;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashSet;
-import java.util.Random;
 import java.util.stream.IntStream;
+
+import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 17/01/18 21:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -68,11 +69,10 @@ public class App
     @NotNull
     private static Person randPerson ()
     {
-        Random random = new Random();
-
         int age = 0;
-        Gender gender = Gender.values()[random.nextInt(Gender.values().length)];
-        SexualOrientation orientation = SexualOrientation.values()[random.nextInt(SexualOrientation.values().length)];
+
+        Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
+        SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
 
         return new Person(new PersonalData(age, gender, orientation));
     }
