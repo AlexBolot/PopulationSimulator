@@ -6,12 +6,15 @@ import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.Sector;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
@@ -22,7 +25,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 21:32
+ . Last modified : 18/01/18 22:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -43,12 +46,26 @@ public class App
 
         LinkedHashSet<Applyable> rules = new LinkedHashSet<Applyable>()
         {{
-            add(new LifespanRule(15));
             add(new CoupleRule(5));
             add(new ReproductionRule(7));
+            add(new LifespanRule(15));
         }};
 
-        new SimulationController(new Population(people), rules).simulate(25);
+        LinkedHashSet<Sector> sectors = new LinkedHashSet<Sector>()
+        {{
+            add(new Sector(1, 3)); // 0
+            add(new Sector(0, 2)); // 1
+            add(new Sector(1, 3)); // 2
+            add(new Sector(0, 2)); // 3
+        }};
+
+        LinkedHashMap<Person, Sector> locations = new LinkedHashMap<>();
+
+        people.forEach(person -> locations.put(person, new ArrayList<>(sectors).get(randBetween(0, sectors.size()))));
+
+        Population population = new Population(people, new LinkedHashSet<>(), sectors, locations);
+
+        new SimulationController(population, rules).simulate(25);
     }
 
     /**

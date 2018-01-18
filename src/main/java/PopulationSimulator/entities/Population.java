@@ -1,5 +1,9 @@
 package PopulationSimulator.entities;
 
+import PopulationSimulator.model.Sector;
+
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 
@@ -8,7 +12,7 @@ import java.util.Objects;
  .
  . The Population class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 21:32
+ . Last modified : 18/01/18 22:33
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -16,34 +20,49 @@ import java.util.Objects;
 public class Population
 {
     //region --------------- Attributes ----------------------
-    private final LinkedHashSet<Person>   people;
-    private final LinkedHashSet<Relation> relations;
+    private final LinkedHashSet<Person>         people;
+    private final LinkedHashSet<Sector>         sectors;
+    private final LinkedHashSet<Relation>       relations;
+    private final LinkedHashMap<Person, Sector> locations;
     //endregion
 
     //region --------------- Constructors --------------------
     public Population (LinkedHashSet<Person> people)
     {
-        this.people = people;
-        this.relations = new LinkedHashSet<>();
+        this(people, new LinkedHashSet<>());
     }
 
     public Population (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations)
     {
         this.people = people;
         this.relations = relations;
+
+        Sector sector = new Sector();
+
+        this.sectors = new LinkedHashSet<>(Collections.singletonList(sector));
+        this.locations = new LinkedHashMap<>();
+
+        this.people.forEach(person -> locations.put(person, sector));
+    }
+
+    public Population (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations, LinkedHashSet<Sector> sectors,
+                       LinkedHashMap<Person, Sector> locations)
+    {
+        this.people = people;
+        this.relations = relations;
+        this.sectors = sectors;
+        this.locations = locations;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public LinkedHashSet<Person> people ()
-    {
-        return people;
-    }
+    public LinkedHashSet<Person> people () { return people; }
 
-    public LinkedHashSet<Relation> relations ()
-    {
-        return relations;
-    }
+    public LinkedHashSet<Relation> relations () { return relations; }
+
+    public LinkedHashMap<Person, Sector> locations () { return locations; }
+
+    public LinkedHashSet<Sector> sectors () { return sectors; }
     //endregion
 
     //region --------------- Override ------------------------
