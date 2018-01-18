@@ -1,9 +1,9 @@
 package PopulationSimulator.model.rules;
 
 import PopulationSimulator.controllers.SimulationController;
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
@@ -17,7 +17,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 18/01/18 22:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -68,7 +68,7 @@ public class ReproductionRule extends SimpleRule
 
     /**
      <hr>
-     <h2>Applies this Rule on the Population param</h2>
+     <h2>Applies this Rule on the Context param</h2>
      <h3>A new Person is created if
      - Both members of a Couple relationship have reached the minimumAge <br>
      - They have opposite Gender (Female X Male or Male X Female) <br>
@@ -82,13 +82,13 @@ public class ReproductionRule extends SimpleRule
      </h3>
      <hr>
 
-     @param population Population to apply this rule onto
+     @param context Context to apply this rule onto
      */
-    public void apply (Population population)
+    public void apply (Context context)
     {
-        Objects.requireNonNull(population, "population param is null");
+        Objects.requireNonNull(context, "context param is null");
 
-        for (Relation relation : population.relations())
+        for (Relation relation : context.relations())
         {
             PersonalData dataP1 = relation.person1().data();
             PersonalData dataP2 = relation.person2().data();
@@ -109,7 +109,7 @@ public class ReproductionRule extends SimpleRule
 
             Person newPerson = new Person(new PersonalData(age, gender, orientation));
 
-            population.people().add(newPerson);
+            context.people().add(newPerson);
         }
     }
     //endregion

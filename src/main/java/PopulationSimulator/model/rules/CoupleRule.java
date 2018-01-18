@@ -1,7 +1,7 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
@@ -19,7 +19,7 @@ import static PopulationSimulator.model.factories.PersonFactory.getOppositeGende
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 00:38
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -70,7 +70,7 @@ public class CoupleRule extends SimpleRule
 
     /**
      <hr>
-     <h2>Applies this Rule on the Population param</h2>
+     <h2>Applies this Rule on the Context param</h2>
      <h3>
      — A Person that didn't reach minium age can't get in couple <br>
      — A Person that already is in couple, can't get in couple with someone else <br>
@@ -83,15 +83,15 @@ public class CoupleRule extends SimpleRule
      </h3>
      <hr>
 
-     @param population Population to apply this rule onto
+     @param context Context to apply this rule onto
      */
-    public void apply (Population population)
+    public void apply (Context context)
     {
-        Objects.requireNonNull(population, "population param is null");
+        Objects.requireNonNull(context, "context param is null");
 
-        ArrayList<Person> tmpPeople = new ArrayList<>(population.people());
+        ArrayList<Person> tmpPeople = new ArrayList<>(context.people());
         if (minimumAge != anyAge) tmpPeople.removeIf(person -> person.data().age() < minimumAge);
-        tmpPeople.removeIf(person -> population.relations().stream().anyMatch(relation -> relation.involves(person)));
+        tmpPeople.removeIf(person -> context.relations().stream().anyMatch(relation -> relation.involves(person)));
 
         for (Person person1 : tmpPeople)
         {
@@ -101,7 +101,7 @@ public class CoupleRule extends SimpleRule
 
                 if (isMatch(person1, person2))
                 {
-                    population.relations().add(new Relation(person1, person2, Couple, currentTime()));
+                    context.relations().add(new Relation(person1, person2, Couple, currentTime()));
                     break;
                 }
             }

@@ -1,7 +1,7 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -84,11 +84,11 @@ public class CoupleRuleTest
             });
         }};
 
-        Population population = new Population(people);
+        Context context = new Context(people);
 
-        coupleRule.apply(population);
+        coupleRule.apply(context);
 
-        assertEquals(29, population.relations().size());
+        assertEquals(29, context.relations().size());
     }
 
     /**
@@ -104,11 +104,11 @@ public class CoupleRuleTest
     {
         assertTrue(people.isEmpty());
 
-        Population population = new Population(people);
+        Context context = new Context(people);
 
-        coupleRule.apply(population);
+        coupleRule.apply(context);
 
-        assertTrue(population.relations().isEmpty());
+        assertTrue(context.relations().isEmpty());
     }
 
     /**

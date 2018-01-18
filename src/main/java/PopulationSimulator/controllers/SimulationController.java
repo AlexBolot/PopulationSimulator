@@ -1,6 +1,6 @@
 package PopulationSimulator.controllers;
 
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
 import org.jetbrains.annotations.Contract;
 
@@ -11,7 +11,7 @@ import java.util.HashSet;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 21:33
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -21,7 +21,7 @@ public class SimulationController
     //region --------------- Attributes ----------------------
     private static int currentTime = 0;
 
-    private Population         population;
+    private Context            context;
     private HashSet<Applyable> rules;
     //endregion
 
@@ -37,12 +37,12 @@ public class SimulationController
      </h3>
      <hr>
 
-     @param population Population (people + relations) to work on for the simulation
-     @param rules      Rules to apply on the population when to simulation starts
+     @param context Context (people + relations) to work on for the simulation
+     @param rules      Rules to apply on the context when to simulation starts
      */
-    public SimulationController (Population population, HashSet<Applyable> rules)
+    public SimulationController (Context context, HashSet<Applyable> rules)
     {
-        this.population = population;
+        this.context = context;
         this.rules = rules;
     }
     //endregion
@@ -51,7 +51,7 @@ public class SimulationController
     @Contract (pure = true)
     public static int currentTime () { return currentTime; }
 
-    public Population population () { return population; }
+    public Context population () { return context; }
 
     public HashSet<Applyable> rules () { return rules; }
     //endregion
@@ -60,7 +60,7 @@ public class SimulationController
 
     /**
      <hr>
-     <h2>Will apply every Rule on the Population as many times as they are ticks</h2>
+     <h2>Will apply every Rule on the Context as many times as they are ticks</h2>
      <hr>
      <h3>
      Created : Alexandre Bolot 10/01 <br>
@@ -75,20 +75,20 @@ public class SimulationController
 
         while (currentTime != ticks)
         {
-            rules.forEach(rule -> rule.apply(population));
+            rules.forEach(rule -> rule.apply(context));
 
-            boolean hasPeople = !population.people().isEmpty();
-            boolean hasRelations = !population.relations().isEmpty();
+            boolean hasPeople = !context.people().isEmpty();
+            boolean hasRelations = !context.relations().isEmpty();
 
             if (hasPeople)
             {
-                population.people().forEach(System.out::println);
+                context.people().forEach(System.out::println);
                 System.out.println();
             }
 
             if (hasRelations)
             {
-                population.relations().forEach(System.out::println);
+                context.relations().forEach(System.out::println);
                 System.out.println();
             }
 

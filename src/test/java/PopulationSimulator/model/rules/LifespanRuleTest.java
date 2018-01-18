@@ -1,7 +1,7 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -72,7 +72,7 @@ public class LifespanRuleTest
 
             assertEquals(youngAmount + oldAmount, people.size());
 
-            lifespanRule.apply(new Population(people));
+            lifespanRule.apply(new Context(people));
 
             assertEquals(youngAmount, people.size());
         }
@@ -91,7 +91,7 @@ public class LifespanRuleTest
     {
         assertTrue(people.isEmpty());
 
-        lifespanRule.apply(new Population(people));
+        lifespanRule.apply(new Context(people));
 
         assertTrue(people.isEmpty());
     }

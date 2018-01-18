@@ -1,7 +1,7 @@
 package PopulationSimulator.model.finders;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 00:36
+ . Last modified : 18/01/18 22:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -33,14 +33,14 @@ public class PartenerFinderTest
 {
     private Person                person1;
     private Person                person2;
-    private Population            population;
+    private Context               context;
     private LinkedHashSet<Person> people;
 
     @Before
     public void before ()
     {
         people = new LinkedHashSet<>();
-        population = new Population(people);
+        context = new Context(people);
         person1 = null;
         person2 = null;
     }
@@ -56,7 +56,7 @@ public class PartenerFinderTest
 
         people.addAll(couple);
 
-        population.relations().add(new Relation(person1, person2, Couple));
+        context.relations().add(new Relation(person1, person2, Couple));
 
         int bound = randBetween(20, 40);
         for (int j = 0; j < bound; j++)
@@ -70,14 +70,14 @@ public class PartenerFinderTest
     {
         specialSetUp();
 
-        assertEquals(person2, new ArrayList<>(new PartenerFinder().find(person1, population)).get(0));
-        assertEquals(person1, new ArrayList<>(new PartenerFinder().find(person2, population)).get(0));
+        assertEquals(person2, new ArrayList<>(new PartenerFinder().find(person1, context)).get(0));
+        assertEquals(person1, new ArrayList<>(new PartenerFinder().find(person2, context)).get(0));
     }
 
     @Test
     public void find_Empty ()
     {
-        LinkedHashSet<Person> hashSet = new PartenerFinder().find(createPerson(), population);
+        LinkedHashSet<Person> hashSet = new PartenerFinder().find(createPerson(), context);
 
         assertTrue(hashSet.isEmpty());
     }
@@ -87,24 +87,24 @@ public class PartenerFinderTest
     {
         Person person = null;
 
-        new PartenerFinder().find(person, population);
+        new PartenerFinder().find(person, context);
     }
 
     @Test (expected = NullPointerException.class)
     public void find_Null_2ndParam ()
     {
-        Population population = null;
+        Context context = null;
 
-        new PartenerFinder().find(createPerson(), population);
+        new PartenerFinder().find(createPerson(), context);
     }
 
     @Test (expected = NullPointerException.class)
     public void find_Null_BothParam ()
     {
         Person person = null;
-        Population population = null;
+        Context context = null;
 
-        new PartenerFinder().find(person, population);
+        new PartenerFinder().find(person, context);
     }
 
     @Test
@@ -124,7 +124,7 @@ public class PartenerFinderTest
 
         PartenerFinder finder = new PartenerFinder();
 
-        finder.find(person1, population);
+        finder.find(person1, context);
 
         LinkedHashSet<Person> merge = finder.merge(hashSet);
 
@@ -142,7 +142,7 @@ public class PartenerFinderTest
 
         PartenerFinder finder = new PartenerFinder();
 
-        finder.find(person1, population);
+        finder.find(person1, context);
 
         LinkedHashSet<Person> merge = finder.merge(hashSet);
 

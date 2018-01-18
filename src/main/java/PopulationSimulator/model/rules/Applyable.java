@@ -1,18 +1,18 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.entities.Context;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The Applyable class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public interface Applyable
 {
-    void apply (Population population);
+    void apply (Context context);
 }

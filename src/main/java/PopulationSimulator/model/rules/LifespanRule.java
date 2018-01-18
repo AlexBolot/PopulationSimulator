@@ -1,6 +1,6 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.entities.Context;
 
 import java.util.Objects;
 
@@ -9,7 +9,7 @@ import java.util.Objects;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -58,7 +58,7 @@ public class LifespanRule extends SimpleRule
 
     /**
      <hr>
-     <h2>Applies this Rule on the Population param</h2>
+     <h2>Applies this Rule on the Context param</h2>
      <h3>A Person dies if it's age is over or equals to maxLifespan <br>
      </h3>
      <hr>
@@ -68,17 +68,17 @@ public class LifespanRule extends SimpleRule
      </h3>
      <hr>
 
-     @param population Population to apply this rule onto
+     @param context Context to apply this rule onto
      */
-    public void apply (Population population)
+    public void apply (Context context)
     {
-        Objects.requireNonNull(population, "population param is null");
+        Objects.requireNonNull(context, "context param is null");
 
-        population.people().removeIf(person -> person.data().age() >= maxLifespan);
+        context.people().removeIf(person -> person.data().age() >= maxLifespan);
 
-        population.relations().removeIf(relation -> {
-            boolean notContainsP1 = !population.people().contains(relation.person1());
-            boolean notContainsP2 = !population.people().contains(relation.person2());
+        context.relations().removeIf(relation -> {
+            boolean notContainsP1 = !context.people().contains(relation.person1());
+            boolean notContainsP2 = !context.people().contains(relation.person2());
 
             return notContainsP1 || notContainsP2;
         });

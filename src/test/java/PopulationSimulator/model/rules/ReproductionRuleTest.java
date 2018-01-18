@@ -1,7 +1,7 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/01/18 00:23
+ . Last modified : 18/01/18 22:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -30,7 +30,7 @@ public class ReproductionRuleTest
     private ReproductionRule        reproductionRule;
     private LinkedHashSet<Person>   people;
     private LinkedHashSet<Relation> relations;
-    private Population              population;
+    private Context                 context;
 
     /**
      <hr>
@@ -47,7 +47,7 @@ public class ReproductionRuleTest
         relations = new LinkedHashSet<>();
         minimumAge = Const.randBetween(16, 18);
         reproductionRule = new ReproductionRule(minimumAge);
-        population = new Population(people, relations);
+        context = new Context(people, relations);
     }
 
     /**
@@ -63,11 +63,11 @@ public class ReproductionRuleTest
     {
         people = new LinkedHashSet<>(createAllCombinations(minimumAge));
 
-        new CoupleRule(minimumAge).apply(population);
+        new CoupleRule(minimumAge).apply(context);
 
         assertEquals(people.size(), 30);
 
-        reproductionRule.apply(population);
+        reproductionRule.apply(context);
 
         assertEquals(people.size(), 30);
     }
@@ -85,7 +85,7 @@ public class ReproductionRuleTest
     {
         assertTrue(people.isEmpty());
 
-        reproductionRule.apply(population);
+        reproductionRule.apply(context);
 
         assertTrue(people.isEmpty());
     }

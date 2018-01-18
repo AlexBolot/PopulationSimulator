@@ -1,9 +1,9 @@
 package PopulationSimulator;
 
 import PopulationSimulator.controllers.SimulationController;
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 import PopulationSimulator.model.Sector;
@@ -25,7 +25,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:35
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -63,9 +63,9 @@ public class App
 
         people.forEach(person -> locations.put(person, new ArrayList<>(sectors).get(randBetween(0, sectors.size()))));
 
-        Population population = new Population(people, new LinkedHashSet<>(), sectors, locations);
+        Context context = new Context(people, new LinkedHashSet<>(), sectors, locations);
 
-        new SimulationController(population, rules).simulate(25);
+        new SimulationController(context, rules).simulate(25);
     }
 
     /**

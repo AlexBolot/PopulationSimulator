@@ -10,14 +10,14 @@ import java.util.Objects;
 /*................................................................................................................................
  . Copyright (c)
  .
- . The Population class was coded by : Alexandre BOLOT
+ . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:33
+ . Last modified : 18/01/18 22:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class Population
+public class Context
 {
     //region --------------- Attributes ----------------------
     private final LinkedHashSet<Person>         people;
@@ -27,12 +27,12 @@ public class Population
     //endregion
 
     //region --------------- Constructors --------------------
-    public Population (LinkedHashSet<Person> people)
+    public Context (LinkedHashSet<Person> people)
     {
         this(people, new LinkedHashSet<>());
     }
 
-    public Population (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations)
+    public Context (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations)
     {
         this.people = people;
         this.relations = relations;
@@ -45,8 +45,8 @@ public class Population
         this.people.forEach(person -> locations.put(person, sector));
     }
 
-    public Population (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations, LinkedHashSet<Sector> sectors,
-                       LinkedHashMap<Person, Sector> locations)
+    public Context (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations, LinkedHashSet<Sector> sectors,
+                    LinkedHashMap<Person, Sector> locations)
     {
         this.people = people;
         this.relations = relations;
@@ -69,7 +69,7 @@ public class Population
 
     /**
      <hr>
-     <h2>Format : Population + foreach(Person) in people + foreach(Relation) in relations</h2>
+     <h2>Format : Context + foreach(Person) in people + foreach(Relation) in relations</h2>
      <hr>
      <h3>
      Created : Alexandre Bolot 14/01 <br>
@@ -114,7 +114,7 @@ public class Population
     {
         if (obj == null || !getClass().isInstance(obj)) return false;
 
-        Population popCmp = (Population) obj;
+        Context popCmp = (Context) obj;
 
         return people.equals(popCmp.people) && relations.equals(popCmp.relations);
     }
@@ -127,7 +127,7 @@ public class Population
      </h3>
      <hr>
 
-     @return Unique HashCode for this Population instance <br>
+     @return Unique HashCode for this Context instance <br>
      Based on : people, relations
      */
     @Override
