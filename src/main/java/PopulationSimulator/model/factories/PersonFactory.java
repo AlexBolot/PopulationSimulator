@@ -22,7 +22,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/01/18 21:15
+ . Last modified : 18/01/18 23:14
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -258,7 +258,7 @@ public class PersonFactory
     @NotNull
     public static LinkedHashSet<Person> createAllCombinations (int minimumAge)
     {
-        int oldEnough = minimumAge + randBetween(1, 5);
+        int oldEnough = -(minimumAge + randBetween(1, 5));
 
         LinkedHashSet<Person> people = new LinkedHashSet<>();
 

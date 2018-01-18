@@ -1,6 +1,5 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
@@ -10,6 +9,7 @@ import PopulationSimulator.entities.enums.SexualOrientation;
 
 import java.util.Objects;
 
+import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -17,7 +17,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:51
+ . Last modified : 18/01/18 23:19
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -103,7 +103,7 @@ public class ReproductionRule extends SimpleRule
             if (minimumAge != anyAge && age1 < minimumAge) continue;
             if (minimumAge != anyAge && age2 < minimumAge) continue;
 
-            int age = SimulationController.currentTime();
+            int age = currentTime();
             Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
             SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
 

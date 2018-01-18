@@ -19,7 +19,7 @@ import static PopulationSimulator.model.factories.PersonFactory.getOppositeGende
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 23:22
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -98,6 +98,8 @@ public class CoupleRule extends SimpleRule
             for (Person person2 : tmpPeople)
             {
                 if (person2.equals(person1)) continue;
+                if (context.relations().contains(relation -> relation.involves(person1))) continue;
+                if (context.relations().contains(relation -> relation.involves(person2))) continue;
 
                 if (isMatch(person1, person2))
                 {
