@@ -2,16 +2,15 @@ package PopulationSimulator.controllers;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
+import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.Contract;
-
-import java.util.HashSet;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 23:02
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -21,8 +20,8 @@ public class SimulationController
     //region --------------- Attributes ----------------------
     private static int currentTime = 0;
 
-    private Context            context;
-    private HashSet<Applyable> rules;
+    private Context               context;
+    private ArrayList8<Applyable> rules;
     //endregion
 
     //region --------------- Constructors --------------------
@@ -40,7 +39,7 @@ public class SimulationController
      @param context Context (people + relations) to work on for the simulation
      @param rules      Rules to apply on the context when to simulation starts
      */
-    public SimulationController (Context context, HashSet<Applyable> rules)
+    public SimulationController (Context context, ArrayList8<Applyable> rules)
     {
         this.context = context;
         this.rules = rules;
@@ -53,7 +52,7 @@ public class SimulationController
 
     public Context population () { return context; }
 
-    public HashSet<Applyable> rules () { return rules; }
+    public ArrayList8<Applyable> rules () { return rules; }
     //endregion
 
     //region --------------- Methods -------------------------

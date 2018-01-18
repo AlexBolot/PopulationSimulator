@@ -3,11 +3,10 @@ package PopulationSimulator.model.rules;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Relation;
+import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.LinkedHashSet;
 
 import static PopulationSimulator.model.factories.PersonFactory.createAllCombinations;
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:51
+ . Last modified : 18/01/18 23:02
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -26,11 +25,11 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings ("FieldCanBeLocal")
 public class ReproductionRuleTest
 {
-    private int                     minimumAge;
-    private ReproductionRule        reproductionRule;
-    private LinkedHashSet<Person>   people;
-    private LinkedHashSet<Relation> relations;
-    private Context                 context;
+    private int                  minimumAge;
+    private ReproductionRule     reproductionRule;
+    private ArrayList8<Person>   people;
+    private ArrayList8<Relation> relations;
+    private Context              context;
 
     /**
      <hr>
@@ -43,8 +42,8 @@ public class ReproductionRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
-        relations = new LinkedHashSet<>();
+        people = new ArrayList8<>();
+        relations = new ArrayList8<>();
         minimumAge = Const.randBetween(16, 18);
         reproductionRule = new ReproductionRule(minimumAge);
         context = new Context(people, relations);
@@ -61,7 +60,7 @@ public class ReproductionRuleTest
     @Test
     public void apply_Right ()
     {
-        people = new LinkedHashSet<>(createAllCombinations(minimumAge));
+        people = new ArrayList8<>(createAllCombinations(minimumAge));
 
         new CoupleRule(minimumAge).apply(context);
 

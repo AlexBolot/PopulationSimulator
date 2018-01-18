@@ -1,5 +1,6 @@
 package CodingUtils;
 
+import PopulationSimulator.utils.ArrayList8;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -14,7 +15,7 @@ import static org.junit.Assert.*;
  .
  . The ArrayList8Test class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/12/17 22:51
+ . Last modified : 18/01/18 23:00
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

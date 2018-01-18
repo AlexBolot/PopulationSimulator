@@ -2,22 +2,21 @@ package PopulationSimulator.model.finders;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-
-import java.util.LinkedHashSet;
+import PopulationSimulator.utils.ArrayList8;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The PersonFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:51
+ . Last modified : 18/01/18 23:00
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public interface PersonFinder
 {
-    LinkedHashSet<Person> find (Person person, Context context);
+    ArrayList8<Person> find (Person person, Context context);
 
-    LinkedHashSet<Person> merge (LinkedHashSet<Person> people);
+    ArrayList8<Person> merge (ArrayList8<Person> people);
 }

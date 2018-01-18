@@ -1,4 +1,4 @@
-package CodingUtils;
+package PopulationSimulator.utils;
 
 import java.util.*;
 import java.util.function.Predicate;
@@ -8,7 +8,7 @@ import java.util.function.Predicate;
  .
  . The ArrayList8 class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/12/17 10:26
+ . Last modified : 18/01/18 22:54
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -17,6 +17,16 @@ import java.util.function.Predicate;
 public class ArrayList8<E> extends ArrayList<E>
 {
     private Random random = new Random();
+
+    public ArrayList8 ()
+    {
+        super();
+    }
+
+    public ArrayList8 (Collection<? extends E> c)
+    {
+        super(c);
+    }
 
     public E getRandom ()
     {

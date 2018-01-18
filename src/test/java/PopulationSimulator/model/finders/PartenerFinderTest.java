@@ -3,11 +3,11 @@ package PopulationSimulator.model.finders;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Relation;
+import PopulationSimulator.utils.ArrayList8;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 
 import static PopulationSimulator.entities.enums.Gender.Female;
 import static PopulationSimulator.entities.enums.Gender.Male;
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:51
+ . Last modified : 18/01/18 23:01
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -31,15 +31,15 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings ("ConstantConditions")
 public class PartenerFinderTest
 {
-    private Person                person1;
-    private Person                person2;
-    private Context               context;
-    private LinkedHashSet<Person> people;
+    private Person             person1;
+    private Person             person2;
+    private Context            context;
+    private ArrayList8<Person> people;
 
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
+        people = new ArrayList8<>();
         context = new Context(people);
         person1 = null;
         person2 = null;
@@ -77,9 +77,9 @@ public class PartenerFinderTest
     @Test
     public void find_Empty ()
     {
-        LinkedHashSet<Person> hashSet = new PartenerFinder().find(createPerson(), context);
+        ArrayList8<Person> people = new PartenerFinder().find(createPerson(), context);
 
-        assertTrue(hashSet.isEmpty());
+        assertTrue(people.isEmpty());
     }
 
     @Test (expected = NullPointerException.class)
@@ -112,7 +112,7 @@ public class PartenerFinderTest
     {
         specialSetUp();
 
-        LinkedHashSet<Person> hashSet = new LinkedHashSet<Person>()
+        people = new ArrayList8<Person>()
         {{
             add(createPerson());
             add(createPerson());
@@ -120,13 +120,13 @@ public class PartenerFinderTest
             add(createPerson());
         }};
 
-        assertEquals(4, hashSet.size());
+        assertEquals(4, people.size());
 
         PartenerFinder finder = new PartenerFinder();
 
         finder.find(person1, context);
 
-        LinkedHashSet<Person> merge = finder.merge(hashSet);
+        ArrayList8<Person> merge = finder.merge(people);
 
         assertEquals(5, merge.size());
     }
@@ -136,15 +136,15 @@ public class PartenerFinderTest
     {
         specialSetUp();
 
-        LinkedHashSet<Person> hashSet = new LinkedHashSet<>();
+        people = new ArrayList8<>();
 
-        assertEquals(0, hashSet.size());
+        assertEquals(0, people.size());
 
         PartenerFinder finder = new PartenerFinder();
 
         finder.find(person1, context);
 
-        LinkedHashSet<Person> merge = finder.merge(hashSet);
+        ArrayList8<Person> merge = finder.merge(people);
 
         assertEquals(1, merge.size());
     }
@@ -152,8 +152,8 @@ public class PartenerFinderTest
     @Test (expected = NullPointerException.class)
     public void merge_Null ()
     {
-        LinkedHashSet<Person> hashSet = null;
+        people = null;
 
-        new PartenerFinder().merge(hashSet);
+        new PartenerFinder().merge(people);
     }
 }

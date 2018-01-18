@@ -1,10 +1,10 @@
 package PopulationSimulator.entities;
 
 import PopulationSimulator.model.Sector;
+import PopulationSimulator.utils.ArrayList8;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.Objects;
 
 /*................................................................................................................................
@@ -12,7 +12,7 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 22:56
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -20,32 +20,32 @@ import java.util.Objects;
 public class Context
 {
     //region --------------- Attributes ----------------------
-    private final LinkedHashSet<Person>         people;
-    private final LinkedHashSet<Sector>         sectors;
-    private final LinkedHashSet<Relation>       relations;
+    private final ArrayList8<Person>            people;
+    private final ArrayList8<Sector>            sectors;
+    private final ArrayList8<Relation>          relations;
     private final LinkedHashMap<Person, Sector> locations;
     //endregion
 
     //region --------------- Constructors --------------------
-    public Context (LinkedHashSet<Person> people)
+    public Context (ArrayList8<Person> people)
     {
-        this(people, new LinkedHashSet<>());
+        this(people, new ArrayList8<>());
     }
 
-    public Context (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations)
+    public Context (ArrayList8<Person> people, ArrayList8<Relation> relations)
     {
         this.people = people;
         this.relations = relations;
 
         Sector sector = new Sector();
 
-        this.sectors = new LinkedHashSet<>(Collections.singletonList(sector));
+        this.sectors = new ArrayList8<>(Collections.singletonList(sector));
         this.locations = new LinkedHashMap<>();
 
         this.people.forEach(person -> locations.put(person, sector));
     }
 
-    public Context (LinkedHashSet<Person> people, LinkedHashSet<Relation> relations, LinkedHashSet<Sector> sectors,
+    public Context (ArrayList8<Person> people, ArrayList8<Relation> relations, ArrayList8<Sector> sectors,
                     LinkedHashMap<Person, Sector> locations)
     {
         this.people = people;
@@ -56,13 +56,13 @@ public class Context
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public LinkedHashSet<Person> people () { return people; }
+    public ArrayList8<Person> people () { return people; }
 
-    public LinkedHashSet<Relation> relations () { return relations; }
+    public ArrayList8<Relation> relations () { return relations; }
 
     public LinkedHashMap<Person, Sector> locations () { return locations; }
 
-    public LinkedHashSet<Sector> sectors () { return sectors; }
+    public ArrayList8<Sector> sectors () { return sectors; }
     //endregion
 
     //region --------------- Override ------------------------

@@ -2,11 +2,11 @@ package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
+import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.entities.enums.Gender.Female;
@@ -22,16 +22,16 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 23:00
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class CoupleRuleTest
 {
-    private int                   minimumAge;
-    private CoupleRule            coupleRule;
-    private LinkedHashSet<Person> people;
+    private int                minimumAge;
+    private CoupleRule         coupleRule;
+    private ArrayList8<Person> people;
 
     /**
      <hr>
@@ -44,7 +44,7 @@ public class CoupleRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
+        people = new ArrayList8<>();
         minimumAge = Const.randBetween(18, 25);
         coupleRule = new CoupleRule(minimumAge);
     }
@@ -63,7 +63,7 @@ public class CoupleRuleTest
         int tooYoung = minimumAge - randBetween(1, 5);
         int oldEnough = minimumAge + randBetween(1, 5);
 
-        people = new LinkedHashSet<Person>()
+        people = new ArrayList8<Person>()
         {{
             IntStream.range(0, 10).forEach(j -> {
                 //Will generate 20 couples

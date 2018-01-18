@@ -2,10 +2,10 @@ package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
+import PopulationSimulator.utils.ArrayList8;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.model.rules.RulesTestingUtils.randPerson;
@@ -18,16 +18,16 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 23:00
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class LifespanRuleTest
 {
-    private int                   lifespan;
-    private LifespanRule          lifespanRule;
-    private LinkedHashSet<Person> people;
+    private int                lifespan;
+    private LifespanRule       lifespanRule;
+    private ArrayList8<Person> people;
 
     /**
      <hr>
@@ -40,7 +40,7 @@ public class LifespanRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
+        people = new ArrayList8<>();
         lifespan = randBetween(50, 100);
         lifespanRule = new LifespanRule(lifespan);
     }
@@ -61,7 +61,7 @@ public class LifespanRuleTest
 
         for (int i = 0; i < 1000; i++)
         {
-            people = new LinkedHashSet<Person>()
+            people = new ArrayList8<Person>()
             {{
                 IntStream.range(0, randBetween(5, 20)).forEach(j -> add(randPerson(lifespan, true)));
                 IntStream.range(0, randBetween(5, 20)).forEach(k -> add(randPerson(lifespan, false)));

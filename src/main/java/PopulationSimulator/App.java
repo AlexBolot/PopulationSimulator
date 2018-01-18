@@ -11,11 +11,10 @@ import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
+import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.utils.Const.randBetween;
@@ -25,7 +24,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 18/01/18 22:57
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -39,19 +38,19 @@ public class App
 {
     public static void main (String[] args)
     {
-        LinkedHashSet<Person> people = new LinkedHashSet<Person>()
+        ArrayList8<Person> people = new ArrayList8<Person>()
         {{
             IntStream.range(0, 10).forEach(i -> add(randPerson()));
         }};
 
-        LinkedHashSet<Applyable> rules = new LinkedHashSet<Applyable>()
+        ArrayList8<Applyable> rules = new ArrayList8<Applyable>()
         {{
             add(new CoupleRule(5));
             add(new ReproductionRule(7));
             add(new LifespanRule(15));
         }};
 
-        LinkedHashSet<Sector> sectors = new LinkedHashSet<Sector>()
+        ArrayList8<Sector> sectors = new ArrayList8<Sector>()
         {{
             add(new Sector(1, 3)); // 0
             add(new Sector(0, 2)); // 1
@@ -61,9 +60,9 @@ public class App
 
         LinkedHashMap<Person, Sector> locations = new LinkedHashMap<>();
 
-        people.forEach(person -> locations.put(person, new ArrayList<>(sectors).get(randBetween(0, sectors.size()))));
+        people.forEach(person -> locations.put(person, sectors.get(randBetween(0, sectors.size()))));
 
-        Context context = new Context(people, new LinkedHashSet<>(), sectors, locations);
+        Context context = new Context(people, new ArrayList8<>(), sectors, locations);
 
         new SimulationController(context, rules).simulate(25);
     }

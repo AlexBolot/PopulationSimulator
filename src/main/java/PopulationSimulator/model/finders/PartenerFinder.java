@@ -3,8 +3,8 @@ package PopulationSimulator.model.finders;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Relation;
+import PopulationSimulator.utils.ArrayList8;
 
-import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -15,24 +15,24 @@ import static PopulationSimulator.entities.enums.RelationType.Couple;
  .
  . The PartenerFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:51
+ . Last modified : 18/01/18 23:00
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class PartenerFinder implements PersonFinder
 {
-    private LinkedHashSet<Person> hashSet = new LinkedHashSet<>();
+    private ArrayList8<Person> people = new ArrayList8<>();
 
-    public LinkedHashSet<Person> getHashSet () { return hashSet; }
+    public ArrayList8<Person> people () { return people; }
 
     @Override
-    public LinkedHashSet<Person> find (Person person, Context context)
+    public ArrayList8<Person> find (Person person, Context context)
     {
         Objects.requireNonNull(person, "Person param is null");
         Objects.requireNonNull(context, "Context param is null");
 
-        hashSet = new LinkedHashSet<>();
+        people = new ArrayList8<>();
 
         for (Relation relation : context.relations())
         {
@@ -42,21 +42,21 @@ public class PartenerFinder implements PersonFinder
 
             if (!otherPerson.isPresent()) continue;
 
-            hashSet.add(otherPerson.get());
+            people.add(otherPerson.get());
 
-            return hashSet;
+            return people;
         }
 
-        return hashSet;
+        return people;
     }
 
     @Override
-    public LinkedHashSet<Person> merge (LinkedHashSet<Person> people)
+    public ArrayList8<Person> merge (ArrayList8<Person> people)
     {
         Objects.requireNonNull(people, "People param is null");
 
-        hashSet.addAll(people);
+        this.people.addAll(people);
 
-        return hashSet;
+        return this.people;
     }
 }
