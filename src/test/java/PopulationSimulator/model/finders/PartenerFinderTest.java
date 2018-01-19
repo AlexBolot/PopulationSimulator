@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:01
+ . Last modified : 19/01/18 22:03
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -31,11 +31,14 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings ("ConstantConditions")
 public class PartenerFinderTest
 {
+    //region --------------- Attributes ----------------------
     private Person             person1;
     private Person             person2;
     private Context            context;
     private ArrayList8<Person> people;
+    //endregion
 
+    //region --------------- SetUps --------------------------
     @Before
     public void before ()
     {
@@ -64,7 +67,9 @@ public class PartenerFinderTest
             people.add(createOlder(minimumAge, minimumAge * 2));
         }
     }
+    //endregion
 
+    //region --------------- find (x5) -----------------------
     @Test
     public void find_Right ()
     {
@@ -106,7 +111,9 @@ public class PartenerFinderTest
 
         new PartenerFinder().find(person, context);
     }
+    //endregion
 
+    //region --------------- merge (x3) ----------------------
     @Test
     public void merge_Right ()
     {
@@ -156,4 +163,5 @@ public class PartenerFinderTest
 
         new PartenerFinder().merge(people);
     }
+    //endregion
 }

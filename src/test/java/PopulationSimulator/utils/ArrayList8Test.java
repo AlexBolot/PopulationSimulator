@@ -1,6 +1,6 @@
-package CodingUtils;
+package PopulationSimulator.utils;
 
-import PopulationSimulator.utils.ArrayList8;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.Comparator;
@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
  .
  . The ArrayList8Test class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:00
+ . Last modified : 19/01/18 21:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -23,6 +23,7 @@ import static org.junit.Assert.*;
 @SuppressWarnings ({"Duplicates", "MismatchedQueryAndUpdateOfCollection", "ResultOfMethodCallIgnored"})
 public class ArrayList8Test
 {
+    //region --------------- Attributes ----------------------
     private Predicate<TestObject> positive = testObject -> testObject.val1 > 0 && testObject.val2 > 0 && testObject.val3 > 0;
 
     private Comparator<TestObject> comparator = (testObject1, testObject2) -> {
@@ -34,8 +35,9 @@ public class ArrayList8Test
 
         return Integer.compare(testObject1.val3, testObject2.val3);
     };
+    //endregion
 
-    //region ==================== getRandom (1 -> 2) =================
+    //region --------------- getRandom (x2) ---------------
     @Test
     public void getRandom_Right ()
     {
@@ -84,7 +86,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== removeRandom (1 -> 2) ==============
+    //region --------------- removeRandom (x2) ------------
     @Test
     public void removeRandom_Right ()
     {
@@ -116,7 +118,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== addIf (1 -> 4) =====================
+    //region --------------- addIf (x4) -------------------
     @Test
     public void addIf_Right ()
     {
@@ -165,7 +167,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== addAllIf (1 -> 4) ==================
+    //region --------------- addAllIf (x4) ----------------
     @Test
     public void addAllIf_Right ()
     {
@@ -222,7 +224,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== contains (1 -> 3) ==================
+    //region --------------- contains (x3) ----------------
     @Test
     public void contains_Right ()
     {
@@ -261,7 +263,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== countIf (1 -> 2) ===================
+    //region --------------- countIf (x2) -----------------
     @Test
     public void countIf_Right ()
     {
@@ -296,7 +298,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== sublist (1 -> 2) ===================
+    //region --------------- sublist (x2) -----------------
     @Test
     public void sublist_Right ()
     {
@@ -331,7 +333,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== findAny (1 -> 2) ===================
+    //region --------------- findAny (x2) -----------------
     @Test
     public void findAny_Right ()
     {
@@ -366,7 +368,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== findFirst (1 -> 2) =================
+    //region --------------- findFirst (x2) ---------------
     @Test
     public void findFirst_Right ()
     {
@@ -398,7 +400,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== max (1 -> 2) =================
+    //region --------------- max (x2) ---------------------
     @Test
     public void max_Right ()
     {
@@ -434,7 +436,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region ==================== min (1 -> 2) =================
+    //region --------------- min (x2) ---------------------
     @Test
     public void min_Right ()
     {
@@ -470,6 +472,8 @@ public class ArrayList8Test
     }
     //endregion
 
+    //region  --------------- OtherMethods -------------------
+    @NotNull
     private TestObject randTestObject ()
     {
         int val1 = ThreadLocalRandom.current().nextInt();
@@ -478,8 +482,9 @@ public class ArrayList8Test
 
         return new TestObject(val1, val2, val3);
     }
+    //endregion
 
-    //region ==================== Private classes ====================
+    //region --------------- Private classes -----------------
     private class TestObject
     {
         int val1;

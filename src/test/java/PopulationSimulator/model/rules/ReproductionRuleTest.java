@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:22
+ . Last modified : 19/01/18 21:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -25,11 +25,15 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings ("FieldCanBeLocal")
 public class ReproductionRuleTest
 {
+    //region --------------- Attributes ----------------------
     private int                  minimumAge;
+    private Context              context;
     private ReproductionRule     reproductionRule;
     private ArrayList8<Person>   people;
     private ArrayList8<Relation> relations;
-    private Context              context;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -48,6 +52,9 @@ public class ReproductionRuleTest
         reproductionRule = new ReproductionRule(minimumAge);
         context = new Context(people, relations);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -100,6 +107,9 @@ public class ReproductionRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        reproductionRule.apply(null);
+        Context context = null;
+
+        reproductionRule.apply(context);
     }
+    //endregion
 }

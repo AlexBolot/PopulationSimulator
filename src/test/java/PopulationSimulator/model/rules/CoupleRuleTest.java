@@ -22,16 +22,20 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:00
+ . Last modified : 19/01/18 21:57
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class CoupleRuleTest
 {
+    //region --------------- Attributes ----------------------
     private int                minimumAge;
     private CoupleRule         coupleRule;
     private ArrayList8<Person> people;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -48,6 +52,9 @@ public class CoupleRuleTest
         minimumAge = Const.randBetween(18, 25);
         coupleRule = new CoupleRule(minimumAge);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -122,6 +129,9 @@ public class CoupleRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        coupleRule.apply(null);
+        Context context = null;
+
+        coupleRule.apply(context);
     }
+    //endregion
 }

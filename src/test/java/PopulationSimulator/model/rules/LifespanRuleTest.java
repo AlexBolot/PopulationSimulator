@@ -18,16 +18,20 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:00
+ . Last modified : 19/01/18 21:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class LifespanRuleTest
 {
+    //region --------------- Attributes ----------------------
     private int                lifespan;
     private LifespanRule       lifespanRule;
     private ArrayList8<Person> people;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -44,6 +48,9 @@ public class LifespanRuleTest
         lifespan = randBetween(50, 100);
         lifespanRule = new LifespanRule(lifespan);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -106,6 +113,9 @@ public class LifespanRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        lifespanRule.apply(null);
+        Context context = null;
+
+        lifespanRule.apply(context);
     }
+    //endregion
 }

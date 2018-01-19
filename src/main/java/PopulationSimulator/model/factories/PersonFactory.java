@@ -22,13 +22,14 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:14
+ . Last modified : 19/01/18 22:03
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class PersonFactory
 {
+    //region --------------- Create Person -------------------
     /**
      <hr>
      <h2>Creates a new Person with : <br>
@@ -195,7 +196,9 @@ public class PersonFactory
 
         return createPerson(bday, randomGender(), randomOrientation());
     }
+    //endregion
 
+    //region --------------- Create Groups -------------------
     /**
      <hr>
      <h2>Creates a valid couple of People (Relation object not included)</h2>
@@ -304,7 +307,9 @@ public class PersonFactory
 
         return people;
     }
+    //endregion
 
+    //region --------------- get random from enums -----------
     /**
      <hr>
      <h2>Gives a random Gender out of the Gender Enum</h2>
@@ -365,4 +370,5 @@ public class PersonFactory
 
         return values[randBetween(0, values.length)];
     }
+    //endregion
 }
