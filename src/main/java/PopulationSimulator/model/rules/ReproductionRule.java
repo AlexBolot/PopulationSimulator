@@ -6,8 +6,7 @@ import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
-
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.utils.Const.randBetween;
@@ -17,7 +16,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:19
+ . Last modified : 19/01/18 23:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -27,6 +26,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  <h2>Creates a new Person if both mebers of the couple are in age and opposite gender</h2>
  <hr>
  */
+@SuppressWarnings ("ConstantConditions")
 public class ReproductionRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------
@@ -61,7 +61,14 @@ public class ReproductionRule extends SimpleRule
 
      @param minimumAge Minimum age to reach to have kids
      */
-    public ReproductionRule (int minimumAge) { this.minimumAge = minimumAge; }
+    public ReproductionRule (int minimumAge)
+    {
+        //region --> Check params
+        if (minimumAge < 0 && minimumAge != anyAge) throw new IllegalArgumentException("MinimumAge param can't be negative");
+        //endregion
+
+        this.minimumAge = minimumAge;
+    }
     //endregion
 
     //region --------------- Override ------------------------
@@ -84,10 +91,11 @@ public class ReproductionRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public void apply (Context context)
+    public void apply (@NotNull Context context)
     {
-        Objects.requireNonNull(context, "context param is null");
-
+        //region --> Check params
+        if (context == null) throw new IllegalArgumentException("Contect param is null");
+        //endregion
         for (Relation relation : context.relations())
         {
             PersonalData dataP1 = relation.person1().data();

@@ -1,21 +1,24 @@
 package PopulationSimulator.entities;
 
-import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.enums.RelationType;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 import java.util.Optional;
+
+import static PopulationSimulator.controllers.SimulationController.currentTime;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The Relation class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 00:18
+ . Last modified : 19/01/18 23:30
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class Relation
 {
     //region --------------- Attributes ----------------------
@@ -28,14 +31,17 @@ public class Relation
     //region --------------- Constructors --------------------
     public Relation (Person person1, Person person2, RelationType type)
     {
-        this.person1 = person1;
-        this.person2 = person2;
-        this.type = type;
-        this.beginning = SimulationController.currentTime();
+        this(person1, person2, type, currentTime());
     }
 
-    public Relation (Person person1, Person person2, RelationType type, int beginning)
+    public Relation (@NotNull Person person1, @NotNull Person person2, @NotNull RelationType type, int beginning)
     {
+        //region --> Check params
+        if (person1 == null) throw new IllegalArgumentException("Person1 param is null");
+        if (person2 == null) throw new IllegalArgumentException("Person2 param is null");
+        if (type == null) throw new IllegalArgumentException("Type param is null");
+        //endregion
+
         this.person1 = person1;
         this.person2 = person2;
         this.type = type;
@@ -48,21 +54,31 @@ public class Relation
 
     public Person person2 () { return person2; }
 
-    public boolean involves (Person person) { return person1.equals(person) || person2.equals(person); }
+    public boolean involves (@NotNull Person person)
+    {
+        //region --> Check params
+        if (person == null) throw new IllegalArgumentException("Person param is null");
+        //endregion
+
+        return person1.equals(person) || person2.equals(person);
+    }
 
     public RelationType type () { return type; }
 
     public int beginning () { return beginning; }
 
-    public int getDuration () { return SimulationController.currentTime() - beginning; }
+    public int getDuration () { return currentTime() - beginning; }
 
-    public Optional<Person> getOther (Person person)
+    public Optional<Person> getOther (@NotNull Person person)
     {
+        //region --> Check params
+        if (person == null) throw new IllegalArgumentException("Person param is null");
+        //endregion
+
         if (person.equals(person1)) return Optional.of(person2);
         if (person.equals(person2)) return Optional.of(person1);
         return Optional.empty();
     }
-
     //endregion
 
     //region --------------- Override ------------------------
@@ -127,6 +143,5 @@ public class Relation
      */
     @Override
     public int hashCode () { return Objects.hash(person1, person2, type, beginning); }
-
     //endregion
 }

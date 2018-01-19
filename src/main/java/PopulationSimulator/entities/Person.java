@@ -1,15 +1,18 @@
 package PopulationSimulator.entities;
 
+import org.jetbrains.annotations.NotNull;
+
 /*................................................................................................................................
  . Copyright (c)
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 02:58
+ . Last modified : 19/01/18 23:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class Person
 {
     //region --------------- Attributes ----------------------
@@ -35,8 +38,12 @@ public class Person
 
      @param data Personal data of the Person
      */
-    public Person (PersonalData data)
+    public Person (@NotNull PersonalData data)
     {
+        //region --> Check params
+        if (data == null) throw new IllegalArgumentException("Data param is null");
+        //endregion
+
         this.data = data;
         ID = IDCounter++;
     }

@@ -4,11 +4,11 @@ import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.utils.ArrayList8;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Random;
 
 import static PopulationSimulator.controllers.SimulationController.currentTime;
@@ -22,14 +22,16 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 22:03
+ . Last modified : 19/01/18 23:46
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class PersonFactory
 {
     //region --------------- Create Person -------------------
+
     /**
      <hr>
      <h2>Creates a new Person with : <br>
@@ -48,7 +50,7 @@ public class PersonFactory
     @NotNull
     public static Person createPerson ()
     {
-        return new Person(new PersonalData(currentTime(), randomGender(), randomOrientation()));
+        return createPerson(currentTime());
     }
 
     /**
@@ -69,9 +71,7 @@ public class PersonFactory
     @NotNull
     public static Person createPerson (int bday)
     {
-        if (bday > currentTime()) throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
-
-        return new Person(new PersonalData(bday, randomGender(), randomOrientation()));
+        return createPerson(bday, randomGender(), randomOrientation());
     }
 
     /**
@@ -90,10 +90,8 @@ public class PersonFactory
      @return A Person created with {currentTime, gender param, Hetero}
      */
     @NotNull
-    public static Person createPerson (Gender gender)
+    public static Person createPerson (@NotNull Gender gender)
     {
-        Objects.requireNonNull(gender, "Gender param is null");
-
         return new Person(new PersonalData(gender));
     }
 
@@ -113,11 +111,8 @@ public class PersonFactory
      @return A Person created with {currentTime, gender param, orientation param}
      */
     @NotNull
-    public static Person createPerson (Gender gender, SexualOrientation orientation)
+    public static Person createPerson (@NotNull Gender gender, @NotNull SexualOrientation orientation)
     {
-        Objects.requireNonNull(gender, "Gender param is null");
-        Objects.requireNonNull(orientation, "SexualOrientation param is null");
-
         return new Person(new PersonalData(gender, orientation));
     }
 
@@ -137,12 +132,8 @@ public class PersonFactory
      @return A Person created with {bday param, gender param, orientation param}
      */
     @NotNull
-    public static Person createPerson (int bday, Gender gender, SexualOrientation orientation)
+    public static Person createPerson (int bday, @NotNull Gender gender, @NotNull SexualOrientation orientation)
     {
-        if (bday > currentTime()) throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
-        Objects.requireNonNull(gender, "Gender param is null");
-        Objects.requireNonNull(orientation, "SexualOrientation param is null");
-
         return new Person(new PersonalData(bday, gender, orientation));
     }
 
@@ -164,9 +155,13 @@ public class PersonFactory
     @NotNull
     public static Person createYounger (int age)
     {
-        if (age > currentTime()) throw new IllegalArgumentException("Age param can't be bigger than currentTime()");
+        int currentTime = currentTime();
 
-        int bday = randBetween((currentTime() - age) + 1, currentTime());
+        //region --> Check params
+        if (age > currentTime) throw new IllegalArgumentException("Age param can't be bigger than currentTime()");
+        //endregion
+
+        int bday = randBetween((currentTime - age) + 1, currentTime);
 
         return createPerson(bday, randomGender(), randomOrientation());
     }
@@ -189,16 +184,20 @@ public class PersonFactory
     @NotNull
     public static Person createOlder (int age, int limit)
     {
+        //region --> Check params
         if (age <= 0) throw new IllegalArgumentException("Age param can't negative or zero");
         if (limit < age) throw new IllegalArgumentException("Limit param can't be smaller than age");
+        //endregion
 
-        int bday = randBetween(currentTime() - limit, currentTime() - age);
+        int currentTime = currentTime();
+        int bday = randBetween(currentTime - limit, currentTime - age);
 
         return createPerson(bday, randomGender(), randomOrientation());
     }
     //endregion
 
     //region --------------- Create Groups -------------------
+
     /**
      <hr>
      <h2>Creates a valid couple of People (Relation object not included)</h2>
@@ -216,34 +215,36 @@ public class PersonFactory
 
      @return Creates a valid couple of People (Relation object not included)
      */
-    public static LinkedHashSet<Person> createCouple (Gender gender1, Gender gender2)
+    public static ArrayList8<Person> createCouple (@NotNull Gender gender1, @NotNull Gender gender2)
     {
-        Objects.requireNonNull(gender1, "Gender1 param is null");
-        Objects.requireNonNull(gender2, "Gender2 param is null");
+        //region --> Check params
+        if (gender1 == null) throw new IllegalArgumentException("Gendre1 param is null");
+        if (gender2 == null) throw new IllegalArgumentException("Gendre2 param is null");
+        //endregion
 
         Random random = new Random();
         SexualOrientation orientation;
 
-        LinkedHashSet<Person> hashSet = new LinkedHashSet<>();
+        ArrayList8<Person> people = new ArrayList8<>();
 
         if (gender1.equals(gender2))
         {
             orientation = random.nextBoolean() ? Homo : Bi;
-            hashSet.add(createPerson(gender1, orientation));
+            people.add(createPerson(gender1, orientation));
 
             orientation = random.nextBoolean() ? Homo : Bi;
-            hashSet.add(createPerson(gender1, orientation));
+            people.add(createPerson(gender1, orientation));
         }
         else
         {
             orientation = random.nextBoolean() ? Hetero : Bi;
-            hashSet.add(createPerson(gender1, orientation));
+            people.add(createPerson(gender1, orientation));
 
             orientation = random.nextBoolean() ? Hetero : Bi;
-            hashSet.add(createPerson(gender2, orientation));
+            people.add(createPerson(gender2, orientation));
         }
 
-        return hashSet;
+        return people;
     }
 
     /**
@@ -259,11 +260,11 @@ public class PersonFactory
      @return A LinkedHashSet of Person, containing all possible combinations of couples
      */
     @NotNull
-    public static LinkedHashSet<Person> createAllCombinations (int minimumAge)
+    public static ArrayList8<Person> createAllCombinations (int minimumAge)
     {
         int oldEnough = -(minimumAge + randBetween(1, 5));
 
-        LinkedHashSet<Person> people = new LinkedHashSet<>();
+        ArrayList8<Person> people = new ArrayList8<>();
 
         //region --> Hetero Couples (x3 Couples - x3 Repro)
         people.add(createPerson(oldEnough, Male, Hetero));
@@ -310,6 +311,7 @@ public class PersonFactory
     //endregion
 
     //region --------------- get random from enums -----------
+
     /**
      <hr>
      <h2>Gives a random Gender out of the Gender Enum</h2>
@@ -341,15 +343,15 @@ public class PersonFactory
 
      @return The opposite gender than the one given as param
      */
+    @Contract (pure = true)
     @Nullable
-    public static Gender getOppositeGender (Gender gender)
+    public static Gender getOppositeGender (@NotNull Gender gender)
     {
-        Objects.requireNonNull(gender, "Gender param is null");
+        //region --> Check params
+        if (gender == null) throw new IllegalArgumentException("Gender param is null");
+        //endregion
 
-        if (gender.equals(Male)) return Female;
-        if (gender.equals(Female)) return Male;
-
-        else return null;
+        return (gender == Male) ? Female : Male;
     }
 
     /**

@@ -1,15 +1,14 @@
 package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Context;
-
-import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:49
+ . Last modified : 19/01/18 23:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -19,6 +18,7 @@ import java.util.Objects;
  <h2>Removes the Poeple from the population if they reached a certain age</h2>
  <hr>
  */
+@SuppressWarnings ("ConstantConditions")
 public class LifespanRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------
@@ -51,7 +51,14 @@ public class LifespanRule extends SimpleRule
 
      @param maxLifespan Maximum that a Perso can reach before death
      */
-    public LifespanRule (int maxLifespan) { this.maxLifespan = maxLifespan; }
+    public LifespanRule (int maxLifespan)
+    {
+        //region --> Check params
+        if (maxLifespan <= 0) throw new IllegalArgumentException("MaxLifespan can't be negative or zero");
+        //endregion
+
+        this.maxLifespan = maxLifespan;
+    }
     //endregion
 
     //region --------------- Override ------------------------
@@ -70,9 +77,11 @@ public class LifespanRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public void apply (Context context)
+    public void apply (@NotNull Context context)
     {
-        Objects.requireNonNull(context, "context param is null");
+        //region --> Check params
+        if (context == null) throw new IllegalArgumentException("Context param is null");
+        //endregion
 
         context.people().removeIf(person -> person.data().age() >= maxLifespan);
 

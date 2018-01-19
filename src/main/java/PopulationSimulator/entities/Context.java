@@ -2,6 +2,7 @@ package PopulationSimulator.entities;
 
 import PopulationSimulator.model.Sector;
 import PopulationSimulator.utils.ArrayList8;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -12,11 +13,12 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:56
+ . Last modified : 19/01/18 23:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class Context
 {
     //region --------------- Attributes ----------------------
@@ -27,13 +29,18 @@ public class Context
     //endregion
 
     //region --------------- Constructors --------------------
-    public Context (ArrayList8<Person> people)
+    public Context (@NotNull ArrayList8<Person> people)
     {
         this(people, new ArrayList8<>());
     }
 
-    public Context (ArrayList8<Person> people, ArrayList8<Relation> relations)
+    public Context (@NotNull ArrayList8<Person> people, @NotNull ArrayList8<Relation> relations)
     {
+        //region --> Check params
+        if (people == null) throw new IllegalArgumentException("People param is null");
+        if (relations == null) throw new IllegalArgumentException("Relations param is null");
+        //endregion
+
         this.people = people;
         this.relations = relations;
 
@@ -45,12 +52,19 @@ public class Context
         this.people.forEach(person -> locations.put(person, sector));
     }
 
-    public Context (ArrayList8<Person> people, ArrayList8<Relation> relations, ArrayList8<Sector> sectors,
-                    LinkedHashMap<Person, Sector> locations)
+    public Context (@NotNull ArrayList8<Person> people, @NotNull ArrayList8<Relation> relations, @NotNull ArrayList8<Sector> sectors,
+                    @NotNull LinkedHashMap<Person, Sector> locations)
     {
+        //region --> Check params
+        if (people == null) throw new IllegalArgumentException("People param is null");
+        if (sectors == null) throw new IllegalArgumentException("Sectors param is null");
+        if (relations == null) throw new IllegalArgumentException("Relations param is null");
+        if (locations == null) throw new IllegalArgumentException("Locations param is null");
+        //endregion
+
         this.people = people;
-        this.relations = relations;
         this.sectors = sectors;
+        this.relations = relations;
         this.locations = locations;
     }
     //endregion
@@ -132,6 +146,5 @@ public class Context
      */
     @Override
     public int hashCode () { return Objects.hash(people, relations); }
-
     //endregion
 }

@@ -2,6 +2,7 @@ package PopulationSimulator.entities;
 
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
@@ -13,11 +14,12 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/01/18 02:58
+ . Last modified : 19/01/18 23:31
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class PersonalData
 {
     //region --------------- Attributes ----------------------
@@ -45,9 +47,7 @@ public class PersonalData
      */
     public PersonalData (Gender gender)
     {
-        this.gender = gender;
-        this.orientation = Hetero;
-        this.birthday = currentTime();
+        this(currentTime(), gender, Hetero);
     }
 
     /**
@@ -68,9 +68,7 @@ public class PersonalData
      */
     public PersonalData (Gender gender, SexualOrientation orientation)
     {
-        this.gender = gender;
-        this.orientation = orientation;
-        this.birthday = currentTime();
+        this(currentTime(), gender, orientation);
     }
 
     /**
@@ -90,8 +88,14 @@ public class PersonalData
      @param orientation Sexual Orientation of the Person
      @param birthday    Birthday of the Person
      */
-    public PersonalData (int birthday, Gender gender, SexualOrientation orientation)
+    public PersonalData (int birthday, @NotNull Gender gender, @NotNull SexualOrientation orientation)
     {
+        //region --> Check params
+        if (birthday > currentTime()) throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
+        if (gender == null) throw new IllegalArgumentException("Gender param is null");
+        if (orientation == null) throw new IllegalArgumentException("Orientation param is null");
+        //endregion
+
         this.gender = gender;
         this.orientation = orientation;
         this.birthday = birthday;

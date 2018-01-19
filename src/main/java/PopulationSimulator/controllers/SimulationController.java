@@ -4,17 +4,19 @@ import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 23:02
+ . Last modified : 19/01/18 23:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class SimulationController
 {
     //region --------------- Attributes ----------------------
@@ -37,10 +39,15 @@ public class SimulationController
      <hr>
 
      @param context Context (people + relations) to work on for the simulation
-     @param rules      Rules to apply on the context when to simulation starts
+     @param rules   Rules to apply on the context when to simulation starts
      */
-    public SimulationController (Context context, ArrayList8<Applyable> rules)
+    public SimulationController (@NotNull Context context, @NotNull ArrayList8<Applyable> rules)
     {
+        //region --> Check params
+        if (context == null) throw new IllegalArgumentException("Context param is null");
+        if (rules == null) throw new IllegalArgumentException("Rules param is null");
+        //endregion
+
         this.context = context;
         this.rules = rules;
     }
@@ -70,6 +77,10 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
+        //region --> Check params
+        if (ticks < 0) throw new IllegalArgumentException("Ticks param can't be negative");
+        //endregion
+
         System.out.println("---------- year " + currentTime + " ----------\n");
 
         while (currentTime != ticks)
