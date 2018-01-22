@@ -12,19 +12,22 @@ import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
 import PopulationSimulator.utils.ArrayList8;
+import PopulationSimulator.visualizer.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.utils.Const.randBetween;
+import static PopulationSimulator.visualizer.Logger.LogFile.PeopeLogFile;
+import static PopulationSimulator.visualizer.Logger.LogFile.RelationsLogFile;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 18/01/18 22:57
+ . Last modified : 22/01/18 21:43
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -38,6 +41,16 @@ public class App
 {
     public static void main (String[] args)
     {
+        Logger.clearLogs(PeopeLogFile, RelationsLogFile);
+
+        Logger.log("toto", PeopeLogFile);
+        Logger.log("toto", PeopeLogFile);
+        Logger.log("tata", RelationsLogFile);
+        Logger.log("tata", RelationsLogFile);
+
+        System.out.println(Logger.cat(PeopeLogFile));
+        System.out.println(Logger.cat(RelationsLogFile));
+
         ArrayList8<Person> people = new ArrayList8<Person>()
         {{
             IntStream.range(0, 10).forEach(i -> add(randPerson()));
