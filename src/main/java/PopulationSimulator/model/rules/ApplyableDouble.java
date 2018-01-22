@@ -1,22 +1,20 @@
 package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Context;
-import org.jetbrains.annotations.NotNull;
 
 /*
  * ................................................................................................................................
  *  . Copyright (c)
  *  .
- *  . The ComplexeRule class was coded by : Gregoire PELTIER
+ *  . The ApplyableDouble class was coded by : Gregoire PELTIER
  *  .
- *  . Last modified : ComplexeRule.java
+ *  . Last modified : ApplyableDouble.java
  *  .
  *  . Contact : idevedit@gmail.com
  *  ...............................................................................................................................
  *
  */
 
-public abstract class ComplexeRule implements Applyable {
-
-    public abstract void apply(@NotNull Context context);
+public interface ApplyableDouble {
+    double apply(Context population);
 }
