@@ -1,12 +1,12 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.entities.enums.Gender.Female;
@@ -22,16 +22,20 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 19/01/18 21:57
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class CoupleRuleTest
 {
-    private int                   minimumAge;
-    private CoupleRule            coupleRule;
-    private LinkedHashSet<Person> people;
+    //region --------------- Attributes ----------------------
+    private int                minimumAge;
+    private CoupleRule         coupleRule;
+    private ArrayList8<Person> people;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -44,10 +48,13 @@ public class CoupleRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
+        people = new ArrayList8<>();
         minimumAge = Const.randBetween(18, 25);
         coupleRule = new CoupleRule(minimumAge);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -63,7 +70,7 @@ public class CoupleRuleTest
         int tooYoung = minimumAge - randBetween(1, 5);
         int oldEnough = minimumAge + randBetween(1, 5);
 
-        people = new LinkedHashSet<Person>()
+        people = new ArrayList8<Person>()
         {{
             IntStream.range(0, 10).forEach(j -> {
                 //Will generate 20 couples
@@ -84,11 +91,11 @@ public class CoupleRuleTest
             });
         }};
 
-        Population population = new Population(people);
+        Context context = new Context(people);
 
-        coupleRule.apply(population);
+        coupleRule.apply(context);
 
-        assertEquals(29, population.relations().size());
+        assertEquals(29, context.relations().size());
     }
 
     /**
@@ -104,11 +111,11 @@ public class CoupleRuleTest
     {
         assertTrue(people.isEmpty());
 
-        Population population = new Population(people);
+        Context context = new Context(people);
 
-        coupleRule.apply(population);
+        coupleRule.apply(context);
 
-        assertTrue(population.relations().isEmpty());
+        assertTrue(context.relations().isEmpty());
     }
 
     /**
@@ -122,6 +129,9 @@ public class CoupleRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        coupleRule.apply(null);
+        Context context = null;
+
+        coupleRule.apply(context);
     }
+    //endregion
 }

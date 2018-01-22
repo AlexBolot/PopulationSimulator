@@ -1,27 +1,29 @@
 package PopulationSimulator.controllers;
 
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
-
-import java.util.HashSet;
+import PopulationSimulator.utils.ArrayList8;
+import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 19/01/18 23:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
+@SuppressWarnings ("ConstantConditions")
 public class SimulationController
 {
     //region --------------- Attributes ----------------------
     private static int currentTime = 0;
 
-    private Population         population;
-    private HashSet<Applyable> rules;
+    private Context               context;
+    private ArrayList8<Applyable> rules;
     //endregion
 
     //region --------------- Constructors --------------------
@@ -36,38 +38,35 @@ public class SimulationController
      </h3>
      <hr>
 
-     @param population Population (people + relations) to work on for the simulation
-     @param rules      Rules to apply on the population when to simulation starts
+     @param context Context (people + relations) to work on for the simulation
+     @param rules   Rules to apply on the context when to simulation starts
      */
-    public SimulationController (Population population, HashSet<Applyable> rules)
+    public SimulationController (@NotNull Context context, @NotNull ArrayList8<Applyable> rules)
     {
-        this.population = population;
+        //region --> Check params
+        if (context == null) throw new IllegalArgumentException("Context param is null");
+        if (rules == null) throw new IllegalArgumentException("Rules param is null");
+        //endregion
+
+        this.context = context;
         this.rules = rules;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    public static int currentTime ()
-    {
-        return currentTime;
-    }
+    @Contract (pure = true)
+    public static int currentTime () { return currentTime; }
 
-    public Population population ()
-    {
-        return population;
-    }
+    public Context population () { return context; }
 
-    public HashSet<Applyable> rules ()
-    {
-        return rules;
-    }
+    public ArrayList8<Applyable> rules () { return rules; }
     //endregion
 
     //region --------------- Methods -------------------------
 
     /**
      <hr>
-     <h2>Will apply every Rule on the Population as many times as they are ticks</h2>
+     <h2>Will apply every Rule on the Context as many times as they are ticks</h2>
      <hr>
      <h3>
      Created : Alexandre Bolot 10/01 <br>
@@ -78,24 +77,28 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
+        //region --> Check params
+        if (ticks < 0) throw new IllegalArgumentException("Ticks param can't be negative");
+        //endregion
+
         System.out.println("---------- year " + currentTime + " ----------\n");
 
         while (currentTime != ticks)
         {
-            rules.forEach(rule -> rule.apply(population));
+            rules.forEach(rule -> rule.apply(context));
 
-            boolean hasPeople = !population.people().isEmpty();
-            boolean hasRelations = !population.relations().isEmpty();
+            boolean hasPeople = !context.people().isEmpty();
+            boolean hasRelations = !context.relations().isEmpty();
 
             if (hasPeople)
             {
-                population.people().forEach(System.out::println);
+                context.people().forEach(System.out::println);
                 System.out.println();
             }
 
             if (hasRelations)
             {
-                population.relations().forEach(System.out::println);
+                context.relations().forEach(System.out::println);
                 System.out.println();
             }
 

@@ -7,7 +7,7 @@ import java.util.Random;
  .
  . The Const class was coded by : Alexandre BOLOT
  .
- . Last modified : 13/01/18 22:57
+ . Last modified : 19/01/18 23:46
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -36,6 +36,10 @@ public class Const
      */
     public static int randBetween (int lowBound, int highBound)
     {
+        //region --> Check params
+        if (highBound <= lowBound) throw new IllegalArgumentException("Forbidden params : highBound) <= lowBound");
+        //endregion
+
         return random.nextInt(highBound - lowBound) + lowBound;
     }
 
@@ -55,6 +59,10 @@ public class Const
      */
     public static int randDelta (int center, int delta)
     {
+        //region --> Check params
+        if (delta < 0) throw new IllegalArgumentException("Delta param is negative");
+        //endregion
+
         return randBetween(center - delta, center + delta);
     }
 }

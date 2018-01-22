@@ -13,15 +13,13 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RulesTestingUtils class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 23:10
+ . Last modified : 17/01/18 21:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class RulesTestingUtils
 {
-
-
     /**
      <hr>
      <h2>Generates a Person created from given params : age, gender and orientation</h2>

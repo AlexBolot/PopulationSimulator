@@ -1,15 +1,14 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.controllers.SimulationController;
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
-
+import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -17,7 +16,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 19/01/18 23:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -27,6 +26,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  <h2>Creates a new Person if both mebers of the couple are in age and opposite gender</h2>
  <hr>
  */
+@SuppressWarnings ("ConstantConditions")
 public class ReproductionRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------
@@ -61,14 +61,21 @@ public class ReproductionRule extends SimpleRule
 
      @param minimumAge Minimum age to reach to have kids
      */
-    public ReproductionRule (int minimumAge) { this.minimumAge = minimumAge; }
+    public ReproductionRule (int minimumAge)
+    {
+        //region --> Check params
+        if (minimumAge < 0 && minimumAge != anyAge) throw new IllegalArgumentException("MinimumAge param can't be negative");
+        //endregion
+
+        this.minimumAge = minimumAge;
+    }
     //endregion
 
     //region --------------- Override ------------------------
 
     /**
      <hr>
-     <h2>Applies this Rule on the Population param</h2>
+     <h2>Applies this Rule on the Context param</h2>
      <h3>A new Person is created if
      - Both members of a Couple relationship have reached the minimumAge <br>
      - They have opposite Gender (Female X Male or Male X Female) <br>
@@ -82,13 +89,14 @@ public class ReproductionRule extends SimpleRule
      </h3>
      <hr>
 
-     @param population Population to apply this rule onto
+     @param context Context to apply this rule onto
      */
-    public void apply (Population population)
+    public void apply (@NotNull Context context)
     {
-        Objects.requireNonNull(population, "population param is null");
-
-        for (Relation relation : population.relations())
+        //region --> Check params
+        if (context == null) throw new IllegalArgumentException("Contect param is null");
+        //endregion
+        for (Relation relation : context.relations())
         {
             PersonalData dataP1 = relation.person1().data();
             PersonalData dataP2 = relation.person2().data();
@@ -103,13 +111,13 @@ public class ReproductionRule extends SimpleRule
             if (minimumAge != anyAge && age1 < minimumAge) continue;
             if (minimumAge != anyAge && age2 < minimumAge) continue;
 
-            int age = SimulationController.currentTime();
+            int age = currentTime();
             Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
             SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
 
             Person newPerson = new Person(new PersonalData(age, gender, orientation));
 
-            population.people().add(newPerson);
+            context.people().add(newPerson);
         }
     }
     //endregion

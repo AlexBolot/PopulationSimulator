@@ -1,11 +1,11 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
+import PopulationSimulator.utils.ArrayList8;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedHashSet;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.model.rules.RulesTestingUtils.randPerson;
@@ -18,16 +18,20 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 15/01/18 13:35
+ . Last modified : 19/01/18 21:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public class LifespanRuleTest
 {
-    private int                   lifespan;
-    private LifespanRule          lifespanRule;
-    private LinkedHashSet<Person> people;
+    //region --------------- Attributes ----------------------
+    private int                lifespan;
+    private LifespanRule       lifespanRule;
+    private ArrayList8<Person> people;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -40,10 +44,13 @@ public class LifespanRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
+        people = new ArrayList8<>();
         lifespan = randBetween(50, 100);
         lifespanRule = new LifespanRule(lifespan);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -61,7 +68,7 @@ public class LifespanRuleTest
 
         for (int i = 0; i < 1000; i++)
         {
-            people = new LinkedHashSet<Person>()
+            people = new ArrayList8<Person>()
             {{
                 IntStream.range(0, randBetween(5, 20)).forEach(j -> add(randPerson(lifespan, true)));
                 IntStream.range(0, randBetween(5, 20)).forEach(k -> add(randPerson(lifespan, false)));
@@ -72,7 +79,7 @@ public class LifespanRuleTest
 
             assertEquals(youngAmount + oldAmount, people.size());
 
-            lifespanRule.apply(new Population(people));
+            lifespanRule.apply(new Context(people));
 
             assertEquals(youngAmount, people.size());
         }
@@ -91,7 +98,7 @@ public class LifespanRuleTest
     {
         assertTrue(people.isEmpty());
 
-        lifespanRule.apply(new Population(people));
+        lifespanRule.apply(new Context(people));
 
         assertTrue(people.isEmpty());
     }
@@ -106,6 +113,9 @@ public class LifespanRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        lifespanRule.apply(null);
+        Context context = null;
+
+        lifespanRule.apply(context);
     }
+    //endregion
 }

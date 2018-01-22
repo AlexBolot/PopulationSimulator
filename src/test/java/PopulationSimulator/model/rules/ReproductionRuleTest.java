@@ -1,13 +1,12 @@
 package PopulationSimulator.model.rules;
 
+import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Population;
 import PopulationSimulator.entities.Relation;
+import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.LinkedHashSet;
 
 import static PopulationSimulator.model.factories.PersonFactory.createAllCombinations;
 import static org.junit.Assert.assertEquals;
@@ -18,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/01/18 00:23
+ . Last modified : 19/01/18 21:49
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -26,11 +25,15 @@ import static org.junit.Assert.assertTrue;
 @SuppressWarnings ("FieldCanBeLocal")
 public class ReproductionRuleTest
 {
-    private int                     minimumAge;
-    private ReproductionRule        reproductionRule;
-    private LinkedHashSet<Person>   people;
-    private LinkedHashSet<Relation> relations;
-    private Population              population;
+    //region --------------- Attributes ----------------------
+    private int                  minimumAge;
+    private Context              context;
+    private ReproductionRule     reproductionRule;
+    private ArrayList8<Person>   people;
+    private ArrayList8<Relation> relations;
+    //endregion
+
+    //region --------------- SetUps --------------------------
 
     /**
      <hr>
@@ -43,12 +46,15 @@ public class ReproductionRuleTest
     @Before
     public void before ()
     {
-        people = new LinkedHashSet<>();
-        relations = new LinkedHashSet<>();
+        people = new ArrayList8<>();
+        relations = new ArrayList8<>();
         minimumAge = Const.randBetween(16, 18);
         reproductionRule = new ReproductionRule(minimumAge);
-        population = new Population(people, relations);
+        context = new Context(people, relations);
     }
+    //endregion
+
+    //region --------------- apply (x3) ----------------------
 
     /**
      <hr>
@@ -61,15 +67,15 @@ public class ReproductionRuleTest
     @Test
     public void apply_Right ()
     {
-        people = new LinkedHashSet<>(createAllCombinations(minimumAge));
+        people.addAll(createAllCombinations(minimumAge));
 
-        new CoupleRule(minimumAge).apply(population);
+        new CoupleRule(minimumAge).apply(context);
 
-        assertEquals(people.size(), 30);
+        assertEquals(24, people.size());
 
-        reproductionRule.apply(population);
+        reproductionRule.apply(context);
 
-        assertEquals(people.size(), 30);
+        assertEquals(30, people.size());
     }
 
     /**
@@ -85,7 +91,7 @@ public class ReproductionRuleTest
     {
         assertTrue(people.isEmpty());
 
-        reproductionRule.apply(population);
+        reproductionRule.apply(context);
 
         assertTrue(people.isEmpty());
     }
@@ -101,6 +107,9 @@ public class ReproductionRuleTest
     @Test (expected = NullPointerException.class)
     public void apply_Null ()
     {
-        reproductionRule.apply(null);
+        Context context = null;
+
+        reproductionRule.apply(context);
     }
+    //endregion
 }
