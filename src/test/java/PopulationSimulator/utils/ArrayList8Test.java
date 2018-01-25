@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.*;
 
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
  .
  . The ArrayList8Test class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 21:49
+ . Last modified : 25/01/18 12:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -145,21 +146,21 @@ public class ArrayList8Test
         assertEquals(0, list.countIf(positive));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addIf_NullValue ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
         list.addIf(null, positive);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addIf_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
         list.addIf(randTestObject(), null);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addIf_NullBoth ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -169,6 +170,7 @@ public class ArrayList8Test
 
     //region --------------- addAllIf (x4) ----------------
     @Test
+
     public void addAllIf_Right ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -202,21 +204,21 @@ public class ArrayList8Test
         assertEquals(0, list.size());
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addAllIf_NullValue ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
         list.addAllIf(null, positive);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addAllIf_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
         list.addAllIf(new ArrayList8<>(), null);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void addAllIf_NullBoth ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -255,7 +257,7 @@ public class ArrayList8Test
         assertFalse(list.contains(positive));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void contains_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -290,7 +292,7 @@ public class ArrayList8Test
         assertEquals(0, list.countIf(positive));
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void countIf_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -325,7 +327,7 @@ public class ArrayList8Test
         assertEquals(0, list.subList(positive).size());
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void sublist_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -341,26 +343,19 @@ public class ArrayList8Test
 
         for (int i = 0; i < 2000; i++)
         {
-            for (int j = 0; j < 500; j++)
-            {
-                TestObject testObject = randTestObject();
-                list.add(testObject);
-            }
+            IntStream.range(0, 500).mapToObj(j -> randTestObject()).forEach(list::add);
 
             Optional<TestObject> any1 = list.stream().filter(positive).findAny();
             Optional<TestObject> any2 = list.findAny(positive);
 
-            if (any1.isPresent() && any2.isPresent())
-            {
-                assertEquals(any1.get(), any2.get());
-            }
+            if (any1.isPresent() && any2.isPresent()) assertEquals(any1.get(), any2.get());
             else fail("any not found");
 
             list.clear();
         }
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void findAny_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -376,11 +371,7 @@ public class ArrayList8Test
 
         for (int i = 0; i < 2000; i++)
         {
-            for (int j = 0; j < 500; j++)
-            {
-                TestObject testObject = randTestObject();
-                list.add(testObject);
-            }
+            IntStream.range(0, 500).mapToObj(j -> randTestObject()).forEach(list::add);
 
             Optional<TestObject> first1 = list.stream().filter(positive).findFirst();
             Optional<TestObject> first2 = list.findFirst(positive);
@@ -392,7 +383,7 @@ public class ArrayList8Test
         }
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void findFirst_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -428,7 +419,7 @@ public class ArrayList8Test
         }
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void max_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();
@@ -464,7 +455,7 @@ public class ArrayList8Test
         }
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void min_NullPredicate ()
     {
         ArrayList8<TestObject> list = new ArrayList8<>();

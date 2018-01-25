@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 21:49
+ . Last modified : 25/01/18 11:03
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -104,7 +104,7 @@ public class ReproductionRuleTest
      </h3>
      <hr>
      */
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {
         Context context = null;

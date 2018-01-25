@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 21:49
+ . Last modified : 25/01/18 12:50
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -74,8 +74,8 @@ public class LifespanRuleTest
                 IntStream.range(0, randBetween(5, 20)).forEach(k -> add(randPerson(lifespan, false)));
             }};
 
-            youngAmount = people.stream().filter(person1 -> person1.data().age() < lifespan).count();
-            oldAmount = people.stream().filter(person -> person.data().age() >= lifespan).count();
+            youngAmount = people.subList(person1 -> person1.data().age() < lifespan).size();
+            oldAmount = people.subList(person -> person.data().age() >= lifespan).size();
 
             assertEquals(youngAmount + oldAmount, people.size());
 
@@ -110,7 +110,7 @@ public class LifespanRuleTest
      Modified : Alexandre Bolot 10/01
      <hr>
      */
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {
         Context context = null;

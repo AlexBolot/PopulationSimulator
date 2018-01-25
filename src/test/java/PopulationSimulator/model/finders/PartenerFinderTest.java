@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 22:03
+ . Last modified : 25/01/18 12:46
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -62,6 +62,7 @@ public class PartenerFinderTest
         context.relations().add(new Relation(person1, person2, Couple));
 
         int bound = randBetween(20, 40);
+
         for (int j = 0; j < bound; j++)
         {
             people.add(createOlder(minimumAge, minimumAge * 2));
@@ -75,8 +76,11 @@ public class PartenerFinderTest
     {
         specialSetUp();
 
-        assertEquals(person2, new ArrayList<>(new PartenerFinder().find(person1, context)).get(0));
-        assertEquals(person1, new ArrayList<>(new PartenerFinder().find(person2, context)).get(0));
+        ArrayList8<Person> list1 = new PartenerFinder().find(person1, context);
+        ArrayList8<Person> list2 = new PartenerFinder().find(person2, context);
+
+        assertEquals(person2, list1.get(0));
+        assertEquals(person1, list2.get(0));
     }
 
     @Test
@@ -87,7 +91,7 @@ public class PartenerFinderTest
         assertTrue(people.isEmpty());
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void find_Null_1stParam ()
     {
         Person person = null;
@@ -95,7 +99,7 @@ public class PartenerFinderTest
         new PartenerFinder().find(person, context);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void find_Null_2ndParam ()
     {
         Context context = null;
@@ -103,7 +107,7 @@ public class PartenerFinderTest
         new PartenerFinder().find(createPerson(), context);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void find_Null_BothParam ()
     {
         Person person = null;
@@ -156,7 +160,7 @@ public class PartenerFinderTest
         assertEquals(1, merge.size());
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test (expected = IllegalArgumentException.class)
     public void merge_Null ()
     {
         people = null;
