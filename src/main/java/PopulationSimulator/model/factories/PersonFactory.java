@@ -5,9 +5,7 @@ import PopulationSimulator.entities.PersonalData;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
 import PopulationSimulator.utils.ArrayList8;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
@@ -22,7 +20,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:46
+ . Last modified : 26/01/18 08:16
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -71,7 +69,7 @@ public class PersonFactory
     @NotNull
     public static Person createPerson (int bday)
     {
-        return createPerson(bday, randomGender(), randomOrientation());
+        return createPerson(bday, Gender.getRandom(), SexualOrientation.getRandom());
     }
 
     /**
@@ -163,7 +161,7 @@ public class PersonFactory
 
         int bday = randBetween((currentTime - age) + 1, currentTime);
 
-        return createPerson(bday, randomGender(), randomOrientation());
+        return createPerson(bday, Gender.getRandom(), SexualOrientation.getRandom());
     }
 
     /**
@@ -192,7 +190,7 @@ public class PersonFactory
         int currentTime = currentTime();
         int bday = randBetween(currentTime - limit, currentTime - age);
 
-        return createPerson(bday, randomGender(), randomOrientation());
+        return createPerson(bday, Gender.getRandom(), SexualOrientation.getRandom());
     }
     //endregion
 
@@ -307,70 +305,6 @@ public class PersonFactory
         //endregion
 
         return people;
-    }
-    //endregion
-
-    //region --------------- get random from enums -----------
-
-    /**
-     <hr>
-     <h2>Gives a random Gender out of the Gender Enum</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
-
-     @return A random Gender out of the Gender Enum
-     */
-    public static Gender randomGender ()
-    {
-        Gender[] values = Gender.values();
-
-        return values[randBetween(0, values.length)];
-    }
-
-    /**
-     <hr>
-     <h2>Gives the opposite gender than the one given as param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
-
-     @return The opposite gender than the one given as param
-     */
-    @Contract (pure = true)
-    @Nullable
-    public static Gender getOppositeGender (@NotNull Gender gender)
-    {
-        //region --> Check params
-        if (gender == null) throw new IllegalArgumentException("Gender param is null");
-        //endregion
-
-        return (gender == Male) ? Female : Male;
-    }
-
-    /**
-     <hr>
-     <h2>Gives a random SexualOrientation out of the SexualOrientation Enum</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
-
-     @return A random SexualOrientation out of the SexualOrientation Enum
-     */
-    public static SexualOrientation randomOrientation ()
-    {
-        SexualOrientation[] values = SexualOrientation.values();
-
-        return values[randBetween(0, values.length)];
     }
     //endregion
 }

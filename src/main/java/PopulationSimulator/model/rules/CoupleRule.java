@@ -13,14 +13,13 @@ import java.util.ArrayList;
 import static PopulationSimulator.controllers.SimulationController.currentTime;
 import static PopulationSimulator.entities.enums.RelationType.Couple;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
-import static PopulationSimulator.model.factories.PersonFactory.getOppositeGender;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:53
+ . Last modified : 26/01/18 08:16
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -155,11 +154,11 @@ public class CoupleRule extends SimpleRule
         if (ori1 == Bi)
         {
             if (ori2 == Bi) return true;
-            if (ori2 == Hetero) return gen1 == getOppositeGender(gen2);
+            if (ori2 == Hetero) return gen1 == Gender.getOppositeGender(gen2);
             if (ori2 == Homo) return gen1 == gen2;
         }
 
-        if (ori1 == Hetero) return gen1 == getOppositeGender(gen2) && (ori2 == Hetero || ori2 == Bi);
+        if (ori1 == Hetero) return gen1 == Gender.getOppositeGender(gen2) && (ori2 == Hetero || ori2 == Bi);
         if (ori1 == Homo) return gen1 == gen2 && (ori2 == Homo || ori2 == Bi);
 
         return false;
