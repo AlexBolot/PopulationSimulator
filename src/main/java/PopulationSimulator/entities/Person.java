@@ -7,12 +7,11 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:28
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class Person
 {
     //region --------------- Attributes ----------------------
@@ -40,16 +39,13 @@ public class Person
      */
     public Person (@NotNull PersonalData data)
     {
-        //region --> Check params
-        if (data == null) throw new IllegalArgumentException("Data param is null");
-        //endregion
-
         this.data = data;
         ID = IDCounter++;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
+    @NotNull
     public PersonalData data () { return data; }
 
     public int ID () { return ID; }
@@ -70,6 +66,7 @@ public class Person
      @return Person + ID + data.toString()
      */
     @Override
+    @NotNull
     public String toString ()
     {
         return String.format("%s : %d - %s", getClass().getSimpleName(), ID, data.toString().substring(5));
@@ -89,9 +86,9 @@ public class Person
      @return True if obj is equal to this, False otherwise
      */
     @Override
-    public boolean equals (Object obj)
+    public boolean equals (@NotNull Object obj)
     {
-        if (obj == null || !getClass().isInstance(obj)) return false;
+        if (!getClass().isInstance(obj)) return false;
 
         Person personCompare = (Person) obj;
 

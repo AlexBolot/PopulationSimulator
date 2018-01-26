@@ -10,12 +10,12 @@ import java.util.Arrays;
  .
  . The Sector class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:59
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
+@SuppressWarnings ("unused")
 public class Sector
 {
     //region --------------- Attributes ----------------------
@@ -30,10 +30,6 @@ public class Sector
     {
         this();
 
-        //region --> Check params
-        if (neighboors == null) throw new IllegalArgumentException("Neighboors param is null");
-        //endregion
-
         Arrays.stream(neighboors).forEach(this.neighboors::add);
     }
 
@@ -47,6 +43,7 @@ public class Sector
     //region --------------- Getters and Setters -------------
     public int ID () { return ID; }
 
+    @NotNull
     public ArrayList<Integer> neighboors () { return neighboors; }
     //endregion
 
@@ -55,19 +52,11 @@ public class Sector
 
     public void addNeighboors (@NotNull int... neighboors)
     {
-        //region --> Check params
-        if (neighboors == null) throw new IllegalArgumentException("Neighboors param is null");
-        //endregion
-
         Arrays.stream(neighboors).forEach(this::addNeighboor);
     }
 
     public boolean isNeighboorOf (@NotNull Sector sector)
     {
-        //region --> Check params
-        if (sector == null) throw new IllegalArgumentException("Sector param is null");
-        //endregion
-
         return isNeighboorOf(sector.ID());
     }
 
@@ -76,12 +65,11 @@ public class Sector
 
     //region --------------- Overrides -----------------------
     @Override
-    public boolean equals (Object o)
+    public boolean equals (@NotNull Object obj)
     {
-        if (o == null) return false;
-        if (!(o instanceof Sector)) return false;
+        if (!(obj instanceof Sector)) return false;
 
-        Sector sector = (Sector) o;
+        Sector sector = (Sector) obj;
 
         return ID == sector.ID;
     }

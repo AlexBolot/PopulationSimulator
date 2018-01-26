@@ -13,12 +13,11 @@ import static PopulationSimulator.controllers.SimulationController.currentTime;
  .
  . The Relation class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 15:12
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class Relation
 {
     //region --------------- Attributes ----------------------
@@ -29,40 +28,33 @@ public class Relation
     //endregion
 
     //region --------------- Constructors --------------------
-    public Relation (Person person1, Person person2, RelationType type)
+    public Relation (@NotNull Person person1, @NotNull Person person2, @NotNull RelationType type)
     {
         this(person1, person2, type, currentTime());
     }
 
     public Relation (@NotNull Person person1, @NotNull Person person2, @NotNull RelationType type, int beginning)
     {
-        //region --> Check params
-        if (person1 == null) throw new IllegalArgumentException("Person1 param is null");
-        if (person2 == null) throw new IllegalArgumentException("Person2 param is null");
-        if (type == null) throw new IllegalArgumentException("Type param is null");
-        //endregion
-
+        this.type = type;
         this.person1 = person1;
         this.person2 = person2;
-        this.type = type;
         this.beginning = beginning;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
+    @NotNull
     public Person person1 () { return person1; }
 
+    @NotNull
     public Person person2 () { return person2; }
 
     public boolean involves (@NotNull Person person)
     {
-        //region --> Check params
-        if (person == null) throw new IllegalArgumentException("Person param is null");
-        //endregion
-
         return person1.equals(person) || person2.equals(person);
     }
 
+    @NotNull
     public RelationType type () { return type; }
 
     public int beginning () { return beginning; }
@@ -76,10 +68,6 @@ public class Relation
 
     public Optional<Person> getOther (@NotNull Person person)
     {
-        //region --> Check params
-        if (person == null) throw new IllegalArgumentException("Person param is null");
-        //endregion
-
         if (person.equals(person1)) return Optional.of(person2);
         if (person.equals(person2)) return Optional.of(person1);
         return Optional.empty();
@@ -101,6 +89,7 @@ public class Relation
      @return Relation + person1.ID + person2.ID + type + duration
      */
     @Override
+    @NotNull
     public String toString ()
     {
         return String.format("Relation {%s-%s}{type:%s}{duration:%d}", person1.ID(), person2.ID(), type(), getDuration());
@@ -120,9 +109,9 @@ public class Relation
      @return True if obj is equal to this, False otherwise
      */
     @Override
-    public boolean equals (Object obj)
+    public boolean equals (@NotNull Object obj)
     {
-        if (obj == null || !getClass().isInstance(obj)) return false;
+        if (!getClass().isInstance(obj)) return false;
 
         Relation relCmp = (Relation) obj;
 

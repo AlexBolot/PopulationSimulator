@@ -10,14 +10,14 @@ import org.jetbrains.annotations.NotNull;
  .
  . The PersonFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:49
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public interface PersonFinder
 {
-    ArrayList8<Person> find (@NotNull Person person, @NotNull Context context);
+    @NotNull ArrayList8<Person> find (@NotNull Person person, @NotNull Context context);
 
-    ArrayList8<Person> merge (@NotNull ArrayList8<Person> people);
+    @NotNull ArrayList8<Person> merge (@NotNull ArrayList8<Person> people);
 }

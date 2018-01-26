@@ -11,12 +11,11 @@ import org.jetbrains.annotations.NotNull;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:28
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class SimulationController
 {
     //region --------------- Attributes ----------------------
@@ -43,11 +42,6 @@ public class SimulationController
      */
     public SimulationController (@NotNull Context context, @NotNull ArrayList8<Applyable> rules)
     {
-        //region --> Check params
-        if (context == null) throw new IllegalArgumentException("Context param is null");
-        if (rules == null) throw new IllegalArgumentException("Rules param is null");
-        //endregion
-
         this.context = context;
         this.rules = rules;
     }
@@ -57,8 +51,10 @@ public class SimulationController
     @Contract (pure = true)
     public static int currentTime () { return currentTime; }
 
-    public Context population () { return context; }
+    @NotNull
+    public Context context () { return context; }
 
+    @NotNull
     public ArrayList8<Applyable> rules () { return rules; }
     //endregion
 
@@ -77,10 +73,6 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
-        //region --> Check params
-        if (ticks < 0) throw new IllegalArgumentException("Ticks param can't be negative");
-        //endregion
-
         System.out.println("---------- year " + currentTime + " ----------\n");
 
         while (currentTime != ticks)

@@ -1,5 +1,7 @@
 package PopulationSimulator.entities.enums;
 
+import org.jetbrains.annotations.NotNull;
+
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -7,7 +9,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The SexualOrientation class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 08:14
+ . Last modified : 26/01/18 20:27
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -30,6 +32,7 @@ public enum SexualOrientation
 
      @return A random SexualOrientation out of the SexualOrientation Enum
      */
+    @NotNull
     public static SexualOrientation getRandom ()
     {
         SexualOrientation[] values = SexualOrientation.values();

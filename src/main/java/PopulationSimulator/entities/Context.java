@@ -13,12 +13,11 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 09:05
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class Context
 {
     //region --------------- Attributes ----------------------
@@ -36,11 +35,6 @@ public class Context
 
     public Context (@NotNull ArrayList8<Person> people, @NotNull ArrayList8<Relation> relations)
     {
-        //region --> Check params
-        if (people == null) throw new IllegalArgumentException("People param is null");
-        if (relations == null) throw new IllegalArgumentException("Relations param is null");
-        //endregion
-
         this.people = people;
         this.relations = relations;
 
@@ -55,13 +49,6 @@ public class Context
     public Context (@NotNull ArrayList8<Person> people, @NotNull ArrayList8<Relation> relations, @NotNull ArrayList8<Sector> sectors,
                     @NotNull LinkedHashMap<Person, Sector> locations)
     {
-        //region --> Check params
-        if (people == null) throw new IllegalArgumentException("People param is null");
-        if (sectors == null) throw new IllegalArgumentException("Sectors param is null");
-        if (relations == null) throw new IllegalArgumentException("Relations param is null");
-        if (locations == null) throw new IllegalArgumentException("Locations param is null");
-        //endregion
-
         this.people = people;
         this.sectors = sectors;
         this.relations = relations;
@@ -70,12 +57,16 @@ public class Context
     //endregion
 
     //region --------------- Getters - Setters ---------------
+    @NotNull
     public ArrayList8<Person> people () { return people; }
 
+    @NotNull
     public ArrayList8<Relation> relations () { return relations; }
 
+    @NotNull
     public LinkedHashMap<Person, Sector> locations () { return locations; }
 
+    @NotNull
     public ArrayList8<Sector> sectors () { return sectors; }
     //endregion
 
@@ -93,7 +84,7 @@ public class Context
 
      @param context Other context to merge with this
      */
-    public void merge (Context context)
+    public void merge (@NotNull Context context)
     {
         this.people.addAll(context.people);
         this.sectors.addAll(context.sectors);
@@ -117,6 +108,7 @@ public class Context
      @return Relation + person1.ID + person2.ID + type + duration
      */
     @Override
+    @NotNull
     public String toString ()
     {
         StringBuilder str = new StringBuilder();
@@ -147,9 +139,9 @@ public class Context
      @return True if obj is equal to this, False otherwise
      */
     @Override
-    public boolean equals (Object obj)
+    public boolean equals (@NotNull Object obj)
     {
-        if (obj == null || !getClass().isInstance(obj)) return false;
+        if (!getClass().isInstance(obj)) return false;
 
         Context popCmp = (Context) obj;
 

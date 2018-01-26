@@ -16,7 +16,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:53
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -26,7 +26,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  <h2>Creates a new Person if both mebers of the couple are in age and opposite gender</h2>
  <hr>
  */
-@SuppressWarnings ("ConstantConditions")
+@SuppressWarnings ("unused")
 public class ReproductionRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------
@@ -93,9 +93,6 @@ public class ReproductionRule extends SimpleRule
      */
     public void apply (@NotNull Context context)
     {
-        //region --> Check params
-        if (context == null) throw new IllegalArgumentException("Contect param is null");
-        //endregion
         for (Relation relation : context.relations())
         {
             PersonalData dataP1 = relation.person1().data();

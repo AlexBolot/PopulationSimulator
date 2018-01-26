@@ -5,7 +5,6 @@ import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -19,17 +18,16 @@ import static PopulationSimulator.entities.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 08:16
+ . Last modified : 26/01/18 20:52
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 /**
  <hr>
- <h2>Creates Couple relationships within the population</h2>
+ <h2>Creates Couple relationships within the context</h2>
  <hr>
  */
-@SuppressWarnings ("ConstantConditions")
 public class CoupleRule extends SimpleRule
 {
     //region --------------- Attributes ----------------------
@@ -66,9 +64,7 @@ public class CoupleRule extends SimpleRule
      */
     public CoupleRule (int minimumAge)
     {
-        //region --> Check params
         if (minimumAge < 0 && minimumAge != anyAge) throw new IllegalArgumentException("MinimumAge param can't be negative");
-        //endregion
 
         this.minimumAge = minimumAge;
     }
@@ -93,13 +89,8 @@ public class CoupleRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    @Contract ("null -> fail")
     public void apply (@NotNull Context context)
     {
-        //region --> Check params
-        if (context == null) throw new IllegalArgumentException("Contect param is null");
-        //endregion
-
         ArrayList<Person> tmpPeople = new ArrayList<>(context.people());
         if (minimumAge != anyAge) tmpPeople.removeIf(person -> person.data().age() < minimumAge);
         tmpPeople.removeIf(person -> context.relations().stream().anyMatch(relation -> relation.involves(person)));
@@ -140,11 +131,6 @@ public class CoupleRule extends SimpleRule
      */
     private boolean isMatch (@NotNull Person p1, @NotNull Person p2)
     {
-        //region --> Check params
-        if (p1 == null) throw new IllegalArgumentException("Person1 param is null");
-        if (p2 == null) throw new IllegalArgumentException("Person2 param is null");
-        //endregion
-
         SexualOrientation ori1 = p1.data().orientation();
         SexualOrientation ori2 = p2.data().orientation();
 

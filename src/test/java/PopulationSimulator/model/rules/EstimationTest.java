@@ -1,7 +1,9 @@
 package PopulationSimulator.model.rules;
 
 import PopulationSimulator.entities.Context;
+import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -11,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  .
  . The EstimationTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 08:46
+ . Last modified : 26/01/18 21:20
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -29,13 +31,13 @@ public class EstimationTest
         {
             @Contract (pure = true)
             @Override
-            public double apply (Context population)
+            public double apply (@NotNull Context context)
             {
                 return 0;
             }
         };
 
-        assertEquals(0, estimation.apply(null), 0.001);
+        assertEquals(0, estimation.apply(new Context(new ArrayList8<>())), 0.001);
     }
 
 }

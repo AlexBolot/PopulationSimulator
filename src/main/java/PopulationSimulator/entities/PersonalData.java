@@ -14,12 +14,11 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:31
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class PersonalData
 {
     //region --------------- Attributes ----------------------
@@ -45,7 +44,7 @@ public class PersonalData
 
      @param gender Gender of the Person
      */
-    public PersonalData (Gender gender)
+    public PersonalData (@NotNull Gender gender)
     {
         this(currentTime(), gender, Hetero);
     }
@@ -66,7 +65,7 @@ public class PersonalData
      @param gender      Gender of the Person
      @param orientation Sexual Orientation of the Person
      */
-    public PersonalData (Gender gender, SexualOrientation orientation)
+    public PersonalData (@NotNull Gender gender, @NotNull SexualOrientation orientation)
     {
         this(currentTime(), gender, orientation);
     }
@@ -90,11 +89,7 @@ public class PersonalData
      */
     public PersonalData (int birthday, @NotNull Gender gender, @NotNull SexualOrientation orientation)
     {
-        //region --> Check params
         if (birthday > currentTime()) throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
-        if (gender == null) throw new IllegalArgumentException("Gender param is null");
-        if (orientation == null) throw new IllegalArgumentException("Orientation param is null");
-        //endregion
 
         this.gender = gender;
         this.orientation = orientation;
@@ -103,12 +98,14 @@ public class PersonalData
     //endregion
 
     //region --------------- Getters - Setters ---------------
+    @NotNull
     public Gender gender () { return gender; }
 
     public int age () { return currentTime() - birthday; }
 
     public int birthday () { return birthday; }
 
+    @NotNull
     public SexualOrientation orientation () { return orientation; }
     //endregion
 
@@ -127,6 +124,7 @@ public class PersonalData
      @return Data + age + gender + orientation
      */
     @Override
+    @NotNull
     public String toString ()
     {
         return String.format("Data {%d}{%s}{%s}", age(), gender, orientation);
@@ -146,9 +144,9 @@ public class PersonalData
      @return True if obj is equal to this, False otherwise
      */
     @Override
-    public boolean equals (Object obj)
+    public boolean equals (@NotNull Object obj)
     {
-        if (obj == null || !getClass().isInstance(obj)) return false;
+        if (!getClass().isInstance(obj)) return false;
 
         PersonalData dataCompare = (PersonalData) obj;
 
@@ -158,7 +156,6 @@ public class PersonalData
 
         return true;
     }
-
 
     /**
      <hr>

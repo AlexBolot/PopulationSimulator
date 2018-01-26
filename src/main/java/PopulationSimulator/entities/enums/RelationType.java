@@ -1,5 +1,7 @@
 package PopulationSimulator.entities.enums;
 
+import org.jetbrains.annotations.NotNull;
+
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -7,7 +9,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RelationType class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 08:14
+ . Last modified : 26/01/18 20:27
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -28,6 +30,7 @@ public enum RelationType
 
      @return A random RelationType out of the RelationType Enum
      */
+    @NotNull
     public static RelationType getRandom ()
     {
         RelationType[] values = RelationType.values();

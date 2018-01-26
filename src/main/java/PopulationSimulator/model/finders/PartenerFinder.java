@@ -6,7 +6,6 @@ import PopulationSimulator.entities.Relation;
 import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
 import java.util.Optional;
 
 import static PopulationSimulator.entities.enums.RelationType.Couple;
@@ -16,12 +15,11 @@ import static PopulationSimulator.entities.enums.RelationType.Couple;
  .
  . The PartenerFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 12:42
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
 public class PartenerFinder implements PersonFinder
 {
     //region --------------- Attributes ----------------------
@@ -29,18 +27,15 @@ public class PartenerFinder implements PersonFinder
     //endregion
 
     //region --------------- Getters and Setters -------------
+    @NotNull
     public ArrayList8<Person> people () { return people; }
     //endregion
 
     //region --------------- Methods -------------------------
     @Override
+    @NotNull
     public ArrayList8<Person> find (@NotNull Person person, @NotNull Context context)
     {
-        //region --> Check params
-        if (person == null) throw new IllegalArgumentException("Person param is null");
-        if (context == null) throw new IllegalArgumentException("Context param is null");
-        //endregion
-
         people = new ArrayList8<>();
 
         for (Relation relation : context.relations().subList(r -> r.type() == Couple))
@@ -58,12 +53,9 @@ public class PartenerFinder implements PersonFinder
     }
 
     @Override
+    @NotNull
     public ArrayList8<Person> merge (@NotNull ArrayList8<Person> people)
     {
-        //region --> Check params
-        Objects.requireNonNull(people, "People param is null");
-        //endregion
-
         this.people.addAll(people);
 
         return this.people;

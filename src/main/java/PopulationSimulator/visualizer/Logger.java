@@ -17,12 +17,12 @@ import java.util.Optional;
  .
  . The Logger class was coded by : Alexandre BOLOT
  .
- . Last modified : 22/01/18 21:55
+ . Last modified : 26/01/18 21:30
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ResultOfMethodCallIgnored")
+@SuppressWarnings ({"WeakerAccess", "unused"})
 public class Logger
 {
     private static final Path pathToLogs = Paths.get("src", "main", "resources", "logs");
@@ -32,7 +32,7 @@ public class Logger
         Arrays.stream(files).forEach(file -> log("", file, true));
     }
 
-    public static void log (String header, @NotNull ArrayList8<?> list, LogFile logFile)
+    public static void log (String header, @NotNull ArrayList8<?> list, @NotNull LogFile logFile)
     {
         StringBuilder str = new StringBuilder();
 
@@ -92,6 +92,7 @@ public class Logger
         return "";
     }
 
+    @SuppressWarnings ("unused")
     public enum LogFile
     {
         PeopeLogFile("/peopleLog.txt"),
@@ -100,9 +101,10 @@ public class Logger
 
         private String path;
 
-        LogFile (String path) { this.path = path; }
+        LogFile (@NotNull String path) { this.path = path; }
 
         @Contract (pure = true)
+        @NotNull
         public String path () { return path; }
     }
 }

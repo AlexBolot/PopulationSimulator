@@ -20,12 +20,12 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 08:16
+ . Last modified : 26/01/18 21:15
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("ConstantConditions")
+@SuppressWarnings ({"unused", "WeakerAccess"})
 public class PersonFactory
 {
     //region --------------- Create Person -------------------
@@ -155,9 +155,7 @@ public class PersonFactory
     {
         int currentTime = currentTime();
 
-        //region --> Check params
         if (age > currentTime) throw new IllegalArgumentException("Age param can't be bigger than currentTime()");
-        //endregion
 
         int bday = randBetween((currentTime - age) + 1, currentTime);
 
@@ -182,10 +180,8 @@ public class PersonFactory
     @NotNull
     public static Person createOlder (int age, int limit)
     {
-        //region --> Check params
         if (age <= 0) throw new IllegalArgumentException("Age param can't negative or zero");
         if (limit < age) throw new IllegalArgumentException("Limit param can't be smaller than age");
-        //endregion
 
         int currentTime = currentTime();
         int bday = randBetween(currentTime - limit, currentTime - age);
@@ -213,13 +209,9 @@ public class PersonFactory
 
      @return Creates a valid couple of People (Relation object not included)
      */
+    @NotNull
     public static ArrayList8<Person> createCouple (@NotNull Gender gender1, @NotNull Gender gender2)
     {
-        //region --> Check params
-        if (gender1 == null) throw new IllegalArgumentException("Gendre1 param is null");
-        if (gender2 == null) throw new IllegalArgumentException("Gendre2 param is null");
-        //endregion
-
         Random random = new Random();
         SexualOrientation orientation;
 
