@@ -13,7 +13,7 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:28
+ . Last modified : 26/01/18 09:05
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -77,6 +77,29 @@ public class Context
     public LinkedHashMap<Person, Sector> locations () { return locations; }
 
     public ArrayList8<Sector> sectors () { return sectors; }
+    //endregion
+
+    //region --------------- Methods -------------------------
+
+    /**
+     <hr>
+     <h2>Merging the context param to this one</h2>
+     <hr>
+     <h3>
+     Created : Alexandre Bolot 25/01 <br>
+     Modified : Alexandre Bolot 25/01
+     </h3>
+     <hr>
+
+     @param context Other context to merge with this
+     */
+    public void merge (Context context)
+    {
+        this.people.addAll(context.people);
+        this.sectors.addAll(context.sectors);
+        this.relations.addAll(context.relations);
+        this.locations.putAll(context.locations);
+    }
     //endregion
 
     //region --------------- Override ------------------------

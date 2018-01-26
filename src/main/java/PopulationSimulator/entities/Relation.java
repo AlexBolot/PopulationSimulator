@@ -13,7 +13,7 @@ import static PopulationSimulator.controllers.SimulationController.currentTime;
  .
  . The Relation class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:30
+ . Last modified : 26/01/18 15:12
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -68,6 +68,11 @@ public class Relation
     public int beginning () { return beginning; }
 
     public int getDuration () { return currentTime() - beginning; }
+
+    public int getDeltaAge ()
+    {
+        return Math.abs(person1.data().age() - person2.data().age());
+    }
 
     public Optional<Person> getOther (@NotNull Person person)
     {

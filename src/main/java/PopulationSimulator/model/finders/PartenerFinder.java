@@ -16,7 +16,7 @@ import static PopulationSimulator.entities.enums.RelationType.Couple;
  .
  . The PartenerFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:49
+ . Last modified : 25/01/18 12:42
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -26,7 +26,9 @@ public class PartenerFinder implements PersonFinder
 {
     //region --------------- Attributes ----------------------
     private ArrayList8<Person> people = new ArrayList8<>();
+    //endregion
 
+    //region --------------- Getters and Setters -------------
     public ArrayList8<Person> people () { return people; }
     //endregion
 

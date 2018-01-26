@@ -5,14 +5,17 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The ArrayList8 class was coded by : Alexandre BOLOT
  .
- . Last modified : 20/01/18 00:11
+ . Last modified : 26/01/18 15:12
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -55,9 +58,20 @@ public class ArrayList8<E> extends ArrayList<E>
         return remove(random.nextInt(this.size()));
     }
 
+    public ArrayList8<E> merge (@NotNull Collection<? extends E> collection)
+    {
+        //region --> Check params
+        if (collection == null) throw new IllegalArgumentException("Collection param is null");
+        //endregion
+
+        this.addAll(collection);
+        return this;
+    }
+
     public boolean addIf (@Nullable E value, @NotNull Predicate<? super E> filter)
     {
         //region --> Check params
+        if (value == null) throw new IllegalArgumentException("Value param is null");
         if (filter == null) throw new IllegalArgumentException("Filter param is null");
         //endregion
 
@@ -106,10 +120,11 @@ public class ArrayList8<E> extends ArrayList<E>
         if (filter == null) throw new IllegalArgumentException("Filter param is null");
         //endregion
 
-        return new ArrayList8<E>()
-        {{
-            this.forEach(e -> addIf(e, filter));
-        }};
+        ArrayList8<E> res = new ArrayList8<>();
+
+        this.forEach(e -> res.addIf(e, filter));
+
+        return res;
     }
 
     public Optional<E> findAny (@NotNull Predicate<? super E> filter)
@@ -169,6 +184,24 @@ public class ArrayList8<E> extends ArrayList<E>
         }
 
         return Optional.of(min);
+    }
+
+    public Optional<E> reduce (@NotNull BinaryOperator<E> accumulator)
+    {
+        //region --> Check params
+        if (accumulator == null) throw new IllegalArgumentException("Accumulator param is null");
+        //endregion
+
+        return this.stream().reduce(accumulator);
+    }
+
+    public <R> Stream<R> map (@NotNull Function<? super E, ? extends R> mapper)
+    {
+        //region --> Check params
+        if (mapper == null) throw new IllegalArgumentException("Mapper param is null");
+        //endregion
+
+        return this.stream().map(mapper);
     }
     //endregion
 }

@@ -3,17 +3,14 @@ package PopulationSimulator;
 import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
 import PopulationSimulator.model.Sector;
+import PopulationSimulator.model.factories.PersonFactory;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
 import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.visualizer.Logger;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
@@ -27,7 +24,7 @@ import static PopulationSimulator.visualizer.Logger.LogFile.RelationsLogFile;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 22/01/18 21:43
+ . Last modified : 26/01/18 09:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -53,7 +50,7 @@ public class App
 
         ArrayList8<Person> people = new ArrayList8<Person>()
         {{
-            IntStream.range(0, 10).forEach(i -> add(randPerson()));
+            IntStream.range(0, 10).forEach(i -> add(PersonFactory.createPerson()));
         }};
 
         ArrayList8<Applyable> rules = new ArrayList8<Applyable>()
@@ -78,31 +75,5 @@ public class App
         Context context = new Context(people, new ArrayList8<>(), sectors, locations);
 
         new SimulationController(context, rules).simulate(25);
-    }
-
-    /**
-     <hr>
-     <h2>Generates a random Person with :<br>
-     - Age = 0 <br>
-     - Gender = random from the Enum <br>
-     - Sexual Ori. = random from the Enum</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 11/01
-     </h3>
-     <hr>
-
-     @return A new Person with random data (see details above)
-     */
-    @NotNull
-    private static Person randPerson ()
-    {
-        int age = 0;
-
-        Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
-        SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
-
-        return new Person(new PersonalData(age, gender, orientation));
     }
 }

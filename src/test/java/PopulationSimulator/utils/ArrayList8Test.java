@@ -9,6 +9,8 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
+import static PopulationSimulator.utils.Const.randDelta;
+import static java.util.stream.Collectors.toCollection;
 import static org.junit.Assert.*;
 
 /*................................................................................................................................
@@ -16,7 +18,7 @@ import static org.junit.Assert.*;
  .
  . The ArrayList8Test class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 12:51
+ . Last modified : 26/01/18 14:40
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -38,7 +40,7 @@ public class ArrayList8Test
     };
     //endregion
 
-    //region --------------- getRandom (x2) ---------------
+    //region --------------- getRandom (x2) ------------------
     @Test
     public void getRandom_Right ()
     {
@@ -87,7 +89,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- removeRandom (x2) ------------
+    //region --------------- removeRandom (x2) ---------------
     @Test
     public void removeRandom_Right ()
     {
@@ -119,7 +121,52 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- addIf (x4) -------------------
+    //region --------------- merge (x3) ----------------------
+    @Test
+    public void merge_Right ()
+    {
+        for (int i = 0; i < 1000; i++)
+        {
+            ArrayList8<TestObject> list1 = new ArrayList8<TestObject>()
+            {{
+                IntStream.range(0, randDelta(30, 10)).forEach(i -> add(randTestObject()));
+            }};
+
+            ArrayList8<TestObject> list2 = new ArrayList8<TestObject>()
+            {{
+                IntStream.range(0, randDelta(30, 10)).forEach(i -> add(randTestObject()));
+            }};
+
+            int prevSize1 = list1.size();
+            int prevSize2 = list2.size();
+
+            ArrayList8<TestObject> merge = list1.merge(list2);
+
+            assertEquals(list1, merge);
+            assertEquals(prevSize1 + prevSize2, list1.size());
+            assertEquals(prevSize1 + prevSize2, merge.size());
+        }
+    }
+
+    @Test
+    public void merge_Empty ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+        ArrayList8<TestObject> list2 = new ArrayList8<>();
+        ArrayList8<TestObject> merge = list1.merge(list2);
+
+        assertTrue(merge.isEmpty());
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void merge_Null ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+        list1.merge(null);
+    }
+    //endregion
+
+    //region --------------- addIf (x4) ----------------------
     @Test
     public void addIf_Right ()
     {
@@ -168,7 +215,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- addAllIf (x4) ----------------
+    //region --------------- addAllIf (x4) -------------------
     @Test
 
     public void addAllIf_Right ()
@@ -226,7 +273,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- contains (x3) ----------------
+    //region --------------- contains (x3) -------------------
     @Test
     public void contains_Right ()
     {
@@ -265,7 +312,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- countIf (x2) -----------------
+    //region --------------- countIf (x2) --------------------
     @Test
     public void countIf_Right ()
     {
@@ -300,7 +347,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- sublist (x2) -----------------
+    //region --------------- sublist (x2) --------------------
     @Test
     public void sublist_Right ()
     {
@@ -335,7 +382,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- findAny (x2) -----------------
+    //region --------------- findAny (x2) --------------------
     @Test
     public void findAny_Right ()
     {
@@ -363,7 +410,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- findFirst (x2) ---------------
+    //region --------------- findFirst (x2) ------------------
     @Test
     public void findFirst_Right ()
     {
@@ -391,7 +438,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- max (x2) ---------------------
+    //region --------------- max (x2) ------------------------
     @Test
     public void max_Right ()
     {
@@ -427,7 +474,7 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region --------------- min (x2) ---------------------
+    //region --------------- min (x2) ------------------------
     @Test
     public void min_Right ()
     {
@@ -463,7 +510,79 @@ public class ArrayList8Test
     }
     //endregion
 
-    //region  --------------- OtherMethods -------------------
+    //region --------------- reduce (x3) ---------------------
+    @Test
+    public void reduce_Right ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<TestObject>()
+        {
+            {
+                IntStream.range(0, randDelta(10, 5)).forEach(i -> add(randTestObject()));
+            }
+        };
+
+        int sumVal1 = list1.stream().mapToInt(t -> t.val1).sum();
+
+        Optional<TestObject> opt = list1.reduce((o1, o2) -> new TestObject(o1.val1 + o2.val1, 0, 0));
+
+        assertTrue(opt.isPresent());
+
+        assertEquals(sumVal1, opt.get().val1);
+    }
+
+    @Test
+    public void reduce_Empty ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+
+        Optional<TestObject> opt = list1.reduce((o1, o2) -> new TestObject(o1.val1 + o2.val1, o1.val2 + o2.val2, o1.val3 + o2.val3));
+
+        assertFalse(opt.isPresent());
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void reduce_Null ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+
+        list1.reduce(null);
+    }
+    //endregion
+
+    //region --------------- map (x3) ------------------------
+    @Test
+    public void map_Right ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<TestObject>()
+        {{
+            IntStream.range(0, randDelta(10, 5)).forEach(i -> add(randTestObject()));
+        }};
+
+        ArrayList8<Integer> collect = list1.map(testObject -> testObject.val1).collect(toCollection(ArrayList8::new));
+
+        IntStream.range(0, list1.size()).forEach(i -> assertEquals(list1.get(i).val1, collect.get(i), 0.0001));
+    }
+
+    @Test
+    public void map_Empty ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+
+        ArrayList8<Integer> collect = list1.map(testObject -> testObject.val1).collect(toCollection(ArrayList8::new));
+
+        IntStream.range(0, list1.size()).forEach(i -> assertEquals(list1.get(i).val1, collect.get(i), 0.0001));
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void map_Null ()
+    {
+        ArrayList8<TestObject> list1 = new ArrayList8<>();
+
+        list1.map(null);
+    }
+    //endregion
+
+    //region --------------- OtherMethods --------------------
     @NotNull
     private TestObject randTestObject ()
     {
