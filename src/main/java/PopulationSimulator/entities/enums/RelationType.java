@@ -9,7 +9,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RelationType class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 20:27
+ . Last modified : 30/01/18 02:29
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -36,5 +36,18 @@ public enum RelationType
         RelationType[] values = RelationType.values();
 
         return values[randBetween(0, values.length)];
+    }
+
+    public static boolean contains (@NotNull String value)
+    {
+        try
+        {
+            RelationType.valueOf(value);
+            return true;
+        }
+        catch (IllegalArgumentException ignored)
+        {
+            return false;
+        }
     }
 }

@@ -1,5 +1,7 @@
 package PopulationSimulator.utils;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Random;
 
 /*................................................................................................................................
@@ -7,7 +9,7 @@ import java.util.Random;
  .
  . The Const class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 30/01/18 02:29
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -61,4 +63,27 @@ public class Const
 
         return randBetween(center - delta, center + delta);
     }
+
+    /**
+     <hr>
+     <h2>Tests if [string] can be parsed into an Integer</h2>
+     <hr>
+
+     @param string String to test
+     @return True if [string] can be parsed into an Integer
+     */
+    public static boolean isInteger (@NotNull String string)
+    {
+        try
+        {
+            //noinspection ResultOfMethodCallIgnored
+            Integer.parseInt(string);
+            return true;
+        }
+        catch (NumberFormatException e)
+        {
+            return false;
+        }
+    }
+
 }
