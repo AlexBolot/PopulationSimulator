@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 20:52
+ . Last modified : 29/01/18 14:31
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -76,7 +76,7 @@ public class LifespanRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public void apply (@NotNull Context context)
+    public Context apply (@NotNull Context context)
     {
         context.people().removeIf(person -> person.data().age() >= maxLifespan);
 
@@ -86,6 +86,10 @@ public class LifespanRule extends SimpleRule
 
             return notContainsP1 || notContainsP2;
         });
+
+        //return empty context since we added no item
+        //TODO : find a way to take note of the people + relations removed
+        return new Context();
     }
     //endregion
 }

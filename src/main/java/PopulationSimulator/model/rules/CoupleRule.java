@@ -18,7 +18,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 20:52
+ . Last modified : 31/01/18 22:52
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -89,8 +89,10 @@ public class CoupleRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public void apply (@NotNull Context context)
+    public Context apply (@NotNull Context context)
     {
+        Context res = new Context();
+
         ArrayList<Person> tmpPeople = new ArrayList<>(context.people());
         if (minimumAge != anyAge) tmpPeople.removeIf(person -> person.data().age() < minimumAge);
         tmpPeople.removeIf(person -> context.relations().stream().anyMatch(relation -> relation.involves(person)));
@@ -105,11 +107,16 @@ public class CoupleRule extends SimpleRule
 
                 if (isMatch(person1, person2))
                 {
-                    context.relations().add(new Relation(person1, person2, Couple, currentTime()));
+                    Relation newRelation = new Relation(person1, person2, Couple, currentTime());
+
+                    context.relations().add(newRelation);
+                    res.relations().add(newRelation);
                     break;
                 }
             }
         }
+
+        return res;
     }
     //endregion
 

@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 11:03
+ . Last modified : 31/01/18 19:14
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -69,13 +69,13 @@ public class ReproductionRuleTest
     {
         people.addAll(createAllCombinations(minimumAge));
 
-        new CoupleRule(minimumAge).apply(context);
+        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).people().size();
 
-        assertEquals(24, people.size());
+        assertEquals(24, sizeBefore);
 
-        reproductionRule.apply(context);
+        int sizeAfter = context.merge(reproductionRule.apply(context)).people().size();
 
-        assertEquals(30, people.size());
+        assertEquals(30, sizeAfter);
     }
 
     /**
@@ -91,9 +91,13 @@ public class ReproductionRuleTest
     {
         assertTrue(people.isEmpty());
 
-        reproductionRule.apply(context);
+        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).people().size();
 
-        assertTrue(people.isEmpty());
+        assertEquals(0, sizeBefore);
+
+        int sizeAfter = context.merge(reproductionRule.apply(context)).people().size();
+
+        assertEquals(0, sizeAfter);
     }
 
     /**

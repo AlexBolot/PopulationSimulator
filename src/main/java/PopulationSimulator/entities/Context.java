@@ -13,7 +13,7 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 01/02/18 00:53
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -54,6 +54,11 @@ public class Context
         this.relations = relations;
         this.locations = locations;
     }
+
+    public Context ()
+    {
+        this(new ArrayList8<>(), new ArrayList8<>());
+    }
     //endregion
 
     //region --------------- Getters - Setters ---------------
@@ -68,6 +73,14 @@ public class Context
 
     @NotNull
     public ArrayList8<Sector> sectors () { return sectors; }
+
+    public boolean hasPeople () { return !people.isEmpty(); }
+
+    public boolean hasRelations () { return !relations.isEmpty(); }
+
+    public boolean hasLocations () { return !locations.isEmpty(); }
+
+    public boolean hasSectors () { return !sectors.isEmpty(); }
     //endregion
 
     //region --------------- Methods -------------------------
@@ -84,12 +97,15 @@ public class Context
 
      @param context Other context to merge with this
      */
-    public void merge (@NotNull Context context)
+    @NotNull
+    public Context merge (@NotNull Context context)
     {
-        this.people.addAll(context.people);
-        this.sectors.addAll(context.sectors);
-        this.relations.addAll(context.relations);
-        this.locations.putAll(context.locations);
+        people.addAllIf(context.people, p -> !people.contains(p));
+        sectors.addAllIf(context.sectors, s -> !sectors.contains(s));
+        relations.addAllIf(context.relations, r -> !relations.contains(r));
+        locations.putAll(context.locations);
+
+        return this;
     }
     //endregion
 

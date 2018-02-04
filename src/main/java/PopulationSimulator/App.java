@@ -10,21 +10,22 @@ import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
 import PopulationSimulator.utils.ArrayList8;
+import PopulationSimulator.visualizer.CLI;
 import PopulationSimulator.visualizer.Logger;
+import PopulationSimulator.visualizer.Visualizer;
 
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.utils.Const.randBetween;
-import static PopulationSimulator.visualizer.Logger.LogFile.PeopeLogFile;
-import static PopulationSimulator.visualizer.Logger.LogFile.RelationsLogFile;
+import static PopulationSimulator.visualizer.Logger.LogFile.*;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 09:35
+ . Last modified : 01/02/18 01:16
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -36,17 +37,9 @@ import static PopulationSimulator.visualizer.Logger.LogFile.RelationsLogFile;
  */
 public class App
 {
-    public static void main (String[] args)
+    public static void mainj (String[] args)
     {
-        Logger.clearLogs(PeopeLogFile, RelationsLogFile);
-
-        Logger.log("toto", PeopeLogFile);
-        Logger.log("toto", PeopeLogFile);
-        Logger.log("tata", RelationsLogFile);
-        Logger.log("tata", RelationsLogFile);
-
-        System.out.println(Logger.cat(PeopeLogFile));
-        System.out.println(Logger.cat(RelationsLogFile));
+        Logger.clearLogs(PeopeLogFile, RelationsLogFile, SectorsLogFile);
 
         ArrayList8<Person> people = new ArrayList8<Person>()
         {{
@@ -74,6 +67,11 @@ public class App
 
         Context context = new Context(people, new ArrayList8<>(), sectors, locations);
 
-        new SimulationController(context, rules).simulate(25);
+        CLI cli = new CLI();
+        cli.start(args);
+
+        Visualizer visualizer = new Visualizer(cli.userArgs());
+
+        new SimulationController(rules, context, visualizer).simulate(25);
     }
 }

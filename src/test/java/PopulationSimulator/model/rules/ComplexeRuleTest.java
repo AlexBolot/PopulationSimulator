@@ -4,14 +4,14 @@ import PopulationSimulator.entities.Context;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The ComplexeRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 09:05
+ . Last modified : 29/01/18 14:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -28,12 +28,12 @@ public class ComplexeRuleTest
         ComplexeRule complexeRule = new ComplexeRule()
         {
             @Override
-            public void apply (@NotNull Context context)
+            public Context apply (@NotNull Context context)
             {
-
+                return new Context();
             }
         };
 
-        assertTrue(true);
+        assertEquals(new Context(), complexeRule.apply(new Context()));
     }
 }

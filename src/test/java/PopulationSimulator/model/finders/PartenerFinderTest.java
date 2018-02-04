@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import static PopulationSimulator.entities.enums.Gender.Female;
 import static PopulationSimulator.entities.enums.Gender.Male;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 12:46
+ . Last modified : 01/02/18 00:56
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -63,10 +64,7 @@ public class PartenerFinderTest
 
         int bound = randBetween(20, 40);
 
-        for (int j = 0; j < bound; j++)
-        {
-            people.add(createOlder(minimumAge, minimumAge * 2));
-        }
+        IntStream.range(0, bound).forEach(j -> people.add(createOlder(minimumAge, minimumAge * 2)));
     }
     //endregion
 

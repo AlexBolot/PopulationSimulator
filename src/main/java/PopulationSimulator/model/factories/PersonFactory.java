@@ -20,7 +20,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 04/02/18 21:01
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -188,6 +188,7 @@ public class PersonFactory
 
         return createPerson(bday, Gender.getRandom(), SexualOrientation.getRandom());
     }
+
     //endregion
 
     //region --------------- Create Groups -------------------

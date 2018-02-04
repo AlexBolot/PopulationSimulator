@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 11:03
+ . Last modified : 31/01/18 19:08
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -93,9 +93,9 @@ public class CoupleRuleTest
 
         Context context = new Context(people);
 
-        coupleRule.apply(context);
+        int newSize = context.merge(coupleRule.apply(context)).relations().size();
 
-        assertEquals(29, context.relations().size());
+        assertEquals(29, newSize);
     }
 
     /**
@@ -113,9 +113,9 @@ public class CoupleRuleTest
 
         Context context = new Context(people);
 
-        coupleRule.apply(context);
+        int newSize = context.merge(coupleRule.apply(context)).relations().size();
 
-        assertTrue(context.relations().isEmpty());
+        assertEquals(0, newSize);
     }
 
     /**

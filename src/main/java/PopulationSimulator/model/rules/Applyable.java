@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Applyable class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 23:49
+ . Last modified : 29/01/18 14:27
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public interface Applyable
 {
-    void apply (@NotNull Context context);
+    Context apply (@NotNull Context context);
 }

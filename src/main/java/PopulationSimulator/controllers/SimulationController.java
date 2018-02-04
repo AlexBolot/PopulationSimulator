@@ -3,15 +3,19 @@ package PopulationSimulator.controllers;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.utils.ArrayList8;
+import PopulationSimulator.visualizer.Visualizer;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import static PopulationSimulator.visualizer.Logger.LogFile.*;
+import static PopulationSimulator.visualizer.Logger.log;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 31/01/18 22:59
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -22,6 +26,7 @@ public class SimulationController
     private static int currentTime = 0;
 
     private Context               context;
+    private Visualizer            visualizer;
     private ArrayList8<Applyable> rules;
     //endregion
 
@@ -30,20 +35,24 @@ public class SimulationController
     /**
      <hr>
      <h2>Simple constructor of SimulationController</h2>
-     <hr>
+
      <h3>
      Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 11/01
+     Modified : Alexandre Bolot 29/01
      </h3>
      <hr>
 
-     @param context Context (people + relations) to work on for the simulation
-     @param rules   Rules to apply on the context when to simulation starts
+     @param rules      Applyables to apply on each tick of simulation
+     @param context    Context (people, relations, sectors) to start with
+     @param visualizer Visualizer to feed with data on each tick, to print stats in the end
      */
-    public SimulationController (@NotNull Context context, @NotNull ArrayList8<Applyable> rules)
+    public SimulationController (@NotNull ArrayList8<Applyable> rules, @NotNull Context context, @NotNull Visualizer visualizer)
     {
-        this.context = context;
         this.rules = rules;
+        this.context = context;
+        this.visualizer = visualizer;
+
+        visualizer.addTurn(new Context().merge(context));
     }
     //endregion
 
@@ -56,6 +65,9 @@ public class SimulationController
 
     @NotNull
     public ArrayList8<Applyable> rules () { return rules; }
+
+    @NotNull
+    public Visualizer visualizer () { return visualizer; }
     //endregion
 
     //region --------------- Methods -------------------------
@@ -73,35 +85,38 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
-        System.out.println("---------- year " + currentTime + " ----------\n");
-
         while (currentTime != ticks)
         {
-            rules.forEach(rule -> rule.apply(context));
+            Context tmpContext = new Context();
 
-            boolean hasPeople = !context.people().isEmpty();
-            boolean hasRelations = !context.relations().isEmpty();
+            rules.forEach(rule -> tmpContext.merge(rule.apply(context)));
 
-            if (hasPeople)
+            visualizer.addTurn(tmpContext);
+
+            String turnTitle = "---------- Turn " + currentTime + "----------";
+
+            if (context.hasPeople())
             {
-                context.people().forEach(System.out::println);
-                System.out.println();
+                log(turnTitle, PeopeLogFile);
+                context.people().forEach(p -> log(p.toString(), PeopeLogFile));
             }
 
-            if (hasRelations)
+            if (context.hasRelations())
             {
-                context.relations().forEach(System.out::println);
-                System.out.println();
+                log(turnTitle, RelationsLogFile);
+                context.relations().forEach(r -> log(r.toString(), RelationsLogFile));
             }
 
-            if (hasPeople || hasRelations)
+            if (context.hasLocations())
             {
-                System.out.println("---------- year " + currentTime + " ----------");
-                System.out.println();
+                log(turnTitle, SectorsLogFile);
+                log(context.locations().toString(), SectorsLogFile);
             }
 
             currentTime++;
         }
+
+        visualizer.printStats();
     }
     //endregion
 }

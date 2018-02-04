@@ -1,4 +1,5 @@
 .idea*
 PopulationSimulator.iml
 /target
-/src/main/resources/logs/*
+/src/main/java/PopulationSimulator/DraftApp.java
+src/main/resources/

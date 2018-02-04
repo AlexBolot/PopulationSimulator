@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  .
  . The ArrayList8Test class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 14:40
+ . Last modified : 29/01/18 00:13
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -307,8 +307,9 @@ public class ArrayList8Test
     @Test (expected = IllegalArgumentException.class)
     public void contains_NullPredicate ()
     {
-        ArrayList8<TestObject> list = new ArrayList8<>();
-        list.contains(null);
+        Predicate<TestObject> predicate = null;
+
+        new ArrayList8<TestObject>().contains(predicate);
     }
     //endregion
 
