@@ -15,7 +15,7 @@ import static PopulationSimulator.visualizer.Logger.log;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 22:59
+ . Last modified : 04/02/18 22:21
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -35,11 +35,6 @@ public class SimulationController
     /**
      <hr>
      <h2>Simple constructor of SimulationController</h2>
-
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 29/01
-     </h3>
      <hr>
 
      @param rules      Applyables to apply on each tick of simulation
@@ -76,10 +71,6 @@ public class SimulationController
      <hr>
      <h2>Will apply every Rule on the Context as many times as they are ticks</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
 
      @param ticks Numbers of "turns" to do before stopping the simulation
      */

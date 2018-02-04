@@ -16,7 +16,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 22:59
+ . Last modified : 04/02/18 22:33
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -41,22 +41,12 @@ public class ReproductionRule extends SimpleRule
      <hr>
      <h2>Constructor of ReproductionRule : sets minimumAge at -1</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
      */
     public ReproductionRule () { this(anyAge); }
 
     /**
      <hr>
      <h2>Constructor of ReproductionRule using minimumAge param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
      <hr>
 
      @param minimumAge Minimum age to reach to have kids
@@ -81,11 +71,6 @@ public class ReproductionRule extends SimpleRule
      - They have opposite Gender (Female X Male or Male X Female) <br>
      <br>
      Creates a new Person with random Gender and SexualOrientation
-     </h3>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
      </h3>
      <hr>
 

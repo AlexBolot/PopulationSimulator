@@ -13,7 +13,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RulesTestingUtils class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/01/18 21:32
+ . Last modified : 04/02/18 22:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -23,11 +23,6 @@ public class RulesTestingUtils
     /**
      <hr>
      <h2>Generates a Person created from given params : age, gender and orientation</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param age         Age of the Person
@@ -44,11 +39,6 @@ public class RulesTestingUtils
     /**
      <hr>
      <h2>Generates a random Person with age under/over the limit, depending on the young param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param limit Age limit of a Person's lifespan

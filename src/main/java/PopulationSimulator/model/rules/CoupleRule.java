@@ -18,7 +18,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 22:52
+ . Last modified : 04/02/18 22:30
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -42,22 +42,12 @@ public class CoupleRule extends SimpleRule
      <hr>
      <h2>Constructor of CoupleRule : sets minimumAge at -1</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
      */
     public CoupleRule () { this(anyAge); }
 
     /**
      <hr>
      <h2>Constructor of CoupleRule using minimumAge param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
      <hr>
 
      @param minimumAge Minimum age to create a couple relationship with any other Person
@@ -80,11 +70,6 @@ public class CoupleRule extends SimpleRule
      — A Person that already is in couple, can't get in couple with someone else <br>
      — 2 People have to <code>match</code> to get in couple <br>
      See {@link CoupleRule#isMatch(Person, Person)}</h3>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param context Context to apply this rule onto
@@ -125,11 +110,6 @@ public class CoupleRule extends SimpleRule
     /**
      <hr>
      <h2>Checks if 2 people match each other</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param p1 Person to match with p2

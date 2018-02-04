@@ -20,7 +20,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 21:01
+ . Last modified : 04/02/18 22:30
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -36,11 +36,6 @@ public class PersonFactory
      - Birthday = currentTime <br>
      - Gender = random <br>
      - SexualOrientation = random </h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
      <hr>
 
      @return A Person created with {currentTime, randomGender, randomOrientation}
@@ -58,11 +53,6 @@ public class PersonFactory
      - Gender = random <br>
      - SexualOrientation = random </h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
 
      @return A Person created with {bday param, randomGender, randomOrientation}
      */
@@ -78,11 +68,6 @@ public class PersonFactory
      - Birthday = currentTime <br>
      - Gender = gender param <br>
      - SexualOrientation = Hetero </h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
      <hr>
 
      @return A Person created with {currentTime, gender param, Hetero}
@@ -100,11 +85,6 @@ public class PersonFactory
      - Gender = gender param <br>
      - SexualOrientation = orientation param </h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
 
      @return A Person created with {currentTime, gender param, orientation param}
      */
@@ -121,11 +101,6 @@ public class PersonFactory
      - Gender = gender param <br>
      - SexualOrientation = orientation param </h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
-     <hr>
 
      @return A Person created with {bday param, gender param, orientation param}
      */
@@ -141,11 +116,6 @@ public class PersonFactory
      - Birthday = calculated to be younger than age param <br>
      - Gender = random <br>
      - SexualOrientation = random </h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
      <hr>
 
      @return A Person created with {random younger than age param, randomGender, randomOrientation}
@@ -168,11 +138,6 @@ public class PersonFactory
      - Birthday = calculated for age to be between age param and limit param <br>
      - Gender = random <br>
      - SexualOrientation = random </h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
      <hr>
 
      @return A Person created with {random older than age param and younger than limit param, randomGender, randomOrientation}
@@ -201,11 +166,6 @@ public class PersonFactory
      <br>
      Else : <br>
      -> They'll have opposite gender and be Heterosexual or Bi</h3>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 15/01 <br>
-     Modified : Alexandre Bolot 15/01
-     </h3>
      <hr>
 
      @return Creates a valid couple of People (Relation object not included)
@@ -241,11 +201,6 @@ public class PersonFactory
     /**
      <hr>
      <h2>Creates all possible combinations of couples</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @return A LinkedHashSet of Person, containing all possible combinations of couples

@@ -13,7 +13,7 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 01/02/18 00:53
+ . Last modified : 04/02/18 22:26
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -89,11 +89,6 @@ public class Context
      <hr>
      <h2>Merging the context param to this one</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 25/01 <br>
-     Modified : Alexandre Bolot 25/01
-     </h3>
-     <hr>
 
      @param context Other context to merge with this
      */
@@ -114,11 +109,6 @@ public class Context
     /**
      <hr>
      <h2>Format : Context + foreach(Person) in people + foreach(Relation) in relations</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @return Relation + person1.ID + person2.ID + type + duration
@@ -145,11 +135,6 @@ public class Context
      <hr>
      <h2>Compares : people and relations</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
 
      @param obj The Object to compare with this
      @return True if obj is equal to this, False otherwise
@@ -166,13 +151,11 @@ public class Context
 
     /**
      <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
+     <h2>Returns a unique HashCode for this Context instance <br>
+     Based on : people, relations</h2>
      <hr>
 
-     @return Unique HashCode for this Context instance <br>
+     @return A unique HashCode for this Context instance <br>
      Based on : people, relations
      */
     @Override

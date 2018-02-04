@@ -8,7 +8,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 29/01/18 14:31
+ . Last modified : 04/02/18 22:33
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -30,22 +30,12 @@ public class LifespanRule extends SimpleRule
      <hr>
      <h2>Constructor of LifespanRule : sets maxLifespan at 80</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
      */
     public LifespanRule () { this(80); }
 
     /**
      <hr>
      <h2>Constructor of LifespanRule using maxLifespan param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
      <hr>
 
      @param maxLifespan Maximum that a Perso can reach before death
@@ -66,11 +56,6 @@ public class LifespanRule extends SimpleRule
      <hr>
      <h2>Applies this Rule on the Context param</h2>
      <h3>A Person dies if it's age is over or equals to maxLifespan <br>
-     </h3>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
      </h3>
      <hr>
 

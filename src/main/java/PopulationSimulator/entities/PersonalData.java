@@ -14,7 +14,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 04/02/18 22:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -36,11 +36,6 @@ public class PersonalData
      - Orientation : Hetero (as default) <br>
      - Birthday : Now (SimulationController.currentTime())</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
 
      @param gender Gender of the Person
      */
@@ -55,11 +50,6 @@ public class PersonalData
      - Gender : gender param <br>
      - Orientation : orientation param <br>
      - Birthday : Now (SimulationController.currentTime())</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param gender      Gender of the Person
@@ -76,11 +66,6 @@ public class PersonalData
      - Gender : gender param <br>
      - Orientation : orientation param <br>
      - Birthday : birthday param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param gender      Gender of the Person
@@ -115,11 +100,6 @@ public class PersonalData
      <hr>
      <h2>Format : Data + age + gender + orientation</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
 
      @return Data + age + gender + orientation
      */
@@ -133,11 +113,6 @@ public class PersonalData
     /**
      <hr>
      <h2>Compares : birthday, gender and orientation</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param obj The Object to compare with this
@@ -159,13 +134,11 @@ public class PersonalData
 
     /**
      <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 16/01
-     </h3>
+     <h2>Returns a unique HashCode for this Context instance <br>
+     Based on : birthday, gender and orientation</h2>
      <hr>
 
-     @return Unique HashCode of this PersonalData instance <br>
+     @return A unique HashCode for this Context instance <br>
      Based on : birthday, gender and orientation
      */
     @Override

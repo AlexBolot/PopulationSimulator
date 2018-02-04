@@ -9,7 +9,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The SexualOrientation class was coded by : Alexandre BOLOT
  .
- . Last modified : 30/01/18 02:28
+ . Last modified : 04/02/18 22:26
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -23,11 +23,6 @@ public enum SexualOrientation
     /**
      <hr>
      <h2>Gives a random SexualOrientation out of the SexualOrientation Enum</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 26/01 <br>
-     Modified : Alexandre Bolot 26/01
-     </h3>
      <hr>
 
      @return A random SexualOrientation out of the SexualOrientation Enum

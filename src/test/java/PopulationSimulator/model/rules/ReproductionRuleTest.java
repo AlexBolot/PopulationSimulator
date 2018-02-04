@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 19:14
+ . Last modified : 04/02/18 22:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -35,14 +35,6 @@ public class ReproductionRuleTest
 
     //region --------------- SetUps --------------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Before
     public void before ()
     {
@@ -56,14 +48,6 @@ public class ReproductionRuleTest
 
     //region --------------- apply (x3) ----------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Right ()
     {
@@ -78,14 +62,6 @@ public class ReproductionRuleTest
         assertEquals(30, sizeAfter);
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Empty ()
     {
@@ -100,14 +76,6 @@ public class ReproductionRuleTest
         assertEquals(0, sizeAfter);
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {

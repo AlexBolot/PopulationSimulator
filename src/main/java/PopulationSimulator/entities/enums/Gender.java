@@ -10,7 +10,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The Gender class was coded by : Alexandre BOLOT
  .
- . Last modified : 30/01/18 02:27
+ . Last modified : 04/02/18 22:26
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -23,11 +23,6 @@ public enum Gender
     /**
      <hr>
      <h2>Gives a random Gender out of the Gender Enum</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 26/01 <br>
-     Modified : Alexandre Bolot 26/01
-     </h3>
      <hr>
 
      @return A random Gender out of the Gender Enum
@@ -43,11 +38,6 @@ public enum Gender
     /**
      <hr>
      <h2>Gives the opposite gender than the one given as param</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 26/01 <br>
-     Modified : Alexandre Bolot 26/01
-     </h3>
      <hr>
 
      @return The opposite gender than the one given as param

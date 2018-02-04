@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 19:08
+ . Last modified : 04/02/18 22:33
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -37,14 +37,6 @@ public class CoupleRuleTest
 
     //region --------------- SetUps --------------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Before
     public void before ()
     {
@@ -56,14 +48,6 @@ public class CoupleRuleTest
 
     //region --------------- apply (x3) ----------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Right ()
     {
@@ -98,14 +82,6 @@ public class CoupleRuleTest
         assertEquals(29, newSize);
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Empty ()
     {
@@ -118,14 +94,6 @@ public class CoupleRuleTest
         assertEquals(0, newSize);
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 14/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
-     */
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {

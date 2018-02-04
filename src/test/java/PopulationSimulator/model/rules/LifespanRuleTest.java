@@ -18,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/01/18 12:50
+ . Last modified : 04/02/18 22:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -33,14 +33,6 @@ public class LifespanRuleTest
 
     //region --------------- SetUps --------------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
-     */
     @Before
     public void before ()
     {
@@ -52,14 +44,6 @@ public class LifespanRuleTest
 
     //region --------------- apply (x3) ----------------------
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Right ()
     {
@@ -85,14 +69,6 @@ public class LifespanRuleTest
         }
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     </h3>
-     <hr>
-     */
     @Test
     public void apply_Empty ()
     {
@@ -103,13 +79,6 @@ public class LifespanRuleTest
         assertTrue(people.isEmpty());
     }
 
-    /**
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 10/01
-     <hr>
-     */
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {

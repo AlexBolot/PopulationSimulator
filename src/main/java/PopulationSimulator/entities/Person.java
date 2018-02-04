@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 04/02/18 22:26
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -28,11 +28,6 @@ public class Person
      <hr>
      <h2>Simple constructor of Person <br>
      Fetches ID, attributes it, then increments it.</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param data Personal data of the Person
@@ -57,11 +52,6 @@ public class Person
      <hr>
      <h2>Format : Person + ID + data.toString()</h2>
      <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
-     <hr>
 
      @return Person + ID + data.toString()
      */
@@ -75,11 +65,6 @@ public class Person
     /**
      <hr>
      <h2>Compares : ID</h2>
-     <hr>
-     <h3>
-     Created : Alexandre Bolot 16/12 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
      <hr>
 
      @param obj The Object to compare with this
@@ -97,13 +82,11 @@ public class Person
 
     /**
      <hr>
-     <h3>
-     Created : Alexandre Bolot 10/01 <br>
-     Modified : Alexandre Bolot 14/01
-     </h3>
+     <h2>Returns a unique HashCode for this Context instance <br>
+     Based on : people, relations</h2>
      <hr>
 
-     @return Unique HashCode of this Person instance <br>
+     @return A unique HashCode for this Context instance <br>
      Based on : ID
      */
     @Override
