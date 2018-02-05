@@ -10,9 +10,9 @@ import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
 import PopulationSimulator.utils.ArrayList8;
-import PopulationSimulator.visualizer.CLI;
 import PopulationSimulator.visualizer.Logger;
-import PopulationSimulator.visualizer.Visualizer;
+import PopulationSimulator.visualizer.cli.CLI;
+import PopulationSimulator.visualizer.cli.Visualizer;
 
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
@@ -25,7 +25,7 @@ import static PopulationSimulator.visualizer.Logger.LogFile.*;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 01/02/18 01:16
+ . Last modified : 05/02/18 16:47
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -37,7 +37,7 @@ import static PopulationSimulator.visualizer.Logger.LogFile.*;
  */
 public class App
 {
-    public static void mainj (String[] args)
+    public static void main (String[] args)
     {
         Logger.clearLogs(PeopeLogFile, RelationsLogFile, SectorsLogFile);
 

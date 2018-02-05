@@ -1,4 +1,4 @@
-package PopulationSimulator.visualizer;
+package PopulationSimulator.visualizer.cli;
 
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
@@ -9,16 +9,16 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import static PopulationSimulator.visualizer.CLI.OptionEnum.*;
 import static PopulationSimulator.visualizer.Logger.clearCLI;
 import static PopulationSimulator.visualizer.Logger.logCLI;
+import static PopulationSimulator.visualizer.cli.CLI.OptionEnum.*;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The CLI class was coded by : Alexandre BOLOT
  .
- . Last modified : 01/02/18 00:42
+ . Last modified : 05/02/18 16:47
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

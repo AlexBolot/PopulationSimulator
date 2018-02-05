@@ -2,6 +2,8 @@ package PopulationSimulator.visualizer;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.CoupleRule;
+import PopulationSimulator.visualizer.cli.CLI;
+import PopulationSimulator.visualizer.cli.Visualizer;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The VisualizerTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:14
+ . Last modified : 05/02/18 16:45
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

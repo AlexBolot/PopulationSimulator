@@ -1,11 +1,11 @@
-package PopulationSimulator.visualizer;
+package PopulationSimulator.visualizer.cli;
 
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.RelationType;
 import PopulationSimulator.entities.enums.SexualOrientation;
 import PopulationSimulator.utils.ArrayList8;
-import PopulationSimulator.visualizer.CLI.OptionEnum;
+import PopulationSimulator.visualizer.cli.CLI.OptionEnum;
 import PopulationSimulator.visualizer.stats.PeopleStats;
 import PopulationSimulator.visualizer.stats.RelationsStats;
 import org.apache.commons.cli.CommandLine;
@@ -26,7 +26,7 @@ import static java.lang.Integer.parseInt;
  .
  . The Visualizer class was coded by : Alexandre BOLOT
  .
- . Last modified : 01/02/18 00:53
+ . Last modified : 05/02/18 16:45
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -63,7 +63,6 @@ public class Visualizer
     //endregion
 
     //region --------------- Methods -------------------------
-
 
     /**
      <hr>
