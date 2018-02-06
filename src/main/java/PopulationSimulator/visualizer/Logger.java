@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
  .
  . The Logger class was coded by : Alexandre BOLOT
  .
- . Last modified : 31/01/18 17:41
+ . Last modified : 06/02/18 10:48
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -90,19 +90,24 @@ public class Logger
      */
     public static void log (String message, @NotNull LogFile logFile, boolean overwrite)
     {
+        Path pathToFile = Paths.get(pathToLogs.toString(), logFile.path());
+
         try
         {
-            Path pathToFile = Paths.get(pathToLogs.toString(), logFile.path());
-
             if (!Files.exists(pathToLogs) || !Files.isDirectory(pathToLogs)) Files.createDirectory(pathToLogs);
             if (!Files.exists(pathToFile) || !Files.isRegularFile(pathToFile)) Files.createFile(pathToFile);
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
-            String oldContent = overwrite ? "" : cat(logFile);
-            String newContent = (oldContent.isEmpty()) ? message : oldContent + "\n" + message;
+        String oldContent = overwrite ? "" : cat(logFile);
+        String newContent = (oldContent.isEmpty()) ? message : oldContent + "\n" + message;
 
-            BufferedWriter out = new BufferedWriter(new FileWriter(pathToFile.toString()));
+        try (BufferedWriter out = new BufferedWriter(new FileWriter(pathToFile.toString())))
+        {
             out.write(newContent);
-            out.close();
         }
         catch (IOException e)
         {
@@ -117,10 +122,7 @@ public class Logger
 
      @param message Message to print on the console
      */
-    public static void logCLI (String message)
-    {
-        System.out.println(message);
-    }
+    public static void logCLI (String message) { System.out.println(message); }
 
     /**
      <hr>
@@ -145,17 +147,16 @@ public class Logger
     {
         Path pathToFile = Paths.get(pathToLogs.toString(), file.path());
 
-        try
-        {
-            if (Files.exists(pathToFile) && Files.isRegularFile(pathToFile))
-            {
-                BufferedReader in = new BufferedReader(new FileReader(pathToFile.toString()));
-                Optional<String> reduce = in.lines().reduce((s1, s2) -> s1 + "\n" + s2);
+        if (!Files.exists(pathToFile) || !Files.isRegularFile(pathToFile))
+            throw new IllegalStateException(pathToFile + " does not exist or is not a valid file");
 
-                return reduce.orElse("");
-            }
+        try (BufferedReader in = new BufferedReader(new FileReader(pathToFile.toString())))
+        {
+            Optional<String> reduce = in.lines().reduce((s1, s2) -> s1 + "\n" + s2);
+
+            return reduce.orElse("");
         }
-        catch (FileNotFoundException e)
+        catch (IOException e)
         {
             e.printStackTrace();
         }
