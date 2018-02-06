@@ -26,7 +26,7 @@ import static java.lang.Integer.parseInt;
  .
  . The Visualizer class was coded by : Alexandre BOLOT
  .
- . Last modified : 05/02/18 16:45
+ . Last modified : 06/02/18 22:34
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -289,6 +289,9 @@ public class Visualizer
                     break;
 
                 //endregion
+
+                default:
+                    throw new IllegalStateException("Unkown option : " + optionEnum.name());
             }
 
             if (i < options.length - 1) str.append("\n--------------------\n");
