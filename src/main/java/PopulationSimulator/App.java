@@ -25,7 +25,7 @@ import static PopulationSimulator.visualizer.Logger.LogFile.*;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 05/02/18 16:47
+ . Last modified : 06/02/18 22:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -41,25 +41,19 @@ public class App
     {
         Logger.clearLogs(PeopeLogFile, RelationsLogFile, SectorsLogFile);
 
-        ArrayList8<Person> people = new ArrayList8<Person>()
-        {{
-            IntStream.range(0, 10).forEach(i -> add(PersonFactory.createPerson()));
-        }};
+        ArrayList8<Person> people = new ArrayList8<>();
+        IntStream.range(0, 10).forEach(i -> people.add(PersonFactory.createPerson()));
 
-        ArrayList8<Applyable> rules = new ArrayList8<Applyable>()
-        {{
-            add(new CoupleRule(5));
-            add(new ReproductionRule(7));
-            add(new LifespanRule(15));
-        }};
+        ArrayList8<Applyable> rules = new ArrayList8<>();
+        rules.add(new CoupleRule(5));
+        rules.add(new ReproductionRule(7));
+        rules.add(new LifespanRule(15));
 
-        ArrayList8<Sector> sectors = new ArrayList8<Sector>()
-        {{
-            add(new Sector(1, 3)); // 0
-            add(new Sector(0, 2)); // 1
-            add(new Sector(1, 3)); // 2
-            add(new Sector(0, 2)); // 3
-        }};
+        ArrayList8<Sector> sectors = new ArrayList8<Sector>();
+        sectors.add(new Sector(1, 3)); // 0
+        sectors.add(new Sector(0, 2)); // 1
+        sectors.add(new Sector(1, 3)); // 2
+        sectors.add(new Sector(0, 2)); // 3
 
         LinkedHashMap<Person, Sector> locations = new LinkedHashMap<>();
 
