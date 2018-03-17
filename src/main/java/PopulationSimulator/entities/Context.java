@@ -1,7 +1,7 @@
 package PopulationSimulator.entities;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.model.Sector;
-import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -13,7 +13,7 @@ import java.util.Objects;
  .
  . The Context class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:26
+ . Last modified : 16/03/18 09:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

@@ -10,7 +10,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The Gender class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:26
+ . Last modified : 06/02/18 08:06
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -44,7 +44,7 @@ public enum Gender
      */
     @NotNull
     @Contract (pure = true)
-    public static Gender getOppositeGender (@NotNull Gender gender)
+    public static Gender getOpposite (@NotNull Gender gender)
     {
         return (gender == Male) ? Female : Male;
     }

@@ -1,9 +1,9 @@
 package PopulationSimulator.visualizer.stats;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
-import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
  .
  . The PeopleStatsTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:14
+ . Last modified : 16/03/18 09:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

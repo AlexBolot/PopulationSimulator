@@ -1,5 +1,6 @@
 package PopulationSimulator;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.controllers.SimulationController;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
@@ -9,7 +10,6 @@ import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
-import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.visualizer.Logger;
 import PopulationSimulator.visualizer.cli.CLI;
 import PopulationSimulator.visualizer.cli.Visualizer;
@@ -25,7 +25,7 @@ import static PopulationSimulator.visualizer.Logger.LogFile.*;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 06/02/18 22:32
+ . Last modified : 16/03/18 09:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

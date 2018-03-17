@@ -1,9 +1,9 @@
 package PopulationSimulator.model.finders;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.Relation;
-import PopulationSimulator.utils.ArrayList8;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The PartenerFinderTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 01/02/18 00:56
+ . Last modified : 16/03/18 09:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

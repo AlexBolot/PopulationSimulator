@@ -1,8 +1,8 @@
 package PopulationSimulator.entities;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.model.factories.PersonFactory;
 import PopulationSimulator.model.rules.CoupleRule;
-import PopulationSimulator.utils.ArrayList8;
 import org.junit.Test;
 
 import java.util.stream.IntStream;
@@ -15,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  .
  . The ContextTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 09:34
+ . Last modified : 16/03/18 09:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

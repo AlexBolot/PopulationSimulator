@@ -1,8 +1,8 @@
 package PopulationSimulator.controllers;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.model.rules.Applyable;
-import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.visualizer.cli.Visualizer;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -15,7 +15,7 @@ import static PopulationSimulator.visualizer.Logger.log;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 05/02/18 16:45
+ . Last modified : 16/03/18 09:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

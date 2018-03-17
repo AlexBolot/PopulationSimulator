@@ -14,7 +14,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:28
+ . Last modified : 17/03/18 02:16
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -107,7 +107,7 @@ public class PersonalData
     @NotNull
     public String toString ()
     {
-        return String.format("Data {%d}{%s}{%s}", age(), gender, orientation);
+        return String.format("Data %s,%s,%d", gender, orientation, age());
     }
 
     /**

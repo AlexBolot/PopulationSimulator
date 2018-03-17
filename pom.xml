@@ -3,7 +3,7 @@
   .
   . The pom.xml class was coded by : Alexandre BOLOT
   .
-  . Last modified : 29/01/18 00:26
+  . Last modified : 16/03/18 15:37
   .
   . Contact : bolotalex06@gmail.com
   .............................................................................................................................-->
@@ -20,6 +20,13 @@
 	<name>PopulationSimulator</name>
 	<url>http://maven.apache.org</url>
 	
+	<repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -29,9 +36,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-clean-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<skip>true</skip>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -53,6 +68,11 @@
 			<groupId>org.jetbrains</groupId>
 			<artifactId>annotations</artifactId>
 			<version>15.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.github.AlexBolot</groupId>
+			<artifactId>CodingUtils</artifactId>
+			<version>1.1.2</version>
 		</dependency>
 	</dependencies>
 </project>

@@ -1,6 +1,6 @@
 package PopulationSimulator.visualizer;
 
-import PopulationSimulator.utils.ArrayList8;
+import CodingUtils.ArrayList8;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
  .
  . The Logger class was coded by : Alexandre BOLOT
  .
- . Last modified : 06/02/18 10:48
+ . Last modified : 16/03/18 09:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

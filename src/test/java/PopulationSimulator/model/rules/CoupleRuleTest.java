@@ -1,8 +1,8 @@
 package PopulationSimulator.model.rules;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.utils.ArrayList8;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:33
+ . Last modified : 16/03/18 09:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

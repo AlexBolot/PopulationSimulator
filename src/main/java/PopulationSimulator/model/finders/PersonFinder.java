@@ -1,8 +1,8 @@
 package PopulationSimulator.model.finders;
 
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.utils.ArrayList8;
 import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The PersonFinder class was coded by : Alexandre BOLOT
  .
- . Last modified : 26/01/18 21:15
+ . Last modified : 16/03/18 09:35
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

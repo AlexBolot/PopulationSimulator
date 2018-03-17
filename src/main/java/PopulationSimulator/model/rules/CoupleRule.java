@@ -18,7 +18,7 @@ import static PopulationSimulator.entities.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:30
+ . Last modified : 06/02/18 08:06
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -127,11 +127,11 @@ public class CoupleRule extends SimpleRule
         if (ori1 == Bi)
         {
             if (ori2 == Bi) return true;
-            if (ori2 == Hetero) return gen1 == Gender.getOppositeGender(gen2);
+            if (ori2 == Hetero) return gen1 == Gender.getOpposite(gen2);
             if (ori2 == Homo) return gen1 == gen2;
         }
 
-        if (ori1 == Hetero) return gen1 == Gender.getOppositeGender(gen2) && (ori2 == Hetero || ori2 == Bi);
+        if (ori1 == Hetero) return gen1 == Gender.getOpposite(gen2) && (ori2 == Hetero || ori2 == Bi);
         if (ori1 == Homo) return gen1 == gen2 && (ori2 == Homo || ori2 == Bi);
 
         return false;
