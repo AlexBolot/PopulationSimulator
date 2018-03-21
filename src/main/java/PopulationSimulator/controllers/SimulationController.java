@@ -1,21 +1,17 @@
 package PopulationSimulator.controllers;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Context;
+import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.rules.Applyable;
-import PopulationSimulator.visualizer.cli.Visualizer;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-
-import static PopulationSimulator.visualizer.Logger.LogFile.*;
-import static PopulationSimulator.visualizer.Logger.log;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:35
+ . Last modified : 19/03/18 21:18
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -25,8 +21,7 @@ public class SimulationController
     //region --------------- Attributes ----------------------
     private static int currentTime = 0;
 
-    private Context               context;
-    private Visualizer            visualizer;
+    private Graph                 context;
     private ArrayList8<Applyable> rules;
     //endregion
 
@@ -38,16 +33,12 @@ public class SimulationController
      <hr>
 
      @param rules      Applyables to apply on each tick of simulation
-     @param context    Context (people, relations, sectors) to start with
-     @param visualizer Visualizer to feed with data on each tick, to print stats in the end
+     @param context      Graph with People and their connections, to start with
      */
-    public SimulationController (@NotNull ArrayList8<Applyable> rules, @NotNull Context context, @NotNull Visualizer visualizer)
+    public SimulationController (@NotNull ArrayList8<Applyable> rules, @NotNull Graph context)
     {
         this.rules = rules;
         this.context = context;
-        this.visualizer = visualizer;
-
-        visualizer.addTurn(new Context().merge(context));
     }
     //endregion
 
@@ -56,13 +47,10 @@ public class SimulationController
     public static int currentTime () { return currentTime; }
 
     @NotNull
-    public Context context () { return context; }
+    public Graph graph () { return context; }
 
     @NotNull
     public ArrayList8<Applyable> rules () { return rules; }
-
-    @NotNull
-    public Visualizer visualizer () { return visualizer; }
     //endregion
 
     //region --------------- Methods -------------------------
@@ -76,13 +64,13 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
-        while (currentTime != ticks)
+        /*while (currentTime != ticks)
         {
-            Context tmpContext = new Context();
+            Graph tmpGraph = new Graph();
 
-            rules.forEach(rule -> tmpContext.merge(rule.apply(context)));
+            rules.forEach(rule -> tmpGraph.merge(rule.apply(context)));
 
-            visualizer.addTurn(tmpContext);
+            visualizer.addTurn(tmpGraph);
 
             String turnTitle = "---------- Turn " + currentTime + "----------";
 
@@ -107,7 +95,7 @@ public class SimulationController
             currentTime++;
         }
 
-        visualizer.printStats();
+        visualizer.printStats();*/
     }
     //endregion
 }

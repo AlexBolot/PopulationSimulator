@@ -19,12 +19,11 @@ import java.util.stream.IntStream;
  .
  . The Logger class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:35
+ . Last modified : 21/03/18 07:31
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("WeakerAccess")
 public class Logger
 {
     //region --------------- Attributes ---------------

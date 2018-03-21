@@ -1,8 +1,9 @@
 package PopulationSimulator.model.rules;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
+import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:37
+ . Last modified : 21/03/18 07:16
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -60,12 +61,13 @@ public class LifespanRuleTest
 
             youngAmount = people.subList(person1 -> person1.data().age() < lifespan).size();
             oldAmount = people.subList(person -> person.data().age() >= lifespan).size();
+            Graph graph = new Graph(people.mapAndCollect(Node::new));
 
-            assertEquals(youngAmount + oldAmount, people.size());
+            assertEquals(youngAmount + oldAmount, graph.nodes().size());
 
-            lifespanRule.apply(new Context(people));
+            lifespanRule.apply(graph);
 
-            assertEquals(youngAmount, people.size());
+            assertEquals(youngAmount, graph.nodes().size());
         }
     }
 
@@ -74,7 +76,7 @@ public class LifespanRuleTest
     {
         assertTrue(people.isEmpty());
 
-        lifespanRule.apply(new Context(people));
+        lifespanRule.apply(new Graph(people.mapAndCollect(Node::new)));
 
         assertTrue(people.isEmpty());
     }
@@ -82,7 +84,7 @@ public class LifespanRuleTest
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {
-        Context context = null;
+        Graph context = null;
 
         lifespanRule.apply(context);
     }

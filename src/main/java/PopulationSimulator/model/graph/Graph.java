@@ -4,6 +4,7 @@ import CodingUtils.ArrayList8;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 
 import static java.util.Collections.singletonList;
@@ -13,7 +14,7 @@ import static java.util.Collections.singletonList;
  .
  . The Graph class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/03/18 02:11
+ . Last modified : 19/03/18 21:54
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -27,6 +28,11 @@ public class Graph
 
     public Graph (Node... nodes) { this(Arrays.asList(nodes), new ArrayList8<>()); }
 
+    public Graph (Collection<Node> nodes)
+    {
+        this(nodes, new ArrayList8<>());
+    }
+
     public Graph (Collection<Node> nodes, Collection<Edge> edges)
     {
         this.nodes = new ArrayList8<>(nodes);
@@ -39,12 +45,17 @@ public class Graph
 
     public void addNode (Node node) { nodes.addIf(node, n -> !nodes.contains(n)); }
 
-    public void addLink (Node from, Node towards, EdgeType type) { edges.addIf(new Edge(from, towards, type), e -> !edges.contains(e)); }
+    public void addEdge (Node from, Node towards, EdgeType type) { addEdge(new Edge(from, towards, type)); }
 
-    public void addLinkBoth (Node node1, Node node2, EdgeType type)
+    public void addEdgeBothEnds (Node node1, Node node2, EdgeType type)
     {
-        addLink(node1, node2, type);
-        addLink(node2, node1, type);
+        addEdge(node1, node2, type);
+        addEdge(node2, node1, type);
+    }
+
+    public void addEdge (Edge edge)
+    {
+        edges.addIf(edge, e -> !edges.contains(edge));
     }
 
     public void remove (Node from, Node towards)
@@ -77,7 +88,17 @@ public class Graph
 
     public ArrayList8<Edge> getEdgesTowards (Node towards) { return edges.subList(edge -> edge.isTowards(towards)); }
 
+    public ArrayList8<Edge> getEdgesOfType (Node from, EdgeType type)
+    {
+        return getEdgesFrom(from).subList(edge -> edge.type() == type);
+    }
+
     public Optional<Edge> getEdge (Node from, Node towards) { return edges.findAny(edge -> edge.isFrom(from) && edge.isTowards(towards)); }
+
+    public ArrayList8<Node> getNodesContaining (Class _class)
+    {
+        return nodes.subList(node -> node.value().getClass() == _class);
+    }
 
     public ArrayList8<Node> getNeighboorNodes (Node origin, EdgeType type)
     {
@@ -106,5 +127,22 @@ public class Graph
         newNodes.forEach(node -> getNeighboorNodes(node, type, range - 1, visited));
 
         return visited;
+    }
+
+    public Graph merge (Graph graph)
+    {
+        graph.nodes().forEach(this::addNode);
+        graph.edges().forEach(this::addEdge);
+
+        return this;
+    }
+
+    @Override
+    public boolean equals (Object o)
+    {
+        if (this == o) return true;
+        if (o == null || !(o instanceof Graph)) return false;
+        Graph graph = (Graph) o;
+        return Objects.equals(nodes, graph.nodes) && Objects.equals(edges, graph.edges);
     }
 }

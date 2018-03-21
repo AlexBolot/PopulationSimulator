@@ -1,6 +1,6 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import PopulationSimulator.model.graph.Graph;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertEquals;
  .
  . The ComplexeRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 29/01/18 14:37
+ . Last modified : 19/03/18 21:04
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -28,12 +28,12 @@ public class ComplexeRuleTest
         ComplexeRule complexeRule = new ComplexeRule()
         {
             @Override
-            public Context apply (@NotNull Context context)
+            public Graph apply (@NotNull Graph context)
             {
-                return new Context();
+                return new Graph();
             }
         };
 
-        assertEquals(new Context(), complexeRule.apply(new Context()));
+        assertEquals(new Graph(), complexeRule.apply(new Graph()));
     }
 }

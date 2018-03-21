@@ -1,6 +1,6 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import PopulationSimulator.model.graph.Graph;
 import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
  .
  . The ComplexeRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 30/01/18 02:29
+ . Last modified : 19/03/18 15:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public abstract class ComplexeRule implements Applyable {
 
-    public abstract Context apply (@NotNull Context context);
+    public abstract Graph apply (@NotNull Graph context);
 }

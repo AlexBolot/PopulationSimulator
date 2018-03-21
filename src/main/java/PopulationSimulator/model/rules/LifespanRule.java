@@ -1,6 +1,7 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import PopulationSimulator.entities.Person;
+import PopulationSimulator.model.graph.Graph;
 import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
@@ -8,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:33
+ . Last modified : 21/03/18 07:41
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -42,9 +43,7 @@ public class LifespanRule extends SimpleRule
      */
     public LifespanRule (int maxLifespan)
     {
-        //region --> Check params
         if (maxLifespan <= 0) throw new IllegalArgumentException("MaxLifespan can't be negative or zero");
-        //endregion
 
         this.maxLifespan = maxLifespan;
     }
@@ -61,20 +60,15 @@ public class LifespanRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public Context apply (@NotNull Context context)
+    public Graph apply (@NotNull Graph context)
     {
-        context.people().removeIf(person -> person.data().age() >= maxLifespan);
-
-        context.relations().removeIf(relation -> {
-            boolean notContainsP1 = !context.people().contains(relation.person1());
-            boolean notContainsP2 = !context.people().contains(relation.person2());
-
-            return notContainsP1 || notContainsP2;
-        });
+        context.getNodesContaining(Person.class)
+               .subList(node -> ((Person) node.value()).data().age() >= maxLifespan)
+               .forEach(context::remove);
 
         //return empty context since we added no item
         //TODO : find a way to take note of the people + relations removed
-        return new Context();
+        return new Graph();
     }
     //endregion
 }

@@ -1,14 +1,17 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.graph.Edge;
+import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
 
 import static PopulationSimulator.controllers.SimulationController.currentTime;
+import static PopulationSimulator.model.graph.EdgeType.Couple;
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -16,7 +19,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:33
+ . Last modified : 21/03/18 07:41
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -53,9 +56,7 @@ public class ReproductionRule extends SimpleRule
      */
     public ReproductionRule (int minimumAge)
     {
-        //region --> Check params
         if (minimumAge < 0 && minimumAge != anyAge) throw new IllegalArgumentException("MinimumAge param can't be negative");
-        //endregion
 
         this.minimumAge = minimumAge;
     }
@@ -76,14 +77,19 @@ public class ReproductionRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public Context apply (@NotNull Context context)
+    public Graph apply (@NotNull Graph context)
     {
-        Context newContext = new Context();
+        ArrayList8<Node> visited = new ArrayList8<>();
 
-        for (Relation relation : context.relations())
+        for (Edge edge : context.edges().subList(edge -> edge.type() == Couple))
         {
-            PersonalData dataP1 = relation.person1().data();
-            PersonalData dataP2 = relation.person2().data();
+            if (visited.containsAny(edge.from(), edge.towards())) continue;
+
+            Person person1 = (Person) edge.from().value();
+            Person person2 = (Person) edge.towards().value();
+
+            PersonalData dataP1 = person1.data();
+            PersonalData dataP2 = person2.data();
 
             Gender gender1 = dataP1.gender();
             Gender gender2 = dataP2.gender();
@@ -95,17 +101,19 @@ public class ReproductionRule extends SimpleRule
             if (minimumAge != anyAge && age1 < minimumAge) continue;
             if (minimumAge != anyAge && age2 < minimumAge) continue;
 
+            visited.add(edge.from());
+            visited.add(edge.towards());
+
             int age = currentTime();
             Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
             SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
 
             Person newPerson = new Person(new PersonalData(age, gender, orientation));
 
-            context.people().add(newPerson);
-            newContext.people().add(newPerson);
+            context.addNode(new Node<>(newPerson));
         }
 
-        return newContext;
+        return context;
     }
     //endregion
 }

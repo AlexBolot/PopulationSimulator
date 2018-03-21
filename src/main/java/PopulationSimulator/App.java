@@ -2,30 +2,26 @@ package PopulationSimulator;
 
 import CodingUtils.ArrayList8;
 import PopulationSimulator.controllers.SimulationController;
-import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
 import PopulationSimulator.model.Sector;
 import PopulationSimulator.model.factories.PersonFactory;
+import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
-import PopulationSimulator.visualizer.Logger;
-import PopulationSimulator.visualizer.cli.CLI;
-import PopulationSimulator.visualizer.cli.Visualizer;
 
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
 
 import static PopulationSimulator.utils.Const.randBetween;
-import static PopulationSimulator.visualizer.Logger.LogFile.*;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:32
+ . Last modified : 19/03/18 21:18
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -39,8 +35,6 @@ public class App
 {
     public static void main (String[] args)
     {
-        Logger.clearLogs(PeopeLogFile, RelationsLogFile, SectorsLogFile);
-
         ArrayList8<Person> people = new ArrayList8<>();
         IntStream.range(0, 10).forEach(i -> people.add(PersonFactory.createPerson()));
 
@@ -59,13 +53,7 @@ public class App
 
         people.forEach(person -> locations.put(person, sectors.get(randBetween(0, sectors.size()))));
 
-        Context context = new Context(people, new ArrayList8<>(), sectors, locations);
-
-        CLI cli = new CLI();
-        cli.start(args);
-
-        Visualizer visualizer = new Visualizer(cli.userArgs());
-
-        new SimulationController(rules, context, visualizer).simulate(25);
+        Graph graph = new Graph();
+        new SimulationController(rules, graph).simulate(25);
     }
 }

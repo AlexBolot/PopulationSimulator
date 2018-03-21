@@ -1,8 +1,9 @@
 package PopulationSimulator.model.rules;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
+import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,7 +23,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:37
+ . Last modified : 20/03/18 18:38
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -57,13 +58,13 @@ public class CoupleRuleTest
         people = new ArrayList8<Person>()
         {{
             IntStream.range(0, 10).forEach(j -> {
-                //Will generate 20 couples
+                //Will generate 60 couples
                 add(createPerson(oldEnough, Male, Bi));
                 add(createPerson(oldEnough, Male, Homo));
                 add(createPerson(oldEnough, Male, Hetero));
-                add(createPerson(oldEnough, Female, Bi));
-                add(createPerson(oldEnough, Female, Homo));
                 add(createPerson(oldEnough, Female, Hetero));
+                add(createPerson(oldEnough, Female, Homo));
+                add(createPerson(oldEnough, Female, Bi));
 
                 //Will generate 0 couples
                 add(createPerson(tooYoung, Male, Bi));
@@ -75,11 +76,11 @@ public class CoupleRuleTest
             });
         }};
 
-        Context context = new Context(people);
+        Graph context = new Graph(people.mapAndCollect(Node::new), new ArrayList8<>());
 
-        int newSize = context.merge(coupleRule.apply(context)).relations().size();
+        int newSize = context.merge(coupleRule.apply(context)).edges().size();
 
-        assertEquals(29, newSize);
+        assertEquals(60, newSize);
     }
 
     @Test
@@ -87,9 +88,9 @@ public class CoupleRuleTest
     {
         assertTrue(people.isEmpty());
 
-        Context context = new Context(people);
+        Graph context = new Graph(people.mapAndCollect(Node::new));
 
-        int newSize = context.merge(coupleRule.apply(context)).relations().size();
+        int newSize = context.merge(coupleRule.apply(context)).edges().size();
 
         assertEquals(0, newSize);
     }
@@ -97,7 +98,7 @@ public class CoupleRuleTest
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {
-        Context context = null;
+        Graph context = null;
 
         coupleRule.apply(context);
     }

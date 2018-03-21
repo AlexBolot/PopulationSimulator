@@ -1,24 +1,22 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import CodingUtils.ArrayList8;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Relation;
 import PopulationSimulator.entities.enums.Gender;
 import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-
-import static PopulationSimulator.controllers.SimulationController.currentTime;
-import static PopulationSimulator.entities.enums.RelationType.Couple;
 import static PopulationSimulator.entities.enums.SexualOrientation.*;
+import static PopulationSimulator.model.graph.EdgeType.Couple;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 06/02/18 08:06
+ . Last modified : 19/03/18 22:51
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -74,34 +72,33 @@ public class CoupleRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
-    public Context apply (@NotNull Context context)
+    public Graph apply (@NotNull Graph context)
     {
-        Context res = new Context();
+        //noinspection unchecked
+        ArrayList8<Node<Person>> tmpPeople = context.getNodesContaining(Person.class).mapAndCollect(node -> (Node<Person>) node).subList(
+                node -> {
+                    boolean oldEnough = node.value().data().age() >= minimumAge;
+                    boolean single = !context.getEdgesFrom(node).contains(edge -> edge.type() == Couple);
+                    return oldEnough && single;
+                });
 
-        ArrayList<Person> tmpPeople = new ArrayList<>(context.people());
-        if (minimumAge != anyAge) tmpPeople.removeIf(person -> person.data().age() < minimumAge);
-        tmpPeople.removeIf(person -> context.relations().stream().anyMatch(relation -> relation.involves(person)));
-
-        for (Person person1 : tmpPeople)
+        for (Node<Person> node1 : tmpPeople)
         {
-            for (Person person2 : tmpPeople)
+            if (context.getEdgesFrom(node1).contains(edge -> edge.type() == Couple)) continue;
+
+            for (Node<Person> node2 : tmpPeople)
             {
-                if (person2.equals(person1)) continue;
-                if (context.relations().contains(relation -> relation.involves(person1))) continue;
-                if (context.relations().contains(relation -> relation.involves(person2))) continue;
+                if (context.getEdgesFrom(node2).contains(edge -> edge.type() == Couple)) continue;
 
-                if (isMatch(person1, person2))
-                {
-                    Relation newRelation = new Relation(person1, person2, Couple, currentTime());
+                if (node1.equals(node2)) continue;
+                if (!isMatch(node1.value(), node2.value())) continue;
 
-                    context.relations().add(newRelation);
-                    res.relations().add(newRelation);
-                    break;
-                }
+                context.addEdgeBothEnds(node1, node2, Couple);
+                break;
             }
         }
 
-        return res;
+        return context;
     }
     //endregion
 

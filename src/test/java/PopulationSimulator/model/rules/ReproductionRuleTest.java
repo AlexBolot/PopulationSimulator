@@ -1,9 +1,10 @@
 package PopulationSimulator.model.rules;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Context;
 import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.Relation;
+import PopulationSimulator.model.graph.Edge;
+import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import PopulationSimulator.utils.Const;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +18,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:37
+ . Last modified : 21/03/18 07:20
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -26,11 +27,11 @@ import static org.junit.Assert.assertTrue;
 public class ReproductionRuleTest
 {
     //region --------------- Attributes ----------------------
-    private int                  minimumAge;
-    private Context              context;
-    private ReproductionRule     reproductionRule;
-    private ArrayList8<Person>   people;
-    private ArrayList8<Relation> relations;
+    private int                minimumAge;
+    private Graph              context;
+    private ReproductionRule   reproductionRule;
+    private ArrayList8<Person> people;
+    private ArrayList8<Edge>   edges;
     //endregion
 
     //region --------------- SetUps --------------------------
@@ -39,10 +40,10 @@ public class ReproductionRuleTest
     public void before ()
     {
         people = new ArrayList8<>();
-        relations = new ArrayList8<>();
+        edges = new ArrayList8<>();
         minimumAge = Const.randBetween(16, 18);
         reproductionRule = new ReproductionRule(minimumAge);
-        context = new Context(people, relations);
+        context = new Graph(people.mapAndCollect(Node::new), edges);
     }
     //endregion
 
@@ -53,11 +54,13 @@ public class ReproductionRuleTest
     {
         people.addAll(createAllCombinations(minimumAge));
 
-        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).people().size();
+        context = new Graph(people.mapAndCollect(Node::new), edges);
+
+        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).nodes().size();
 
         assertEquals(24, sizeBefore);
 
-        int sizeAfter = context.merge(reproductionRule.apply(context)).people().size();
+        int sizeAfter = context.merge(reproductionRule.apply(context)).nodes().size();
 
         assertEquals(30, sizeAfter);
     }
@@ -67,11 +70,11 @@ public class ReproductionRuleTest
     {
         assertTrue(people.isEmpty());
 
-        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).people().size();
+        int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).nodes().size();
 
         assertEquals(0, sizeBefore);
 
-        int sizeAfter = context.merge(reproductionRule.apply(context)).people().size();
+        int sizeAfter = context.merge(reproductionRule.apply(context)).nodes().size();
 
         assertEquals(0, sizeAfter);
     }
@@ -79,7 +82,7 @@ public class ReproductionRuleTest
     @Test (expected = IllegalArgumentException.class)
     public void apply_Null ()
     {
-        Context context = null;
+        Graph context = null;
 
         reproductionRule.apply(context);
     }

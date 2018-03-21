@@ -1,6 +1,6 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Context;
+import PopulationSimulator.model.graph.Graph;
 import org.jetbrains.annotations.NotNull;
 
 /*................................................................................................................................
@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Applyable class was coded by : Alexandre BOLOT
  .
- . Last modified : 29/01/18 14:27
+ . Last modified : 19/03/18 15:32
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public interface Applyable
 {
-    Context apply (@NotNull Context context);
+    Graph apply (@NotNull Graph context);
 }
