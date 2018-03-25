@@ -1,4 +1,4 @@
-package PopulationSimulator.model.graph;
+package PopulationSimulator.model.enums;
 
 import org.jetbrains.annotations.Contract;
 
@@ -7,15 +7,23 @@ import org.jetbrains.annotations.Contract;
  .
  . The EdgeType class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/03/18 02:11
+ . Last modified : 25/03/18 16:25
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public enum EdgeType
 {
-    Couple(),
-    Family(),
+    InterPerson(),
+
+    HasMet(InterPerson),
+
+    Couple(HasMet),
+    Family(HasMet),
+
+    Husband(Couple),
+    Wife(Couple),
+
     Father(Family),
     Mother(Family),
     Child(Family);
@@ -29,10 +37,10 @@ public enum EdgeType
     @Contract (pure = true)
     public EdgeType getSuper () { return _super; }
 
-    public boolean isSame (EdgeType other) { return isSame(this, other); }
+    public boolean isSameAs (EdgeType other) { return isSameAs(this, other); }
 
-    private boolean isSame (EdgeType type, EdgeType other)
+    private boolean isSameAs (EdgeType type, EdgeType other)
     {
-        return type == other || (type.getSuper() != null && isSame(type.getSuper(), other));
+        return type == other || (type.getSuper() != null && isSameAs(type.getSuper(), other));
     }
 }

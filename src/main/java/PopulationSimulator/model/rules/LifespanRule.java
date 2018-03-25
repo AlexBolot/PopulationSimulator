@@ -1,6 +1,6 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Person;
+import PopulationSimulator.model.entities.Person;
 import PopulationSimulator.model.graph.Graph;
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 21/03/18 07:41
+ . Last modified : 23/03/18 18:20
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

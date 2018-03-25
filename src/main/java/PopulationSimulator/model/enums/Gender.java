@@ -1,4 +1,4 @@
-package PopulationSimulator.entities.enums;
+package PopulationSimulator.model.enums;
 
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -10,7 +10,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The Gender class was coded by : Alexandre BOLOT
  .
- . Last modified : 06/02/18 08:06
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

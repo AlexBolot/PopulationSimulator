@@ -1,22 +1,22 @@
 package PopulationSimulator.model.rules;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.entities.Person;
+import PopulationSimulator.model.enums.Gender;
+import PopulationSimulator.model.enums.SexualOrientation;
 import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
 
-import static PopulationSimulator.entities.enums.SexualOrientation.*;
-import static PopulationSimulator.model.graph.EdgeType.Couple;
+import static PopulationSimulator.model.enums.EdgeType.Couple;
+import static PopulationSimulator.model.enums.SexualOrientation.*;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 22:51
+ . Last modified : 25/03/18 16:25
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

@@ -1,20 +1,20 @@
-package PopulationSimulator.entities;
+package PopulationSimulator.model.entities;
 
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.enums.Gender;
+import PopulationSimulator.model.enums.SexualOrientation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
 import static PopulationSimulator.controllers.SimulationController.currentTime;
-import static PopulationSimulator.entities.enums.SexualOrientation.Hetero;
+import static PopulationSimulator.model.enums.SexualOrientation.Hetero;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/03/18 02:16
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

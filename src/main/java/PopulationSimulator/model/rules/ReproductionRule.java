@@ -1,25 +1,23 @@
 package PopulationSimulator.model.rules;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.entities.Person;
+import PopulationSimulator.model.entities.PersonalData;
+import PopulationSimulator.model.enums.Gender;
+import PopulationSimulator.model.factories.PersonFactory;
 import PopulationSimulator.model.graph.Edge;
 import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
 
-import static PopulationSimulator.controllers.SimulationController.currentTime;
-import static PopulationSimulator.model.graph.EdgeType.Couple;
-import static PopulationSimulator.utils.Const.randBetween;
+import static PopulationSimulator.model.enums.EdgeType.*;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 21/03/18 07:41
+ . Last modified : 25/03/18 16:25
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -63,7 +61,6 @@ public class ReproductionRule extends SimpleRule
     //endregion
 
     //region --------------- Override ------------------------
-
     /**
      <hr>
      <h2>Applies this Rule on the Context param</h2>
@@ -77,6 +74,8 @@ public class ReproductionRule extends SimpleRule
 
      @param context Context to apply this rule onto
      */
+    @SuppressWarnings ("unchecked")
+    @Override
     public Graph apply (@NotNull Graph context)
     {
         ArrayList8<Node> visited = new ArrayList8<>();
@@ -84,36 +83,43 @@ public class ReproductionRule extends SimpleRule
         for (Edge edge : context.edges().subList(edge -> edge.type() == Couple))
         {
             if (visited.containsAny(edge.from(), edge.towards())) continue;
+            if (!haveOppositeGender(edge.from(), edge.towards())) continue;
 
-            Person person1 = (Person) edge.from().value();
-            Person person2 = (Person) edge.towards().value();
+            Node<Person> fatherNode = (edge.type() == Husband) ? edge.from() : edge.towards();
+            Node<Person> motherNode = (edge.type() == Husband) ? edge.towards() : edge.from();
 
-            PersonalData dataP1 = person1.data();
-            PersonalData dataP2 = person2.data();
-
-            Gender gender1 = dataP1.gender();
-            Gender gender2 = dataP2.gender();
-
-            int age1 = dataP1.age();
-            int age2 = dataP2.age();
-
-            if (gender1.equals(gender2)) continue;
-            if (minimumAge != anyAge && age1 < minimumAge) continue;
-            if (minimumAge != anyAge && age2 < minimumAge) continue;
+            if (minimumAge != anyAge && fatherNode.value().getAge() < minimumAge) continue;
+            if (minimumAge != anyAge && motherNode.value().getAge() < minimumAge) continue;
 
             visited.add(edge.from());
             visited.add(edge.towards());
 
-            int age = currentTime();
-            Gender gender = Gender.values()[randBetween(0, Gender.values().length)];
-            SexualOrientation orientation = SexualOrientation.values()[randBetween(0, SexualOrientation.values().length)];
+            Node<Person> childNode = new Node<>(PersonFactory.createPerson());
 
-            Person newPerson = new Person(new PersonalData(age, gender, orientation));
-
-            context.addNode(new Node<>(newPerson));
+            context.addNode(childNode);
+            context.addEdge(fatherNode, childNode, Father);
+            context.addEdge(motherNode, childNode, Mother);
+            context.addEdge(childNode, fatherNode, Child);
+            context.addEdge(childNode, motherNode, Child);
         }
 
         return context;
+    }
+    //endregion
+
+    //region --------------- Private methods -----------------
+    private boolean haveOppositeGender (Node node1, Node node2)
+    {
+        Person person1 = (Person) node1.value();
+        Person person2 = (Person) node2.value();
+
+        PersonalData dataP1 = person1.data();
+        PersonalData dataP2 = person2.data();
+
+        Gender gender1 = dataP1.gender();
+        Gender gender2 = dataP2.gender();
+
+        return gender1 != gender2;
     }
     //endregion
 }

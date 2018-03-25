@@ -1,9 +1,9 @@
 package PopulationSimulator.model.rules;
 
-import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.entities.Person;
+import PopulationSimulator.model.entities.PersonalData;
+import PopulationSimulator.model.enums.Gender;
+import PopulationSimulator.model.enums.SexualOrientation;
 import org.jetbrains.annotations.NotNull;
 
 import static PopulationSimulator.utils.Const.randBetween;
@@ -13,7 +13,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The RulesTestingUtils class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:35
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

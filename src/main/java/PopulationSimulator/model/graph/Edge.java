@@ -1,5 +1,7 @@
 package PopulationSimulator.model.graph;
 
+import PopulationSimulator.model.enums.EdgeType;
+
 import static PopulationSimulator.controllers.SimulationController.currentTime;
 
 /*................................................................................................................................
@@ -7,7 +9,7 @@ import static PopulationSimulator.controllers.SimulationController.currentTime;
  .
  . The Edge class was coded by : Alexandre BOLOT
  .
- . Last modified : 17/03/18 01:36
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

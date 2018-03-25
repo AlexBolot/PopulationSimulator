@@ -1,18 +1,18 @@
 package PopulationSimulator.model.factories;
 
 import CodingUtils.ArrayList8;
-import PopulationSimulator.entities.Person;
-import PopulationSimulator.entities.PersonalData;
-import PopulationSimulator.entities.enums.Gender;
-import PopulationSimulator.entities.enums.SexualOrientation;
+import PopulationSimulator.model.entities.Person;
+import PopulationSimulator.model.entities.PersonalData;
+import PopulationSimulator.model.enums.Gender;
+import PopulationSimulator.model.enums.SexualOrientation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
 import static PopulationSimulator.controllers.SimulationController.currentTime;
-import static PopulationSimulator.entities.enums.Gender.Female;
-import static PopulationSimulator.entities.enums.Gender.Male;
-import static PopulationSimulator.entities.enums.SexualOrientation.*;
+import static PopulationSimulator.model.enums.Gender.Female;
+import static PopulationSimulator.model.enums.Gender.Male;
+import static PopulationSimulator.model.enums.SexualOrientation.*;
 import static PopulationSimulator.utils.Const.randBetween;
 
 /*................................................................................................................................
@@ -20,7 +20,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The PersonFactory class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/03/18 09:35
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

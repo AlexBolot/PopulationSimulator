@@ -1,6 +1,7 @@
 package PopulationSimulator.model.graph;
 
 import CodingUtils.ArrayList8;
+import PopulationSimulator.model.enums.EdgeType;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,7 +15,7 @@ import static java.util.Collections.singletonList;
  .
  . The Graph class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 21:54
+ . Last modified : 25/03/18 15:37
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -118,7 +119,7 @@ public class Graph
     {
         if (range == 0) return new ArrayList8<>();
 
-        ArrayList8<Edge> newEdges = getEdgesFrom(origin).subList(edge -> edge.type().isSame(type));
+        ArrayList8<Edge> newEdges = getEdgesFrom(origin).subList(edge -> edge.type().isSameAs(type));
 
         ArrayList8<Node> newNodes = newEdges.mapAndCollect(Edge::towards).subList(node -> !visited.contains(node));
 

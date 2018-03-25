@@ -1,4 +1,4 @@
-package PopulationSimulator.entities;
+package PopulationSimulator.model.entities;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -7,7 +7,7 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Person class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:26
+ . Last modified : 25/03/18 15:45
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -44,6 +44,11 @@ public class Person
     public PersonalData data () { return data; }
 
     public int ID () { return ID; }
+
+    public int getAge ()
+    {
+        return data.age();
+    }
     //endregion
 
     //region --------------- Override ------------------------
@@ -58,6 +63,11 @@ public class Person
     @Override
     @NotNull
     public String toString ()
+    {
+        return String.format("%s-%d", getClass().getSimpleName(), ID);
+    }
+
+    public String toStringDetailed ()
     {
         return String.format("%s : %d - %s", getClass().getSimpleName(), ID, data.toString().substring(5));
     }

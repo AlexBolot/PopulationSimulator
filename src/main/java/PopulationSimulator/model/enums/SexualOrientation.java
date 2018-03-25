@@ -1,4 +1,4 @@
-package PopulationSimulator.entities.enums;
+package PopulationSimulator.model.enums;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -9,7 +9,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The SexualOrientation class was coded by : Alexandre BOLOT
  .
- . Last modified : 04/02/18 22:26
+ . Last modified : 23/03/18 18:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/

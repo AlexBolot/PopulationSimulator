@@ -3,15 +3,21 @@ package PopulationSimulator.controllers;
 import CodingUtils.ArrayList8;
 import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.rules.Applyable;
+import PopulationSimulator.visualizer.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+
+import static PopulationSimulator.visualizer.Logger.LogFile.EdgesLogFile;
+import static PopulationSimulator.visualizer.Logger.LogFile.NodesLogFile;
+import static PopulationSimulator.visualizer.Logger.clearLogs;
+import static PopulationSimulator.visualizer.Logger.log;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 21:18
+ . Last modified : 24/03/18 11:45
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -32,8 +38,8 @@ public class SimulationController
      <h2>Simple constructor of SimulationController</h2>
      <hr>
 
-     @param rules      Applyables to apply on each tick of simulation
-     @param context      Graph with People and their connections, to start with
+     @param rules   Applyables to apply on each tick of simulation
+     @param context Graph with People and their connections, to start with
      */
     public SimulationController (@NotNull ArrayList8<Applyable> rules, @NotNull Graph context)
     {
@@ -64,38 +70,31 @@ public class SimulationController
      */
     public void simulate (int ticks)
     {
-        /*while (currentTime != ticks)
+        clearLogs(Logger.LogFile.values());
+
+        while (currentTime != ticks)
         {
             Graph tmpGraph = new Graph();
 
             rules.forEach(rule -> tmpGraph.merge(rule.apply(context)));
 
-            visualizer.addTurn(tmpGraph);
-
             String turnTitle = "---------- Turn " + currentTime + "----------";
 
-            if (context.hasPeople())
+            if (!context.nodes().isEmpty())
             {
-                log(turnTitle, PeopeLogFile);
-                context.people().forEach(p -> log(p.toString(), PeopeLogFile));
+                log(turnTitle, NodesLogFile);
+                context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
+                context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
             }
 
-            if (context.hasRelations())
+            if (!context.edges().isEmpty())
             {
-                log(turnTitle, RelationsLogFile);
-                context.relations().forEach(r -> log(r.toString(), RelationsLogFile));
-            }
-
-            if (context.hasLocations())
-            {
-                log(turnTitle, SectorsLogFile);
-                log(context.locations().toString(), SectorsLogFile);
+                log(turnTitle, EdgesLogFile);
+                context.edges().forEach(edge -> log(edge.toString(), EdgesLogFile));
             }
 
             currentTime++;
         }
-
-        visualizer.printStats();*/
     }
     //endregion
 }

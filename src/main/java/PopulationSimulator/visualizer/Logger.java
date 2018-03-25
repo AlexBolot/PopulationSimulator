@@ -19,7 +19,7 @@ import java.util.stream.IntStream;
  .
  . The Logger class was coded by : Alexandre BOLOT
  .
- . Last modified : 21/03/18 07:31
+ . Last modified : 24/03/18 11:41
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -168,8 +168,8 @@ public class Logger
     @SuppressWarnings ("unused")
     public enum LogFile
     {
-        PeopeLogFile("/peopleLog.txt"),
-        RelationsLogFile("/relationsLog.txt"),
+        NodesLogFile("/peopleLog.txt"),
+        EdgesLogFile("/relationsLog.txt"),
         SectorsLogFile("/sectorsLog.txt");
 
         private String path;

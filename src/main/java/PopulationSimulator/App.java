@@ -2,10 +2,11 @@ package PopulationSimulator;
 
 import CodingUtils.ArrayList8;
 import PopulationSimulator.controllers.SimulationController;
-import PopulationSimulator.entities.Person;
 import PopulationSimulator.model.Sector;
+import PopulationSimulator.model.entities.Person;
 import PopulationSimulator.model.factories.PersonFactory;
 import PopulationSimulator.model.graph.Graph;
+import PopulationSimulator.model.graph.Node;
 import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
@@ -21,7 +22,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 21:18
+ . Last modified : 25/03/18 16:25
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -53,7 +54,7 @@ public class App
 
         people.forEach(person -> locations.put(person, sectors.get(randBetween(0, sectors.size()))));
 
-        Graph graph = new Graph();
+        Graph graph = new Graph(people.mapAndCollect(Node::new));
         new SimulationController(rules, graph).simulate(25);
     }
 }
