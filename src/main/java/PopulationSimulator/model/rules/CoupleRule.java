@@ -17,7 +17,7 @@ import static PopulationSimulator.model.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:36
+ . Last modified : 14/12/18 11:52
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -79,29 +79,22 @@ public class CoupleRule extends SimpleRule {
         ArrayList8<Node<Person>> tmpPeople = context.getNodesContaining(Person.class).mapAndCollect(node -> (Node<Person>) node).subList(
                 node -> {
                     boolean oldEnough = node.value().data().age() >= minimumAge;
-                    boolean single = !context.getEdgesFrom(node).contains(edge -> edge.type() == Couple);
+                    boolean single = !context.getEdgesFrom(node).contains(edge -> edge.type().isSameAs(Couple));
                     return oldEnough && single;
                 });
 
         for (Node<Person> node1 : tmpPeople) {
-            if (context.getEdgesFrom(node1).contains(edge -> edge.type() == Couple)) continue;
+            if (context.getEdgesFrom(node1).contains(edge -> edge.type().isSameAs(Couple))) continue;
 
             for (Node<Person> node2 : tmpPeople) {
-                if (context.getEdgesFrom(node2).contains(edge -> edge.type() == Couple)) continue;
+                if (context.getEdgesFrom(node2).contains(edge -> edge.type().isSameAs(Couple))) continue;
 
                 if (node1.equals(node2)) continue;
                 if (!isMatch(node1.value(), node2.value())) continue;
 
-                if (node1.value().data().gender() == Male)
-                    context.addEdge(node1, node2, Husband);
-                else
-                    context.addEdge(node1, node2, Wife);
-                if (node2.value().data().gender() == Male)
-                    context.addEdge(node2, node1, Husband);
-                else
-                    context.addEdge(node2, node1, Wife);
+                context.addEdge(node1, node2, isMale(node1) ? Husband : Wife);
+                context.addEdge(node2, node1, isMale(node2) ? Husband : Wife);
 
-                context.addEdgeBothEnds(node1, node2, Couple);
                 break;
             }
         }
@@ -138,6 +131,16 @@ public class CoupleRule extends SimpleRule {
         if (ori1 == Homo) return gen1 == gen2 && (ori2 == Homo || ori2 == Bi);
 
         return false;
+    }
+
+    /**
+     * Simple util method to increase code readability
+     *
+     * @param node Node<Person> of wich's gender is to test
+     * @return True if value() of [node] is Male. False otherwise.
+     */
+    private boolean isMale(@NotNull Node<Person> node) {
+        return node.value().data().gender() == Male;
     }
     //endregion
 }
