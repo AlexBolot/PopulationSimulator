@@ -1,16 +1,17 @@
 package PopulationSimulator.controllers;
 
 import CodingUtils.ArrayList8;
+import PopulationSimulator.model.enums.EdgeType;
 import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.rules.Applyable;
+import PopulationSimulator.visualizer.DotGenerator;
 import PopulationSimulator.visualizer.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
-import static PopulationSimulator.visualizer.Logger.LogFile.EdgesLogFile;
-import static PopulationSimulator.visualizer.Logger.LogFile.NodesLogFile;
+import java.io.IOException;
+
 import static PopulationSimulator.visualizer.Logger.clearLogs;
-import static PopulationSimulator.visualizer.Logger.log;
 import static java.lang.System.currentTimeMillis;
 
 /*................................................................................................................................
@@ -18,7 +19,7 @@ import static java.lang.System.currentTimeMillis;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:36
+ . Last modified : 14/12/18 13:17
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -29,6 +30,8 @@ public class SimulationController {
 
     private Graph context;
     private ArrayList8<Applyable> rules;
+    private DotGenerator generator;
+
     //endregion
 
     //region --------------- Constructors --------------------
@@ -44,6 +47,12 @@ public class SimulationController {
     public SimulationController(@NotNull ArrayList8<Applyable> rules, @NotNull Graph context) {
         this.rules = rules;
         this.context = context;
+
+        try {
+            this.generator = new DotGenerator();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     //endregion
 
@@ -73,7 +82,7 @@ public class SimulationController {
      *
      * @param ticks Numbers of "turns" to do before stopping the simulation
      */
-    public void simulate(int ticks) {
+    public void simulate(int ticks, EdgeType type) throws IOException, InterruptedException {
         clearLogs(Logger.LogFile.values());
 
         long millis = currentTimeMillis();
@@ -89,16 +98,8 @@ public class SimulationController {
 
             System.out.println(turnTitle);
 
-            if (!context.nodes().isEmpty()) {
-                log(turnTitle, NodesLogFile);
-                context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
-                context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
-            }
-
-            if (!context.edges().isEmpty()) {
-                log(turnTitle, EdgesLogFile);
-                context.edges().forEach(edge -> log(edge.toString(), EdgesLogFile));
-            }
+            generator.produceFrom(tmpGraph, type);
+            generator.generate(String.valueOf(currentTime), false);
 
             currentTime++;
         }

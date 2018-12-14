@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Contract;
  .
  . The EdgeType class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:36
+ . Last modified : 14/12/18 13:17
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -17,8 +17,8 @@ public enum EdgeType {
 
     HasMet(InterPerson),
 
-    Couple(HasMet),
     Family(HasMet),
+    Couple(Family),
 
     Husband(Couple),
     Wife(Couple),
@@ -26,7 +26,14 @@ public enum EdgeType {
     Parent(Family),
     Father(Parent),
     Mother(Parent),
-    Child(Family);
+
+    Sibling(Family),
+    Brother(Sibling),
+    Sister(Sibling),
+
+    Child(Family),
+    Son(Child),
+    Daughter(Child);
 
     private EdgeType _super;
 

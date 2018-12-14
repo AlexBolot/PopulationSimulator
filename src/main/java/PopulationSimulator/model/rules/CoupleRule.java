@@ -4,9 +4,12 @@ import CodingUtils.ArrayList8;
 import PopulationSimulator.model.entities.Person;
 import PopulationSimulator.model.enums.Gender;
 import PopulationSimulator.model.enums.SexualOrientation;
+import PopulationSimulator.model.graph.Edge;
 import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Optional;
 
 import static PopulationSimulator.model.enums.EdgeType.*;
 import static PopulationSimulator.model.enums.Gender.Male;
@@ -17,7 +20,7 @@ import static PopulationSimulator.model.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 11:52
+ . Last modified : 14/12/18 13:17
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -79,16 +82,16 @@ public class CoupleRule extends SimpleRule {
         ArrayList8<Node<Person>> tmpPeople = context.getNodesContaining(Person.class).mapAndCollect(node -> (Node<Person>) node).subList(
                 node -> {
                     boolean oldEnough = node.value().data().age() >= minimumAge;
-                    boolean single = !context.getEdgesFrom(node).contains(edge -> edge.type().isSameAs(Couple));
+                    boolean single = context.getEdgesOfType(node, Couple).isEmpty();
                     return oldEnough && single;
                 });
 
         for (Node<Person> node1 : tmpPeople) {
-            if (context.getEdgesFrom(node1).contains(edge -> edge.type().isSameAs(Couple))) continue;
-
             for (Node<Person> node2 : tmpPeople) {
-                if (context.getEdgesFrom(node2).contains(edge -> edge.type().isSameAs(Couple))) continue;
 
+                Optional<Edge> optEdge = context.getEdge(node1, node2);
+
+                if (optEdge.isPresent() && optEdge.get().type().isSameAs(Family)) continue;
                 if (node1.equals(node2)) continue;
                 if (!isMatch(node1.value(), node2.value())) continue;
 

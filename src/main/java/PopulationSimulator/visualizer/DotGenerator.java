@@ -18,7 +18,7 @@ import static java.lang.Runtime.getRuntime;
  .
  . The DotGenerator class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 01:13
+ . Last modified : 14/12/18 13:17
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -29,32 +29,37 @@ public class DotGenerator {
 
     private String content = "";
 
-    public void generate() throws IOException, InterruptedException {
+    public DotGenerator() throws IOException {
+        getRuntime().exec("find " + pathToGraphs.toString() + " -mindepth 1 -delete\n");
+    }
+
+    public void generate(String postFix, boolean autoOpen) throws IOException, InterruptedException {
 
         String dotFilePath = pathToGraphs.toString();
+        String graphName = "graph" + postFix;
 
-        Files.write(Paths.get(dotFilePath, "graph.dot"), content.getBytes());
+        Files.write(Paths.get(dotFilePath, graphName + ".dot"), content.getBytes());
 
-        Process process = getRuntime().exec("dot -Tpng " + dotFilePath + "/graph.dot -o " + dotFilePath + "/graph.png");
+        Process process = getRuntime().exec("dot -Tpng " + dotFilePath + "/" + graphName + ".dot -o " + dotFilePath + "/_" + graphName + ".png");
 
         process.waitFor();
 
-        getRuntime().exec("open " + dotFilePath + "/graph.png");
+        if (autoOpen)
+            getRuntime().exec("open " + dotFilePath + "/_" + graphName + ".png");
+        else getRuntime().exec("open " + dotFilePath);
     }
 
-    public void produceFrom(Graph graph) {
+    public void produceFrom(Graph graph, EdgeType type) {
 
         StringBuilder builder = new StringBuilder("digraph PopSimulator {\n\n");
 
-        builder.append("rankdir=LR;\n");
+        //builder.append("rankdir=LR;\n");
 
         //builder.append("graph [splines=ortho]; \n");
 
         ArrayList8<Node> nodes = graph.nodes();
 
         for (Node n : nodes) {
-
-            EdgeType type = EdgeType.Parent;
 
             for (Edge edge : graph.getEdgesOfType(n, type)) {
 
