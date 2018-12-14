@@ -11,13 +11,14 @@ import static PopulationSimulator.visualizer.Logger.LogFile.EdgesLogFile;
 import static PopulationSimulator.visualizer.Logger.LogFile.NodesLogFile;
 import static PopulationSimulator.visualizer.Logger.clearLogs;
 import static PopulationSimulator.visualizer.Logger.log;
+import static java.lang.System.currentTimeMillis;
 
 /*................................................................................................................................
  . Copyright (c)
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 24/03/18 11:45
+ . Last modified : 14/12/18 07:23
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -72,13 +73,19 @@ public class SimulationController
     {
         clearLogs(Logger.LogFile.values());
 
+        long millis = currentTimeMillis();
+
         while (currentTime != ticks)
         {
             Graph tmpGraph = new Graph();
 
             rules.forEach(rule -> tmpGraph.merge(rule.apply(context)));
 
-            String turnTitle = "---------- Turn " + currentTime + "----------";
+            String turnTitle = "---------- Turn " + currentTime + "\t" + ((currentTimeMillis() - millis)) + "----------";
+
+            millis = currentTimeMillis();
+
+            System.out.println(turnTitle);
 
             if (!context.nodes().isEmpty())
             {

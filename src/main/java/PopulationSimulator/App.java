@@ -11,7 +11,9 @@ import PopulationSimulator.model.rules.Applyable;
 import PopulationSimulator.model.rules.CoupleRule;
 import PopulationSimulator.model.rules.LifespanRule;
 import PopulationSimulator.model.rules.ReproductionRule;
+import PopulationSimulator.visualizer.DotGenerator;
 
+import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.stream.IntStream;
 
@@ -22,7 +24,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/03/18 16:25
+ . Last modified : 14/12/18 07:28
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -34,7 +36,7 @@ import static PopulationSimulator.utils.Const.randBetween;
  */
 public class App
 {
-    public static void main (String[] args)
+    public static void main(String[] args) throws IOException, InterruptedException
     {
         ArrayList8<Person> people = new ArrayList8<>();
         IntStream.range(0, 10).forEach(i -> people.add(PersonFactory.createPerson()));
@@ -44,7 +46,7 @@ public class App
         rules.add(new ReproductionRule(7));
         rules.add(new LifespanRule(15));
 
-        ArrayList8<Sector> sectors = new ArrayList8<Sector>();
+        ArrayList8<Sector> sectors = new ArrayList8<>();
         sectors.add(new Sector(1, 3)); // 0
         sectors.add(new Sector(0, 2)); // 1
         sectors.add(new Sector(1, 3)); // 2
@@ -55,6 +57,10 @@ public class App
         people.forEach(person -> locations.put(person, sectors.get(randBetween(0, sectors.size()))));
 
         Graph graph = new Graph(people.mapAndCollect(Node::new));
-        new SimulationController(rules, graph).simulate(25);
+        new SimulationController(rules, graph).simulate(20);
+
+        DotGenerator generator = new DotGenerator();
+        generator.produceFrom(graph);
+        generator.generate();
     }
 }
