@@ -17,7 +17,7 @@ import static PopulationSimulator.model.enums.EdgeType.*;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/03/18 16:25
+ . Last modified : 14/12/18 00:03
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -80,13 +80,13 @@ public class ReproductionRule extends SimpleRule
     {
         ArrayList8<Node> visited = new ArrayList8<>();
 
-        for (Edge edge : context.edges().subList(edge -> edge.type() == Couple))
+        for (Edge edge : context.edges().subList(edge -> edge.type().isSameAs(Couple)))
         {
             if (visited.containsAny(edge.from(), edge.towards())) continue;
             if (!haveOppositeGender(edge.from(), edge.towards())) continue;
 
-            Node<Person> fatherNode = (edge.type() == Husband) ? edge.from() : edge.towards();
-            Node<Person> motherNode = (edge.type() == Husband) ? edge.towards() : edge.from();
+            Node<Person> fatherNode = (edge.type().isSameAs(Husband)) ? edge.from() : edge.towards();
+            Node<Person> motherNode = (edge.type().isSameAs(Wife)) ? edge.from() : edge.towards();
 
             if (minimumAge != anyAge && fatherNode.value().getAge() < minimumAge) continue;
             if (minimumAge != anyAge && motherNode.value().getAge() < minimumAge) continue;

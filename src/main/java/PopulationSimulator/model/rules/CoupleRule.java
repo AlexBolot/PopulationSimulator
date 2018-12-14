@@ -8,7 +8,8 @@ import PopulationSimulator.model.graph.Graph;
 import PopulationSimulator.model.graph.Node;
 import org.jetbrains.annotations.NotNull;
 
-import static PopulationSimulator.model.enums.EdgeType.Couple;
+import static PopulationSimulator.model.enums.EdgeType.*;
+import static PopulationSimulator.model.enums.Gender.Male;
 import static PopulationSimulator.model.enums.SexualOrientation.*;
 
 /*................................................................................................................................
@@ -16,7 +17,7 @@ import static PopulationSimulator.model.enums.SexualOrientation.*;
  .
  . The CoupleRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/03/18 16:25
+ . Last modified : 14/12/18 07:22
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -92,6 +93,15 @@ public class CoupleRule extends SimpleRule
 
                 if (node1.equals(node2)) continue;
                 if (!isMatch(node1.value(), node2.value())) continue;
+
+                if (node1.value().data().gender() == Male)
+                    context.addEdge(node1, node2, Husband);
+                else
+                    context.addEdge(node1, node2, Wife);
+                if (node2.value().data().gender() == Male)
+                    context.addEdge(node2, node1, Husband);
+                else
+                    context.addEdge(node2, node1, Wife);
 
                 context.addEdgeBothEnds(node1, node2, Couple);
                 break;

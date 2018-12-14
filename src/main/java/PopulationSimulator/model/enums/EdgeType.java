@@ -7,7 +7,7 @@ import org.jetbrains.annotations.Contract;
  .
  . The EdgeType class was coded by : Alexandre BOLOT
  .
- . Last modified : 25/03/18 16:25
+ . Last modified : 14/12/18 07:22
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -24,8 +24,9 @@ public enum EdgeType
     Husband(Couple),
     Wife(Couple),
 
-    Father(Family),
-    Mother(Family),
+    Parent(Family),
+    Father(Parent),
+    Mother(Parent),
     Child(Family);
 
     private EdgeType _super;
