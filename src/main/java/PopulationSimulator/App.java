@@ -44,7 +44,7 @@ public class App
         ArrayList8<Applyable> rules = new ArrayList8<>();
         rules.add(new CoupleRule(5));
         rules.add(new ReproductionRule(7));
-        rules.add(new LifespanRule(15));
+        rules.add(new LifespanRule(15, 3));
 
         ArrayList8<Sector> sectors = new ArrayList8<>();
         sectors.add(new Sector(1, 3)); // 0
