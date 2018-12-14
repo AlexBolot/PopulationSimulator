@@ -8,12 +8,12 @@ import org.jetbrains.annotations.NotNull;
  .
  . The ComplexeRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 15:32
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 public abstract class ComplexeRule implements Applyable {
 
-    public abstract Graph apply (@NotNull Graph context);
+    public abstract Graph apply(@NotNull Graph context);
 }

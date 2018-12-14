@@ -24,20 +24,18 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The App class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:28
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 /**
- <hr>
- <h2>This class is the main access to the Simulator.<br>
- Nothing more to say :)</h2>
+ * <hr>
+ * <h2>This class is the main access to the Simulator.<br>
+ * Nothing more to say :)</h2>
  */
-public class App
-{
-    public static void main(String[] args) throws IOException, InterruptedException
-    {
+public class App {
+    public static void main(String[] args) throws IOException, InterruptedException {
         ArrayList8<Person> people = new ArrayList8<>();
         IntStream.range(0, 10).forEach(i -> people.add(PersonFactory.createPerson()));
 

@@ -14,67 +14,64 @@ import static PopulationSimulator.model.enums.SexualOrientation.Hetero;
  .
  . The PersonalData class was coded by : Alexandre BOLOT
  .
- . Last modified : 23/03/18 18:28
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class PersonalData
-{
+public class PersonalData {
     //region --------------- Attributes ----------------------
-    private Gender            gender;
-    private int               birthday;
+    private Gender gender;
+    private int birthday;
     private SexualOrientation orientation;
     //endregion
 
     //region --------------- Constructors --------------------
 
     /**
-     <hr>
-     <h2>Constructor of PersonalData using : <br>
-     - Gender : gender param <br>
-     - Orientation : Hetero (as default) <br>
-     - Birthday : Now (SimulationController.currentTime())</h2>
-     <hr>
-
-     @param gender Gender of the Person
+     * <hr>
+     * <h2>Constructor of PersonalData using : <br>
+     * - Gender : gender param <br>
+     * - Orientation : Hetero (as default) <br>
+     * - Birthday : Now (SimulationController.currentTime())</h2>
+     * <hr>
+     *
+     * @param gender Gender of the Person
      */
-    public PersonalData (@NotNull Gender gender)
-    {
+    public PersonalData(@NotNull Gender gender) {
         this(currentTime(), gender, Hetero);
     }
 
     /**
-     <hr>
-     <h2>Constructor of PersonalData using : <br>
-     - Gender : gender param <br>
-     - Orientation : orientation param <br>
-     - Birthday : Now (SimulationController.currentTime())</h2>
-     <hr>
-
-     @param gender      Gender of the Person
-     @param orientation Sexual Orientation of the Person
+     * <hr>
+     * <h2>Constructor of PersonalData using : <br>
+     * - Gender : gender param <br>
+     * - Orientation : orientation param <br>
+     * - Birthday : Now (SimulationController.currentTime())</h2>
+     * <hr>
+     *
+     * @param gender      Gender of the Person
+     * @param orientation Sexual Orientation of the Person
      */
-    public PersonalData (@NotNull Gender gender, @NotNull SexualOrientation orientation)
-    {
+    public PersonalData(@NotNull Gender gender, @NotNull SexualOrientation orientation) {
         this(currentTime(), gender, orientation);
     }
 
     /**
-     <hr>
-     <h2>Constructor of PersonalData using : <br>
-     - Gender : gender param <br>
-     - Orientation : orientation param <br>
-     - Birthday : birthday param</h2>
-     <hr>
-
-     @param gender      Gender of the Person
-     @param orientation Sexual Orientation of the Person
-     @param birthday    Birthday of the Person
+     * <hr>
+     * <h2>Constructor of PersonalData using : <br>
+     * - Gender : gender param <br>
+     * - Orientation : orientation param <br>
+     * - Birthday : birthday param</h2>
+     * <hr>
+     *
+     * @param gender      Gender of the Person
+     * @param orientation Sexual Orientation of the Person
+     * @param birthday    Birthday of the Person
      */
-    public PersonalData (int birthday, @NotNull Gender gender, @NotNull SexualOrientation orientation)
-    {
-        if (birthday > currentTime()) throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
+    public PersonalData(int birthday, @NotNull Gender gender, @NotNull SexualOrientation orientation) {
+        if (birthday > currentTime())
+            throw new IllegalArgumentException("Bday param can't be bigger than currentTime()");
 
         this.gender = gender;
         this.orientation = orientation;
@@ -84,43 +81,49 @@ public class PersonalData
 
     //region --------------- Getters - Setters ---------------
     @NotNull
-    public Gender gender () { return gender; }
+    public Gender gender() {
+        return gender;
+    }
 
-    public int age () { return currentTime() - birthday; }
+    public int age() {
+        return currentTime() - birthday;
+    }
 
-    public int birthday () { return birthday; }
+    public int birthday() {
+        return birthday;
+    }
 
     @NotNull
-    public SexualOrientation orientation () { return orientation; }
+    public SexualOrientation orientation() {
+        return orientation;
+    }
     //endregion
 
     //region --------------- Override ------------------------
 
     /**
-     <hr>
-     <h2>Format : Data + age + gender + orientation</h2>
-     <hr>
-
-     @return Data + age + gender + orientation
+     * <hr>
+     * <h2>Format : Data + age + gender + orientation</h2>
+     * <hr>
+     *
+     * @return Data + age + gender + orientation
      */
     @Override
     @NotNull
-    public String toString ()
-    {
+    public String toString() {
         return String.format("Data %s,%s,%d", gender, orientation, age());
     }
 
     /**
-     <hr>
-     <h2>Compares : birthday, gender and orientation</h2>
-     <hr>
-
-     @param obj The Object to compare with this
-     @return True if obj is equal to this, False otherwise
+     * <hr>
+     * <h2>Compares : birthday, gender and orientation</h2>
+     * <hr>
+     *
+     * @param obj The Object to compare with this
+     * @return True if obj is equal to this, False otherwise
      */
     @Override
-    public boolean equals (@NotNull Object obj)
-    {
+    public boolean equals(@NotNull Object obj) {
         if (!getClass().isInstance(obj)) return false;
 
         PersonalData dataCompare = (PersonalData) obj;
@@ -133,17 +136,16 @@ public class PersonalData
     }
 
     /**
-     <hr>
-     <h2>Returns a unique HashCode for this Context instance <br>
-     Based on : birthday, gender and orientation</h2>
-     <hr>
-
-     @return A unique HashCode for this Context instance <br>
-     Based on : birthday, gender and orientation
+     * <hr>
+     * <h2>Returns a unique HashCode for this Context instance <br>
+     * Based on : birthday, gender and orientation</h2>
+     * <hr>
+     *
+     * @return A unique HashCode for this Context instance <br>
+     * Based on : birthday, gender and orientation
      */
     @Override
-    public int hashCode ()
-    {
+    public int hashCode() {
         return Objects.hash(birthday, gender, orientation);
     }
 

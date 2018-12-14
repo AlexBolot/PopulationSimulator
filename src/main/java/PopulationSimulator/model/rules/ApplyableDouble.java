@@ -8,12 +8,11 @@ import org.jetbrains.annotations.NotNull;
  .
  . The ApplyableDouble class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 17:01
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public interface ApplyableDouble
-{
-    double apply (@NotNull Graph context);
+public interface ApplyableDouble {
+    double apply(@NotNull Graph context);
 }

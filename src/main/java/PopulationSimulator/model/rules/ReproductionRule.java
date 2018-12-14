@@ -17,19 +17,18 @@ import static PopulationSimulator.model.enums.EdgeType.*;
  .
  . The ReproductionRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 00:03
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 /**
- <hr>
- <h2>Creates a new Person if both mebers of the couple are in age and opposite gender</h2>
- <hr>
+ * <hr>
+ * <h2>Creates a new Person if both mebers of the couple are in age and opposite gender</h2>
+ * <hr>
  */
-@SuppressWarnings ("unused")
-public class ReproductionRule extends SimpleRule
-{
+@SuppressWarnings("unused")
+public class ReproductionRule extends SimpleRule {
     //region --------------- Attributes ----------------------
     private static final int anyAge = -1;
 
@@ -39,49 +38,50 @@ public class ReproductionRule extends SimpleRule
     //region --------------- Constructors --------------------
 
     /**
-     <hr>
-     <h2>Constructor of ReproductionRule : sets minimumAge at -1</h2>
-     <hr>
+     * <hr>
+     * <h2>Constructor of ReproductionRule : sets minimumAge at -1</h2>
+     * <hr>
      */
-    public ReproductionRule () { this(anyAge); }
+    public ReproductionRule() {
+        this(anyAge);
+    }
 
     /**
-     <hr>
-     <h2>Constructor of ReproductionRule using minimumAge param</h2>
-     <hr>
-
-     @param minimumAge Minimum age to reach to have kids
+     * <hr>
+     * <h2>Constructor of ReproductionRule using minimumAge param</h2>
+     * <hr>
+     *
+     * @param minimumAge Minimum age to reach to have kids
      */
-    public ReproductionRule (int minimumAge)
-    {
-        if (minimumAge < 0 && minimumAge != anyAge) throw new IllegalArgumentException("MinimumAge param can't be negative");
+    public ReproductionRule(int minimumAge) {
+        if (minimumAge < 0 && minimumAge != anyAge)
+            throw new IllegalArgumentException("MinimumAge param can't be negative");
 
         this.minimumAge = minimumAge;
     }
     //endregion
 
     //region --------------- Override ------------------------
-    /**
-     <hr>
-     <h2>Applies this Rule on the Context param</h2>
-     <h3>A new Person is created if
-     - Both members of a Couple relationship have reached the minimumAge <br>
-     - They have opposite Gender (Female X Male or Male X Female) <br>
-     <br>
-     Creates a new Person with random Gender and SexualOrientation
-     </h3>
-     <hr>
 
-     @param context Context to apply this rule onto
+    /**
+     * <hr>
+     * <h2>Applies this Rule on the Context param</h2>
+     * <h3>A new Person is created if
+     * - Both members of a Couple relationship have reached the minimumAge <br>
+     * - They have opposite Gender (Female X Male or Male X Female) <br>
+     * <br>
+     * Creates a new Person with random Gender and SexualOrientation
+     * </h3>
+     * <hr>
+     *
+     * @param context Context to apply this rule onto
      */
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     @Override
-    public Graph apply (@NotNull Graph context)
-    {
+    public Graph apply(@NotNull Graph context) {
         ArrayList8<Node> visited = new ArrayList8<>();
 
-        for (Edge edge : context.edges().subList(edge -> edge.type().isSameAs(Couple)))
-        {
+        for (Edge edge : context.edges().subList(edge -> edge.type().isSameAs(Couple))) {
             if (visited.containsAny(edge.from(), edge.towards())) continue;
             if (!haveOppositeGender(edge.from(), edge.towards())) continue;
 
@@ -108,8 +108,7 @@ public class ReproductionRule extends SimpleRule
     //endregion
 
     //region --------------- Private methods -----------------
-    private boolean haveOppositeGender (Node node1, Node node2)
-    {
+    private boolean haveOppositeGender(Node node1, Node node2) {
         Person person1 = (Person) node1.value();
         Person person2 = (Person) node2.value();
 

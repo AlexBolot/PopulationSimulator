@@ -10,54 +10,47 @@ import static PopulationSimulator.utils.Const.randBetween;
  .
  . The Gender class was coded by : Alexandre BOLOT
  .
- . Last modified : 23/03/18 18:28
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public enum Gender
-{
+public enum Gender {
     Male,
     Female;
 
     /**
-     <hr>
-     <h2>Gives a random Gender out of the Gender Enum</h2>
-     <hr>
-
-     @return A random Gender out of the Gender Enum
+     * <hr>
+     * <h2>Gives a random Gender out of the Gender Enum</h2>
+     * <hr>
+     *
+     * @return A random Gender out of the Gender Enum
      */
     @NotNull
-    public static Gender getRandom ()
-    {
+    public static Gender getRandom() {
         Gender[] values = Gender.values();
 
         return values[randBetween(0, values.length)];
     }
 
     /**
-     <hr>
-     <h2>Gives the opposite gender than the one given as param</h2>
-     <hr>
-
-     @return The opposite gender than the one given as param
+     * <hr>
+     * <h2>Gives the opposite gender than the one given as param</h2>
+     * <hr>
+     *
+     * @return The opposite gender than the one given as param
      */
     @NotNull
-    @Contract (pure = true)
-    public static Gender getOpposite (@NotNull Gender gender)
-    {
+    @Contract(pure = true)
+    public static Gender getOpposite(@NotNull Gender gender) {
         return (gender == Male) ? Female : Male;
     }
 
-    public static boolean contains (@NotNull String value)
-    {
-        try
-        {
+    public static boolean contains(@NotNull String value) {
+        try {
             Gender.valueOf(value);
             return true;
-        }
-        catch (IllegalArgumentException ignored)
-        {
+        } catch (IllegalArgumentException ignored) {
             return false;
         }
     }

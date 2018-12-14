@@ -18,65 +18,67 @@ import static java.lang.System.currentTimeMillis;
  .
  . The SimulationController class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:23
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class SimulationController
-{
+public class SimulationController {
     //region --------------- Attributes ----------------------
     private static int currentTime = 0;
 
-    private Graph                 context;
+    private Graph context;
     private ArrayList8<Applyable> rules;
     //endregion
 
     //region --------------- Constructors --------------------
 
     /**
-     <hr>
-     <h2>Simple constructor of SimulationController</h2>
-     <hr>
-
-     @param rules   Applyables to apply on each tick of simulation
-     @param context Graph with People and their connections, to start with
+     * <hr>
+     * <h2>Simple constructor of SimulationController</h2>
+     * <hr>
+     *
+     * @param rules   Applyables to apply on each tick of simulation
+     * @param context Graph with People and their connections, to start with
      */
-    public SimulationController (@NotNull ArrayList8<Applyable> rules, @NotNull Graph context)
-    {
+    public SimulationController(@NotNull ArrayList8<Applyable> rules, @NotNull Graph context) {
         this.rules = rules;
         this.context = context;
     }
     //endregion
 
     //region --------------- Getters - Setters ---------------
-    @Contract (pure = true)
-    public static int currentTime () { return currentTime; }
+    @Contract(pure = true)
+    public static int currentTime() {
+        return currentTime;
+    }
 
     @NotNull
-    public Graph graph () { return context; }
+    public Graph graph() {
+        return context;
+    }
 
     @NotNull
-    public ArrayList8<Applyable> rules () { return rules; }
+    public ArrayList8<Applyable> rules() {
+        return rules;
+    }
     //endregion
 
     //region --------------- Methods -------------------------
 
     /**
-     <hr>
-     <h2>Will apply every Rule on the Context as many times as they are ticks</h2>
-     <hr>
-
-     @param ticks Numbers of "turns" to do before stopping the simulation
+     * <hr>
+     * <h2>Will apply every Rule on the Context as many times as they are ticks</h2>
+     * <hr>
+     *
+     * @param ticks Numbers of "turns" to do before stopping the simulation
      */
-    public void simulate (int ticks)
-    {
+    public void simulate(int ticks) {
         clearLogs(Logger.LogFile.values());
 
         long millis = currentTimeMillis();
 
-        while (currentTime != ticks)
-        {
+        while (currentTime != ticks) {
             Graph tmpGraph = new Graph();
 
             rules.forEach(rule -> tmpGraph.merge(rule.apply(context)));
@@ -87,15 +89,13 @@ public class SimulationController
 
             System.out.println(turnTitle);
 
-            if (!context.nodes().isEmpty())
-            {
+            if (!context.nodes().isEmpty()) {
                 log(turnTitle, NodesLogFile);
                 context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
                 context.nodes().forEach(node -> log(node.toString(), NodesLogFile));
             }
 
-            if (!context.edges().isEmpty())
-            {
+            if (!context.edges().isEmpty()) {
                 log(turnTitle, EdgesLogFile);
                 context.edges().forEach(edge -> log(edge.toString(), EdgesLogFile));
             }

@@ -8,12 +8,11 @@ import org.jetbrains.annotations.NotNull;
  .
  . The Applyable class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 15:32
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public interface Applyable
-{
-    Graph apply (@NotNull Graph context);
+public interface Applyable {
+    Graph apply(@NotNull Graph context);
 }

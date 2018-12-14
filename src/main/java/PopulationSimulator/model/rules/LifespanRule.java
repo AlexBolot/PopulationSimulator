@@ -13,19 +13,18 @@ import java.util.Random;
  .
  . The LifespanRule class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:30
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
 /**
- <hr>
- <h2>Removes the Poeple from the context if they reached a certain age</h2>
- <h3>After the person reaches [maxLifespan], it has more and more chances to die every year until reaching [maxLifespan]+[shadin]</h3>
- <hr>
+ * <hr>
+ * <h2>Removes the Poeple from the context if they reached a certain age</h2>
+ * <h3>After the person reaches [maxLifespan], it has more and more chances to die every year until reaching [maxLifespan]+[shadin]</h3>
+ * <hr>
  */
-public class LifespanRule extends SimpleRule
-{
+public class LifespanRule extends SimpleRule {
     //region --------------- Attributes ----------------------
     private int maxLifespan;
     private int shading;
@@ -34,24 +33,23 @@ public class LifespanRule extends SimpleRule
     //region --------------- Constructors --------------------
 
     /**
-     <hr>
-     <h2>Constructor of LifespanRule : sets maxLifespan at 80</h2>
-     <hr>
+     * <hr>
+     * <h2>Constructor of LifespanRule : sets maxLifespan at 80</h2>
+     * <hr>
      */
     public LifespanRule() {
         this(80, 20);
     }
 
     /**
-     <hr>
-     <h2>Constructor of LifespanRule using maxLifespan param</h2>
-     <hr>
-
-     @param maxLifespan Age after which the chances of death start appearing and increasing
-     @param shading     Delay from [maxLifespan] to a 100% chance of death
+     * <hr>
+     * <h2>Constructor of LifespanRule using maxLifespan param</h2>
+     * <hr>
+     *
+     * @param maxLifespan Age after which the chances of death start appearing and increasing
+     * @param shading     Delay from [maxLifespan] to a 100% chance of death
      */
-    public LifespanRule(int maxLifespan, int shading)
-    {
+    public LifespanRule(int maxLifespan, int shading) {
         if (maxLifespan <= 0) throw new IllegalArgumentException("MaxLifespan can't be negative or zero");
         if (shading < 0) throw new IllegalArgumentException("Shaing can't be negative");
 
@@ -63,16 +61,15 @@ public class LifespanRule extends SimpleRule
     //region --------------- Override ------------------------
 
     /**
-     <hr>
-     <h2>Applies this Rule on the Context param</h2>
-     <h3>A Person dies if it's age is over or equals to maxLifespan <br>
-     </h3>
-     <hr>
-
-     @param context Context to apply this rule onto
+     * <hr>
+     * <h2>Applies this Rule on the Context param</h2>
+     * <h3>A Person dies if it's age is over or equals to maxLifespan <br>
+     * </h3>
+     * <hr>
+     *
+     * @param context Context to apply this rule onto
      */
-    public Graph apply (@NotNull Graph context)
-    {
+    public Graph apply(@NotNull Graph context) {
         ArrayList8<Node<Person>> oldPeople = context.getNodesContaining(Person.class)
                 .mapAndCollect(node -> new Node<>((Person) node.value()))
                 .subList(node -> node.value().getAge() >= maxLifespan);

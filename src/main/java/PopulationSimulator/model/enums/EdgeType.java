@@ -7,13 +7,12 @@ import org.jetbrains.annotations.Contract;
  .
  . The EdgeType class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:22
+ . Last modified : 14/12/18 07:36
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public enum EdgeType
-{
+public enum EdgeType {
     InterPerson(),
 
     HasMet(InterPerson),
@@ -31,17 +30,24 @@ public enum EdgeType
 
     private EdgeType _super;
 
-    EdgeType () { this._super = null; }
+    EdgeType() {
+        this._super = null;
+    }
 
-    EdgeType (EdgeType _super) { this._super = _super; }
+    EdgeType(EdgeType _super) {
+        this._super = _super;
+    }
 
-    @Contract (pure = true)
-    public EdgeType getSuper () { return _super; }
+    @Contract(pure = true)
+    public EdgeType getSuper() {
+        return _super;
+    }
 
-    public boolean isSameAs (EdgeType other) { return isSameAs(this, other); }
+    public boolean isSameAs(EdgeType other) {
+        return isSameAs(this, other);
+    }
 
-    private boolean isSameAs (EdgeType type, EdgeType other)
-    {
+    private boolean isSameAs(EdgeType type, EdgeType other) {
         return type == other || (type.getSuper() != null && isSameAs(type.getSuper(), other));
     }
 }
