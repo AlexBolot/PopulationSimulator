@@ -15,7 +15,7 @@ import static java.util.Collections.singletonList;
  .
  . The Graph class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 11:52
+ . Last modified : 16/12/18 14:43
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -57,11 +57,6 @@ public class Graph {
         addEdge(new Edge(from, towards, type));
     }
 
-    public void addEdgeBothEnds(Node node1, Node node2, EdgeType type) {
-        addEdge(node1, node2, type);
-        addEdge(node2, node1, type);
-    }
-
     public void addEdge(Edge edge) {
         edges.addIf(edge, e -> !edges.contains(edge));
     }
@@ -78,6 +73,10 @@ public class Graph {
         nodes.remove(node);
         edges.removeAll(getEdgesFrom(node));
         edges.removeAll(getEdgesTowards(node));
+    }
+
+    public boolean hasEdge(Node from, EdgeType type) {
+        return getEdgesFrom(from).findAny(edge -> edge.type().isSameAs(type)).isPresent();
     }
 
     public boolean hasEdge(Node from, Node towards) {
