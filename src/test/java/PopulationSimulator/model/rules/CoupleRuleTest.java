@@ -23,24 +23,22 @@ import static org.junit.Assert.assertTrue;
  .
  . The CoupleRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 23/03/18 18:28
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class CoupleRuleTest
-{
+public class CoupleRuleTest {
     //region --------------- Attributes ----------------------
-    private int                minimumAge;
-    private CoupleRule         coupleRule;
+    private int minimumAge;
+    private CoupleRule coupleRule;
     private ArrayList8<Person> people;
     //endregion
 
     //region --------------- SetUps --------------------------
 
     @Before
-    public void before ()
-    {
+    public void before() {
         people = new ArrayList8<>();
         minimumAge = Const.randBetween(18, 25);
         coupleRule = new CoupleRule(minimumAge);
@@ -50,13 +48,11 @@ public class CoupleRuleTest
     //region --------------- apply (x3) ----------------------
 
     @Test
-    public void apply_Right ()
-    {
+    public void apply_Right() {
         int tooYoung = minimumAge - randBetween(1, 5);
         int oldEnough = minimumAge + randBetween(1, 5);
 
-        people = new ArrayList8<Person>()
-        {{
+        people = new ArrayList8<Person>() {{
             IntStream.range(0, 10).forEach(j -> {
                 //Will generate 60 couples
                 add(createPerson(oldEnough, Male, Bi));
@@ -84,8 +80,7 @@ public class CoupleRuleTest
     }
 
     @Test
-    public void apply_Empty ()
-    {
+    public void apply_Empty() {
         assertTrue(people.isEmpty());
 
         Graph context = new Graph(people.mapAndCollect(Node::new));
@@ -95,9 +90,8 @@ public class CoupleRuleTest
         assertEquals(0, newSize);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void apply_Null ()
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void apply_Null() {
         Graph context = null;
 
         coupleRule.apply(context);

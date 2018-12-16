@@ -11,25 +11,21 @@ import static org.junit.Assert.assertEquals;
  .
  . The ComplexeRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 21:04
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class ComplexeRuleTest
-{
+public class ComplexeRuleTest {
     //--------------------------------------------
     // Only way for coverage to see this as ok :D
     //--------------------------------------------
 
     @Test
-    public void apply ()
-    {
-        ComplexeRule complexeRule = new ComplexeRule()
-        {
+    public void apply() {
+        ComplexeRule complexeRule = new ComplexeRule() {
             @Override
-            public Graph apply (@NotNull Graph context)
-            {
+            public Graph apply(@NotNull Graph context) {
                 return new Graph();
             }
         };

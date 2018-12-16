@@ -18,27 +18,25 @@ import static org.junit.Assert.assertTrue;
  .
  . The ReproductionRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 23/03/18 18:20
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-@SuppressWarnings ("FieldCanBeLocal")
-public class ReproductionRuleTest
-{
+@SuppressWarnings("FieldCanBeLocal")
+public class ReproductionRuleTest {
     //region --------------- Attributes ----------------------
-    private int                minimumAge;
-    private Graph              context;
-    private ReproductionRule   reproductionRule;
+    private int minimumAge;
+    private Graph context;
+    private ReproductionRule reproductionRule;
     private ArrayList8<Person> people;
-    private ArrayList8<Edge>   edges;
+    private ArrayList8<Edge> edges;
     //endregion
 
     //region --------------- SetUps --------------------------
 
     @Before
-    public void before ()
-    {
+    public void before() {
         people = new ArrayList8<>();
         edges = new ArrayList8<>();
         minimumAge = Const.randBetween(16, 18);
@@ -50,8 +48,7 @@ public class ReproductionRuleTest
     //region --------------- apply (x3) ----------------------
 
     @Test
-    public void apply_Right ()
-    {
+    public void apply_Right() {
         people.addAll(createAllCombinations(minimumAge));
 
         context = new Graph(people.mapAndCollect(Node::new), edges);
@@ -66,8 +63,7 @@ public class ReproductionRuleTest
     }
 
     @Test
-    public void apply_Empty ()
-    {
+    public void apply_Empty() {
         assertTrue(people.isEmpty());
 
         int sizeBefore = context.merge(new CoupleRule(minimumAge).apply(context)).nodes().size();
@@ -79,9 +75,8 @@ public class ReproductionRuleTest
         assertEquals(0, sizeAfter);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void apply_Null ()
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void apply_Null() {
         Graph context = null;
 
         reproductionRule.apply(context);

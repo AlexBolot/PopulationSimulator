@@ -20,25 +20,23 @@ import static org.junit.Assert.assertTrue;
  .
  . The LifespanRuleTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 07:30
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class LifespanRuleTest
-{
+public class LifespanRuleTest {
     //region --------------- Attributes ----------------------
-    private int                lifespan;
+    private int lifespan;
     private int shading;
-    private LifespanRule       lifespanRule;
+    private LifespanRule lifespanRule;
     private ArrayList8<Person> people;
     //endregion
 
     //region --------------- SetUps --------------------------
 
     @Before
-    public void before ()
-    {
+    public void before() {
         people = new ArrayList8<>();
         lifespan = randBetween(50, 100);
         shading = randBetween(10, 50);
@@ -50,17 +48,14 @@ public class LifespanRuleTest
 
     @Test
     @Ignore("LifespanRuleTest needs to be fixed due to new random mechanism")
-    public void apply_Right ()
-    {
+    public void apply_Right() {
         long youngAmount;
         long oldAmount;
 
-        for (int i = 0; i < 1000; i++)
-        {
+        for (int i = 0; i < 1000; i++) {
             before();
 
-            people = new ArrayList8<Person>()
-            {{
+            people = new ArrayList8<Person>() {{
                 IntStream.range(0, randBetween(5, 20)).forEach(j -> add(randPerson(lifespan, true)));
                 IntStream.range(0, randBetween(5, 20)).forEach(k -> add(randPerson(lifespan, false)));
             }};
@@ -78,8 +73,7 @@ public class LifespanRuleTest
     }
 
     @Test
-    public void apply_Empty ()
-    {
+    public void apply_Empty() {
         assertTrue(people.isEmpty());
 
         lifespanRule.apply(new Graph(people.mapAndCollect(Node::new)));
@@ -87,9 +81,8 @@ public class LifespanRuleTest
         assertTrue(people.isEmpty());
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void apply_Null ()
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void apply_Null() {
         Graph context = null;
 
         lifespanRule.apply(context);

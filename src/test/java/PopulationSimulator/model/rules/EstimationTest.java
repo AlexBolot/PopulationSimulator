@@ -13,26 +13,22 @@ import static org.junit.Assert.assertEquals;
  .
  . The EstimationTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/03/18 21:31
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class EstimationTest
-{
+public class EstimationTest {
     //--------------------------------------------
     // Only way for coverage to see this as ok :D
     //--------------------------------------------
 
     @Test
-    public void emptyTest ()
-    {
-        Estimation estimation = new Estimation()
-        {
+    public void emptyTest() {
+        Estimation estimation = new Estimation() {
             @Override
-            @Contract (pure = true)
-            public double apply (@NotNull Graph context)
-            {
+            @Contract(pure = true)
+            public double apply(@NotNull Graph context) {
                 return 0;
             }
         };

@@ -14,23 +14,20 @@ import static org.junit.Assert.assertTrue;
  .
  . The ConstTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 19/01/18 21:49
+ . Last modified : 16/12/18 14:10
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
 
-public class ConstTest
-{
+public class ConstTest {
     //region --------------- Attributes ----------------------
     private final Random random = new Random();
     //endregion
 
     //region --------------- randBetween (x3) ----------------
     @Test
-    public void randBetween_Right ()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
+    public void randBetween_Right() {
+        for (int i = 0; i < 1000; i++) {
             int minBound = random.nextInt() / 3;
             int maxBound = random.nextInt() / 3;
 
@@ -43,11 +40,9 @@ public class ConstTest
         }
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void randBetween_InvertedBounds ()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
+    @Test(expected = IllegalArgumentException.class)
+    public void randBetween_InvertedBounds() {
+        for (int i = 0; i < 1000; i++) {
             int minBound = random.nextInt() / 3;
             int maxBound = random.nextInt() / 3;
 
@@ -57,11 +52,9 @@ public class ConstTest
         }
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void randBetween_EqualsBounds ()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
+    @Test(expected = IllegalArgumentException.class)
+    public void randBetween_EqualsBounds() {
+        for (int i = 0; i < 1000; i++) {
             int minBound = random.nextInt() / 3;
             randBetween(minBound, minBound);
         }
@@ -70,10 +63,8 @@ public class ConstTest
 
     //region --------------- randDelta (x3) ------------------
     @Test
-    public void randDelta_Right ()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
+    public void randDelta_Right() {
+        for (int i = 0; i < 1000; i++) {
             int center = random.nextInt() / 3;
             int delta = Math.abs(random.nextInt() / 3);
 
@@ -84,11 +75,9 @@ public class ConstTest
         }
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void randDelta_NegativeDelta ()
-    {
-        for (int i = 0; i < 1000; i++)
-        {
+    @Test(expected = IllegalArgumentException.class)
+    public void randDelta_NegativeDelta() {
+        for (int i = 0; i < 1000; i++) {
             int center = random.nextInt() / 3;
             int delta = negativeOf(random.nextInt() / 3);
 
@@ -96,9 +85,8 @@ public class ConstTest
         }
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void randDelta_ZeroCenterAndDelta ()
-    {
+    @Test(expected = IllegalArgumentException.class)
+    public void randDelta_ZeroCenterAndDelta() {
         int center = 0;
         int delta = 0;
 
@@ -107,7 +95,9 @@ public class ConstTest
     //endregion
 
     //region --------------- OtherMethods --------------------
-    @Contract (pure = true)
-    private int negativeOf (int val) { return (val >= 0) ? -val : val; }
+    @Contract(pure = true)
+    private int negativeOf(int val) {
+        return (val >= 0) ? -val : val;
+    }
     //endregion
 }
