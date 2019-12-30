@@ -18,7 +18,7 @@ import static java.lang.Runtime.getRuntime;
  .
  . The DotGenerator class was coded by : Alexandre BOLOT
  .
- . Last modified : 14/12/18 13:17
+ . Last modified : 16/12/2018 15:38
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -55,7 +55,7 @@ public class DotGenerator {
 
         //builder.append("rankdir=LR;\n");
 
-        //builder.append("graph [splines=ortho]; \n");
+        builder.append("graph [splines=spline]; \n");
 
         ArrayList8<Node> nodes = graph.nodes();
 

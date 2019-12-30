@@ -1,5 +1,6 @@
 package PopulationSimulator.model;
 
+import PopulationSimulator.model.entities.Sector;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  .
  . The SectorTest class was coded by : Alexandre BOLOT
  .
- . Last modified : 16/12/18 14:10
+ . Last modified : 17/12/2018 10:46
  .
  . Contact : bolotalex06@gmail.com
  ...............................................................................................................................*/
@@ -30,7 +31,7 @@ public class SectorTest {
         Sector sector1 = new Sector();
         Sector sector2 = new Sector();
 
-        sector0.addNeighboor(sector1.ID());
+        //sector0.addNeighboor(sector1.ID());
 
         assertTrue(sector0.isNeighboorOf(sector1));
         assertFalse(sector0.isNeighboorOf(sector2));
@@ -44,7 +45,7 @@ public class SectorTest {
         Sector sector1 = new Sector();
         Sector sector2 = new Sector();
 
-        sector0.addNeighboor(sector1.ID());
+        //sector0.addNeighboor(sector1.ID());
 
         assertTrue(sector0.isNeighboorOf(sector1.ID()));
         assertFalse(sector0.isNeighboorOf(sector2.ID()));
